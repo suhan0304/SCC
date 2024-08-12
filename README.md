@@ -1,0 +1,2 @@
+# SCC
+Sparta Coding Club 
