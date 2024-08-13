@@ -5,7 +5,6 @@ public class Rain : MonoBehaviour
     float size;
     int score;
 
-    // Start is called before the first frame update
     void Start()
     {
         float x = Random.Range(-2.4f, 2.4f);
@@ -35,16 +34,14 @@ public class Rain : MonoBehaviour
         transform.localScale = new Vector3(size, size);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnCollisionEnter2D(Collision2D coll)
     {
         if(coll.gameObject.CompareTag("Ground")) {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
+        }
+        if(coll.gameObject.CompareTag("Player")) {
+            GameManager.Instance.AddScore(score);
+            Destroy(this.gameObject);
         }
     }
 }

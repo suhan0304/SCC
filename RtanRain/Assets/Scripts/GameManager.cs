@@ -4,21 +4,30 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
     public GameObject rain;
 
-    // Start is called before the first frame update
+    int totalScore = 0;
+
+    void Awake() {
+        if(Instance == null) {
+            Instance = this;    
+        }
+        else {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         InvokeRepeating("MakeRain", 0, 0.5f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void MakeRain() {
         Instantiate(rain, gameObject.transform);
+    }
+
+    public void AddScore(int score) {
+        totalScore += score;
     }
 }
