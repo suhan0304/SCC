@@ -817,7 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac3fa2e1b4edc448adf1bb2c5ee133d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rain: {fileID: 6948229108274755140, guid: cc1567c7119c8ff48b08a966928edff7, type: 3}
+  rain: {fileID: 6948229108274755140, guid: dbc0601a49401fa4eb7748c0acc1769b, type: 3}
   endPanel: {fileID: 1727125035}
   totalScoreText: {fileID: 1820978809}
   timeText: {fileID: 637449063}
