@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
         else {
             Destroy(gameObject);
         }
+
+        Time.timeScale = 1.0f;
     }
 
     void Start()
