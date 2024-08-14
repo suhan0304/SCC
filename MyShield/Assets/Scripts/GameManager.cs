@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject square;
     public Text timeText;
+    public Animator anim;
 
     float time = 0f;
 
@@ -45,7 +46,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver() {
         isPlay = false;
-        Time.timeScale = 0.0f;
+        anim.SetBool("isDie", true);
+        Invoke("TimeStop", 0.5f);
 
         nowScore.text = time.ToString("N2");
 
@@ -66,5 +68,9 @@ public class GameManager : MonoBehaviour
             bestScore.text = time.ToString("N2");
         }
         endPanel.SetActive(true);
+    }
+
+    void TimeStop() {
+        Time.timeScale = 0.0f;
     }
 }

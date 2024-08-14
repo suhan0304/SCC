@@ -156,7 +156,7 @@ MonoBehaviour:
   timeText: {fileID: 1026675287}
   endPanel: {fileID: 186690626}
   nowScore: {fileID: 2100861438}
-  BestScore: {fileID: 44565931}
+  bestScore: {fileID: 44565931}
 --- !u!4 &15761054
 Transform:
   m_ObjectHideFlags: 0
