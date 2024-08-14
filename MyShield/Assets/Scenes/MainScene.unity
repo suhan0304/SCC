@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   square: {fileID: 1791842636468096060, guid: b0c606279670fe843ad24930528a629a, type: 3}
   timeText: {fileID: 1026675287}
+  anim: {fileID: 706868727}
   endPanel: {fileID: 186690626}
   nowScore: {fileID: 2100861438}
   bestScore: {fileID: 44565931}

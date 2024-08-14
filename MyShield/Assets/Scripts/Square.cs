@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Square : MonoBehaviour
@@ -20,6 +21,12 @@ public class Square : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Balloon")) {
             GameManager.Instance.GameOver();
+        }
+    }
+
+    void Update() {
+        if (transform.position.y < -6.0f) {
+            Destroy(gameObject);
         }
     }
 }
