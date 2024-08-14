@@ -52,21 +52,14 @@ public class GameManager : MonoBehaviour
         nowScore.text = time.ToString("N2");
 
         string key = "bestScore";
-        
-        if (PlayerPrefs.HasKey(key)) {
-            float best = PlayerPrefs.GetFloat(key);
-            if (best < time) {
-                PlayerPrefs.SetFloat(key, time);
-                bestScore.text = time.ToString("N2");
-            }
-            else {
-                bestScore.text = best.ToString("N2");
-            }
-        }
-        else {
+        float best = PlayerPrefs.GetFloat(key, 0f); 
+
+        if (time > best) {
             PlayerPrefs.SetFloat(key, time);
-            bestScore.text = time.ToString("N2");
+            best = time; 
         }
+
+        bestScore.text = best.ToString("N2");
         endPanel.SetActive(true);
     }
 
