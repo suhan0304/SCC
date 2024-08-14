@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale =  1.0f;
         InvokeRepeating("MakeSquare", 0.0f, 1.0f);
     }
 
