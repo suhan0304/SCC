@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject square;
     // Start is called before the first frame update
     void Start()
     {
-        
+        InvokeRepeating("MakeSquare", 0.0f, 1.0f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void MakeSquare() {
+        Instantiate(square);
     }
 }
