@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   square: {fileID: 1791842636468096060, guid: b0c606279670fe843ad24930528a629a, type: 3}
+  endPanel: {fileID: 186690626}
   timeText: {fileID: 1026675287}
 --- !u!4 &15761054
 Transform:
@@ -834,7 +835,7 @@ GameObject:
   - component: {fileID: 706868728}
   m_Layer: 0
   m_Name: Balloon
-  m_TagString: Untagged
+  m_TagString: Balloon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
