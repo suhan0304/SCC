@@ -517,6 +517,7 @@ MonoBehaviour:
   front: {fileID: 4731520500566729708}
   hungryCat: {fileID: 656346964848563697}
   fullCat: {fileID: 7523134004447251750}
+  type: 1
 --- !u!1 &8495425693854248230
 GameObject:
   m_ObjectHideFlags: 0

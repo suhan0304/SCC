@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     
     public GameObject normalCat;
+    public GameObject fatCat;
     public GameObject retryBtn;
 
     int level = 0;
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public Text levelText;
     public GameObject levelFront;
+
 
     void Awake() {
         Application.targetFrameRate = 60;
@@ -34,6 +36,18 @@ public class GameManager : MonoBehaviour
 
     void MakeCat() {
         Instantiate(normalCat);
+
+        if (level == 1) {
+            float p = Random.Range(0, 10);
+            if (p < 2) Instantiate(normalCat);
+        }
+        else if (level == 2) {
+            float p = Random.Range(0, 10);
+            if (p < 5) Instantiate(normalCat);
+        }
+        else if (level >= 3) {
+            Instantiate(fatCat);
+        }
     }
 
     public void GameOver() {
@@ -45,6 +59,6 @@ public class GameManager : MonoBehaviour
         level = score / 5;
 
         levelText.text = level.ToString();
-        levelFront.transform.localScale = new Vector3((score - level * 5) / 0.5f, 1.0f, 1.0f);
+        levelFront.transform.localScale = new Vector3((score - level * 5) / 5.0f, 1.0f, 1.0f);
     }
 }

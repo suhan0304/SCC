@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Cat : MonoBehaviour
@@ -14,12 +15,22 @@ public class Cat : MonoBehaviour
     public GameObject fullCat;
 
     bool isFull = false;
+    public int type;
 
     void Start()
     {
         float x = Random.Range(-9.0f, 9.0f);
         float y = 30.0f;
         transform.position = new Vector2(x, y);
+
+        if (type == 1) {
+            Speed = 0.05f;
+            full = 5f;
+        }
+        else if (type == 2) {
+            Speed = 0.02f;
+            full = 10f;
+        }
     }
 
     void Update()
