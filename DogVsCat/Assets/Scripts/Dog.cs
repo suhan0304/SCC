@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Dog : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public GameObject food;
+
+    void Start() {
+        InvokeRepeating("MakeFood", 0.0f, 0.2f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void Update() {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = new Vector2(mousePos.x, transform.position.y);
+    }
+
+    void MakeFood() {
+        float x = transform.position.x;
+        float y = transform.position.y;
+        Instantiate(food, new Vector2(x, y), Quaternion.identity);
     }
 }
