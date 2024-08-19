@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 183041375}
   - component: {fileID: 183041374}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: levelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -830,6 +830,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalCat: {fileID: 7856481688343107567, guid: 8f5d931563ded5e42bdd08b0bdecd10c, type: 3}
   retryBtn: {fileID: 408198233}
+  levelText: {fileID: 183041374}
+  levelFront: {fileID: 723012024}
 --- !u!4 &1214047402
 Transform:
   m_ObjectHideFlags: 0

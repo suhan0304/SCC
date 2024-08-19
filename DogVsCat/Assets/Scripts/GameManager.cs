@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class GameManager : MonoBehaviour
 
     int level = 0;
     int score = 0;
+
+    public Text levelText;
+    public GameObject levelFront;
 
     void Awake() {
         Application.targetFrameRate = 60;
@@ -39,5 +43,8 @@ public class GameManager : MonoBehaviour
     public void AddScore() {
         score++;
         level = score / 5;
+
+        levelText.text = level.ToString();
+        levelFront.transform.localScale = new Vector3((score - level * 5) / 0.5f, 1.0f, 1.0f);
     }
 }
