@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cat : MonoBehaviour
 {
-    float Speed = 0.5f;
+    float Speed = 0.25f;
 
     float full = 5.0f;
     float energy = 0.0f;
@@ -12,6 +12,8 @@ public class Cat : MonoBehaviour
     public Transform front;
     public GameObject hungryCat;
     public GameObject fullCat;
+
+    bool isFull = false;
 
     void Start()
     {
@@ -24,6 +26,10 @@ public class Cat : MonoBehaviour
     {
         if (energy < full) {
             transform.position += Vector3.down * Speed;
+
+            if (transform.position.y < -16.0f) {
+                GameManager.Instance.GameOver();
+            }
         }
         else {
             if(transform.position.magnitude > 0) {
@@ -34,20 +40,22 @@ public class Cat : MonoBehaviour
                 transform.position += Vector3.left * 0.05f;
             }
         }
-
     }
 
-    private void OnTriggerEnter(Collider collision) {
+    private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Food")) {
             if (energy < full) {
                 energy += 1.0f;
                 front.localScale = new Vector3(energy / full, 1.0f, 1.0f);
-                Destroy(collision.gameObject);
-            }
-            else 
-            {
-                hungryCat.SetActive(false);
-                fullCat.SetActive(true);
+                if (energy == full) {
+                    if(!isFull) {
+                        isFull = true;
+                        hungryCat.SetActive(false);
+                        fullCat.SetActive(true);
+                        Destroy(gameObject, 3.0f);
+                        GameManager.Instance.AddScore();
+                    }
+                }
             }
         }
     }
