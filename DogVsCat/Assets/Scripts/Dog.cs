@@ -7,10 +7,10 @@ public class Dog : MonoBehaviour
     public GameObject food;
 
     void Start() {
-        InvokeRepeating("MakeFood", 0.0f, 0.2f);
+        InvokeRepeating("MakeFood", 0.0f, 0.1f);
     }
 
-    void Update() {
+    void FixedUpdate() {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         float x = mousePos.x;

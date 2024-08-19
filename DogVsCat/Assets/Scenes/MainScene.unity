@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -8}
   m_SizeDelta: {x: 20, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &183041374
@@ -190,7 +190,7 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 0
@@ -829,6 +829,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalCat: {fileID: 7856481688343107567, guid: 8f5d931563ded5e42bdd08b0bdecd10c, type: 3}
+  fatCat: {fileID: 363546446464477779, guid: 79c29ed80bf58d64a8d32337dd5d0520, type: 3}
+  pirateCat: {fileID: 549382606006085985, guid: 9cfa8037eecebc543bfd57581d1b6d95, type: 3}
   retryBtn: {fileID: 408198233}
   levelText: {fileID: 183041374}
   levelFront: {fileID: 723012024}

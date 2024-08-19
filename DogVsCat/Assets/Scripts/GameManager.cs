@@ -7,8 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
+    [Header("Cat Prefab")]
     public GameObject normalCat;
     public GameObject fatCat;
+    public GameObject pirateCat;
+
     public GameObject retryBtn;
 
     int level = 0;
@@ -20,7 +23,6 @@ public class GameManager : MonoBehaviour
 
     void Awake() {
         Application.targetFrameRate = 60;
-
         if (Instance == null) {
             Instance = this;
         }
@@ -45,8 +47,11 @@ public class GameManager : MonoBehaviour
             float p = Random.Range(0, 10);
             if (p < 5) Instantiate(normalCat);
         }
-        else if (level >= 3) {
+        else if (level == 3) {
             Instantiate(fatCat);
+        }
+        else if (level >= 4) {
+            Instantiate(pirateCat);
         }
     }
 
@@ -54,6 +59,7 @@ public class GameManager : MonoBehaviour
         retryBtn.SetActive(true);
         Time.timeScale = 0.0f;
     }
+
     public void AddScore() {
         score++;
         level = score / 5;

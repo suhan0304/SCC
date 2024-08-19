@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 
@@ -23,17 +24,23 @@ public class Cat : MonoBehaviour
         float y = 30.0f;
         transform.position = new Vector2(x, y);
 
-        if (type == 1) {
-            Speed = 0.05f;
-            full = 5f;
-        }
-        else if (type == 2) {
-            Speed = 0.02f;
-            full = 10f;
+        switch(type) {
+            case 1 :
+                Speed = 0.05f;
+                full = 5f;
+                break;
+            case 2 :
+                Speed = 0.02f;
+                full = 10f;
+                break;
+            case 3 :
+                Speed = 0.1f;
+                full = 5f;
+                break;
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (energy < full) {
             transform.position += Vector3.down * Speed;
@@ -57,7 +64,9 @@ public class Cat : MonoBehaviour
         if (collision.gameObject.CompareTag("Food")) {
             if (energy < full) {
                 energy += 1.0f;
+                Destroy(collision.gameObject);
                 front.localScale = new Vector3(energy / full, 1.0f, 1.0f);
+                
                 if (energy == full) {
                     if(!isFull) {
                         isFull = true;
