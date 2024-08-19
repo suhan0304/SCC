@@ -12,7 +12,11 @@ public class Dog : MonoBehaviour
 
     void Update() {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = new Vector2(mousePos.x, transform.position.y);
+
+        float x = mousePos.x;
+        x = Mathf.Clamp(x, -8.5f, 8.5f);
+        transform.position = new Vector2(x, transform.position.y);
+
     }
 
     void MakeFood() {
