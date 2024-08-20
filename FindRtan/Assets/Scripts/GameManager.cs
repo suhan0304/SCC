@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject endText;
 
+    public AudioClip audioClip;
+    public AudioSource audioSource;
+
     void Awake() {
         if(Instance == null)  {
             Instance = this;
@@ -32,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     void Start() {
         Time.timeScale = 1.0f;
+        audioSource = GetComponent<AudioSource>();
 
         int[] arr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7};
         arr = arr.OrderBy(x => Random.Range(0f, 7f)).ToArray();
@@ -60,6 +64,8 @@ public class GameManager : MonoBehaviour
 
     public void isMatched() {
         if(firstCard.idx == secondCard.idx) {
+            audioSource.PlayOneShot(audioClip);
+
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             cardCount -= 2;

@@ -13,12 +13,21 @@ public class Card : MonoBehaviour
     public GameObject front;
     public GameObject back;
 
+    public AudioClip clip;
+    public AudioSource audioSource;
+
+    void Start() {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void Setting(int number) {
         idx = number;
         frontImage.sprite = Resources.Load<Sprite>($"rtan{idx}");
     }
 
     public void OpenCard() {
+        audioSource.PlayOneShot(clip);
+
         if (GameManager.Instance.secondCard == null) {
             Anim.SetBool("isOpen", true);
             front.SetActive(true);
