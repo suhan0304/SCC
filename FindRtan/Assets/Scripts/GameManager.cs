@@ -40,8 +40,8 @@ public class GameManager : MonoBehaviour
             GameObject go = Instantiate(card, this.transform);
             go.transform.parent = cards;
 
-            float x = (i%4) * 1.4f - 2.1f;
-            float y = (i/4) * 1.4f - 3.0f;
+            float x = ((i%4) - 2); 
+            float y = (i/4) - 2;
 
             go.transform.position = new Vector2(x, y);
             go.GetComponent<Card>().Setting(arr[i]);
@@ -72,6 +72,15 @@ public class GameManager : MonoBehaviour
             firstCard.CloseCard();
             secondCard.CloseCard();
         }
+        CardReset();
+    }
+
+    void CardReset() {
+
+        Invoke("CardResetInvoke", 0.5f);
+
+    }
+    void CardResetInvoke() {
         firstCard = null;
         secondCard = null;
     }

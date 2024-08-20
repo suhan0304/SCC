@@ -19,16 +19,18 @@ public class Card : MonoBehaviour
     }
 
     public void OpenCard() {
-        Anim.SetBool("isOpen", true);
-        front.SetActive(true);
-        back.SetActive(false);
+        if (GameManager.Instance.secondCard == null) {
+            Anim.SetBool("isOpen", true);
+            front.SetActive(true);
+            back.SetActive(false);
 
-        if(GameManager.Instance.firstCard == null) {
-            GameManager.Instance.firstCard = this;
-        }
-        else {
-            GameManager.Instance.secondCard = this;
-            GameManager.Instance.isMatched();
+            if(GameManager.Instance.firstCard == null) {
+                GameManager.Instance.firstCard = this;
+            }
+            else {
+                GameManager.Instance.secondCard = this;
+                GameManager.Instance.isMatched();
+            }
         }
     }
 
