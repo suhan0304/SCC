@@ -59,11 +59,8 @@ public class Target : MonoBehaviour
 
     [Button("OnHit")]
     public void OnHit() {
-        float randomShakeStrength = Random.Range(0, shakeStrength);
 
-        if (randomShakeStrength >= 0.125 / 0.5) {
-            transform.DOPunchPosition(Vector3.right * shakeStrength, shakeDuration, vibrato, randomness);
-        }
+        transform.DOPunchPosition(Vector3.right * shakeStrength, shakeDuration, vibrato, randomness);
 
         StartCoroutine(FlashCoroutine());
     }

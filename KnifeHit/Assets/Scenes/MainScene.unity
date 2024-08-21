@@ -380,6 +380,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6933688084194772560, guid: d52be0aa356c25448a2af47ccfb0a884, type: 3}
+      propertyPath: maxRotationSpeed
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 7048496678587647813, guid: d52be0aa356c25448a2af47ccfb0a884, type: 3}
       propertyPath: m_Name
       value: Target

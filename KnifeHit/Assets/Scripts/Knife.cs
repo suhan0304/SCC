@@ -9,6 +9,8 @@ public class Knife : MonoBehaviour
     public float speed = 30f;
     public Rigidbody2D rb;
 
+    public ParticleSystem particle;
+
     private void OnEnable() {
         Events.OnTouchScreen += FireKnife;    
     }
@@ -31,10 +33,10 @@ public class Knife : MonoBehaviour
             transform.position = new Vector3(0f, -0.5f, 0f);
             transform.SetParent(collision.transform, true);
 
+            particle.Play();
             collision.gameObject.GetComponent<Target>().OnHit();
             
-            Events.OnTouchScreen -= FireKnife;    
-
+            Events.OnTouchScreen -= FireKnife;   
             GameManager.Instance.SpawnKnife();
         }
         else if(collision.gameObject.CompareTag("Knife")) {
