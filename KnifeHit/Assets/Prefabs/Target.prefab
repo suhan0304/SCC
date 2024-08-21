@@ -110,6 +110,8 @@ MonoBehaviour:
   shakeStrength: 0.1
   vibrato: 10
   randomness: 90
+  flashDuration: 0.1
+  paintWhiteMaterial: {fileID: 2100000, guid: 4e45f0b7098e2a4418bb8214701597b2, type: 2}
 --- !u!58 &2135970965772391019
 CircleCollider2D:
   m_ObjectHideFlags: 0

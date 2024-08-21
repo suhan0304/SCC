@@ -7,6 +7,7 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     [TabGroup("Tap","Rotate",SdfIconType.CodeSlash, TextColor="Green")]
+    [TabGroup("Tap","OnHit Effect",SdfIconType.CodeSlash, TextColor="Red")]
     
     [TabGroup("Tap","Rotate")] public float minRotation = 90f;
     [TabGroup("Tap","Rotate")] public float maxRotation = 500f;
@@ -16,17 +17,16 @@ public class Target : MonoBehaviour
     [TabGroup("Tap","Rotate")] public float minRotateDelay = 0.5f;
     [TabGroup("Tap","Rotate")] public float maxRotateDelay = 1f;
     [TabGroup("Tap","Position")] public float startPositionY = 0.5f;
-    
-    
-    [TabGroup("Tap","OnHit Effect/Shake")] public float shakeDuration = 0.2f;
-    [TabGroup("Tap","OnHit Effect/Shake")] public float shakeStrength = 0.125f;
-    [TabGroup("Tap","OnHit Effect/Shake")] public int vibrato = 10;
-    [TabGroup("Tap","OnHit Effect/Shake")] public float randomness = 90f; 
 
-    [TabGroup("Tap","OnHit Effect/Flash")]public float flashDuration = 0.1f; 
-    [TabGroup("Tap","OnHit Effect/Flash")]public Material paintWhiteMaterial; 
-    [TabGroup("Tap","OnHit Effect/Flash")]private Material originalMaterial; 
-    [TabGroup("Tap","OnHit Effect/Flash")]private SpriteRenderer spriteRenderer; 
+    [TabGroup("OnHit Effect","Shake")] public float shakeDuration = 0.2f;
+    [TabGroup("OnHit Effect","Shake")] public float shakeStrength = 0.125f;
+    [TabGroup("OnHit Effect","Shake")] public int vibrato = 10;
+    [TabGroup("OnHit Effect","Shake")] public float randomness = 90f; 
+
+    [TabGroup("OnHit Effect","Flash")] public float flashDuration = 0.05f; 
+    [TabGroup("OnHit Effect","Flash")] public Material paintWhiteMaterial; 
+    [TabGroup("OnHit Effect","Flash"),ReadOnly] private Material originalMaterial; 
+    [TabGroup("OnHit Effect","Flash"),ReadOnly] private SpriteRenderer spriteRenderer; 
     
     private void Start() {        
         spriteRenderer = GetComponent<SpriteRenderer>(); 
@@ -61,22 +61,17 @@ public class Target : MonoBehaviour
     public void OnHit() {
         float randomShakeStrength = Random.Range(0, shakeStrength);
 
-        if (randomShakeStrength >= 0.75f) Shake(randomShakeStrength);
-        Flash();
+        if (randomShakeStrength >= 0.125 / 0.5) {
+            transform.DOPunchPosition(Vector3.right * shakeStrength, shakeDuration, vibrato, randomness);
+        }
+
+        StartCoroutine(FlashCoroutine());
     }
 
-    private void Shake(float shakeStrength) {
-        transform.DOPunchPosition(Vector3.right * shakeStrength, shakeDuration, vibrato, randomness);
-    }
-
-    // 반짝이게 하는 메서드
-    private void Flash()
+    private IEnumerator FlashCoroutine()
     {
         spriteRenderer.material = paintWhiteMaterial;
-
-        // 반짝이는 애니메이션
-        DOTween.To(() => paintWhiteMaterial.color, x => paintWhiteMaterial.color = x, Color.white, flashDuration / 2)
-               .OnComplete(() => DOTween.To(() => paintWhiteMaterial.color, x => paintWhiteMaterial.color = x, originalMaterial.color, flashDuration / 2))
-               .OnKill(() => spriteRenderer.material = originalMaterial);
+        yield return new WaitForSeconds(flashDuration);
+        spriteRenderer.material = originalMaterial;
     }
 }
