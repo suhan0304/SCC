@@ -30,6 +30,8 @@ public class Knife : MonoBehaviour
             rb.velocity = Vector3.zero;
             transform.position = new Vector3(0f, -0.5f, 0f);
             transform.SetParent(collision.transform, true);
+
+            collision.gameObject.GetComponent<Target>().OnHit();
             
             Events.OnTouchScreen -= FireKnife;    
 
