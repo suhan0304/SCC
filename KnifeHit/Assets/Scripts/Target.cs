@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -15,25 +14,26 @@ public class Target : MonoBehaviour
 
     
     [TabGroup("Tap","Rotate")] public float minDuration = 1f;
-    [TabGroup("Tap","Rotate")]  public float maxDuration = 3f;
+    [TabGroup("Tap","Rotate")]  public float maxDuration = 4f;
 
-    
-    [TabGroup("Tap","Rotate")] public float maxRotationSpeed = 360f;
+    [TabGroup("Tap","Rotate")] public float maxRotationSpeed = 180f;
 
-    [TabGroup("Tap","ReadOnly"), ReadOnly] public float targetRotation = 0;
+    private void Start() {
 
-    [TabGroup("Tap","Rotate")] 
+    }
+
     [Button("Rotate Target")]
     public void RotateTarget() {
         float randomZRotation = Random.Range(minRotation, maxRotation);
 
         float rotationDirection = Random.Range(0, 2) * 2 - 1;
 
-        targetRotation = transform.eulerAngles.z + rotationDirection * (randomZRotation - transform.eulerAngles.z);
-        
+        float targetRotation = transform.eulerAngles.z + rotationDirection * randomZRotation;
 
         float rotationDistance = Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.z, targetRotation));
         float calculatedDurtaion = Mathf.Clamp(rotationDistance / maxRotationSpeed, minDuration, maxDuration);
+
+        Debug.Log(rotationDistance + " : " + calculatedDurtaion + " : " + targetRotation);
 
         transform.DORotate(new Vector3(0f, 0f, targetRotation), calculatedDurtaion, RotateMode.FastBeyond360)
             .SetEase(Ease.InOutSine);
