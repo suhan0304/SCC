@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minRotation: 90
-  maxRotation: 720
+  maxRotation: 500
   minDuration: 1
-  maxDuration: 4
+  maxDuration: 8
   maxRotationSpeed: 180
   startPositionY: 0.5
 --- !u!58 &2135970965772391019
@@ -138,4 +138,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.8

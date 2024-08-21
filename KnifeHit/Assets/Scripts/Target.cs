@@ -17,14 +17,21 @@ public class Target : MonoBehaviour
     [TabGroup("Tap","Rotate")]  public float maxDuration = 8f;
 
     [TabGroup("Tap","Rotate")] public float maxRotationSpeed = 180f;
+    [TabGroup("Tap","Rotate")] public float minRotateDelay = 0.5f;
+    [TabGroup("Tap","Rotate")] public float maxRotateDelay = 1f;
 
     [TabGroup("Tap","Position")] public float startPositionY = 0.5f;
+    
+    
+    private WaitForSeconds delay;
+    
     private void Start() {
         transform.position = new Vector3(0f, startPositionY, 0f);
+        StartCoroutine(RotateTargetObject());
     }
 
     [Button("Rotate Target")]
-    public void RotateTarget() {
+    IEnumerator RotateTarget() {
         float randomZRotation = Random.Range(minRotation, maxRotation);
         float rotationDirection = Random.Range(0, 2) * 2 - 1;
         float targetRotation = transform.eulerAngles.z + rotationDirection * randomZRotation;
@@ -32,5 +39,17 @@ public class Target : MonoBehaviour
 
         transform.DORotate(new Vector3(0f, 0f, targetRotation), calculatedDurtaion, RotateMode.FastBeyond360)
             .SetEase(Ease.InOutSine);
+        
+        yield return new WaitForSeconds(calculatedDurtaion);;
     }
+
+    IEnumerator RotateTargetObject() {
+        while (true) {
+            float waitTime = Random.Range(minRotateDelay, maxRotateDelay);
+            yield return new WaitForSeconds(waitTime);
+
+            yield return StartCoroutine(RotateTarget());
+        }
+    }
+
 }
