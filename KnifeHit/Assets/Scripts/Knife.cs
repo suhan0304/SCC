@@ -11,6 +11,8 @@ public class Knife : MonoBehaviour
 
     public ParticleSystem particle;
 
+    public float knifeOffsetY = 0.7f;
+
     private void OnEnable() {
         Events.OnTouchScreen += FireKnife;    
     }
@@ -30,7 +32,7 @@ public class Knife : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Target")) {
             rb.velocity = Vector3.zero;
-            transform.position = new Vector3(0f, -0.5f, 0f);
+            transform.position = new Vector3(0f, collision.gameObject.transform.position.y - knifeOffsetY, 0f);
             transform.SetParent(collision.transform, true);
 
             particle.Play();
