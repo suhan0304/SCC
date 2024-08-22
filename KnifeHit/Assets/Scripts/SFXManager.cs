@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class SFXManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public static SFXManager Instance;
+    public ParticleSystem ImpactParticle;
+
+    
+    private void OnEnable() {
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void playImpact(Vector3 hitPoint) {
+        ImpactParticle.transform.position = hitPoint;
+        ImpactParticle.Play();
     }
 }

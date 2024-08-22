@@ -10,7 +10,7 @@ public class BackgroundEffect : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-    public float flashDuration = 0.2f;
+    public float flashDuration = 0.15f;
     public float flashStrength = 0.05f;
 
     private void Start() {
@@ -27,8 +27,8 @@ public class BackgroundEffect : MonoBehaviour
 
     [Button("Flash")]
     public void BackgroundFlash() {
-        spriteRenderer.DOFade(flashStrength, flashDuration / 3)
-            .OnComplete(() => spriteRenderer.DOFade(0f, flashDuration / 3 * 2));
+        spriteRenderer.DOFade(flashStrength, flashDuration / 2)
+            .OnComplete(() => spriteRenderer.DOFade(0f, flashDuration / 2));
     }
 
 }

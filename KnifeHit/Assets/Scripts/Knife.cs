@@ -61,6 +61,9 @@ public class Knife : MonoBehaviour
 
             float randomTorque = Random.Range(-200f, 200f);
             rb.angularVelocity = randomTorque;
+
+            Vector2 collisionPoint = collision.bounds.ClosestPoint(transform.position);
+            SFXManager.Instance.playImpact(collisionPoint);
         }
     }
 }

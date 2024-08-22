@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     private void OnEnable() {
         if (Instance == null) {
             Instance = this;
+            DontDestroyOnLoad(this);
         }
         else {
             Destroy(gameObject);
