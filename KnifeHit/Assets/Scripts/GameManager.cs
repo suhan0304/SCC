@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    [ReadOnly] public static GameManager Instance;
 
-    [Header("Prefabs")]
-    public GameObject knife;
-    public GameObject target;
+    [TabGroup("Prefabs")] public GameObject knife;
+    [TabGroup("Prefabs")] public GameObject target;
 
-    [Header("Knives")]
-    public int RemainKnives;
+    [Header("Variables")] public int RemainKnives;
 
     private void OnEnable() {
         if (Instance == null) {
@@ -23,10 +21,12 @@ public class GameManager : MonoBehaviour
         }
 
         Events.OnTouchScreen += OnTouchScreen;
+        Events.OnCollisionBetweenKnives += GameOver;
     }
 
     private void OnDisable() {
         Events.OnTouchScreen -= OnTouchScreen;
+        Events.OnCollisionBetweenKnives -= GameOver;
     }
 
     [Button("SpawnKnife")]
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public void SpawnTarget() {
         GameObject currentTarget = Instantiate(target);
         RemainKnives = currentTarget.GetComponent<Target>().knivesToDestroy;
+        UIManager.Instance.Initialize();
         UIManager.Instance.SpawnKnivesIcon(RemainKnives);
     }
 
@@ -49,8 +50,9 @@ public class GameManager : MonoBehaviour
     public void OnTouchScreen() {
         RemainKnives--;
         UIManager.Instance.DecreaseKnifeCount(RemainKnives);
-        if (RemainKnives == 0) {
-            Events.OnAllKnivesOnHit.Invoke();
-        }
+    }
+
+    public void GameOver() {
+
     }
 }

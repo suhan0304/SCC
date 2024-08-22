@@ -34,4 +34,8 @@ public class UIManager : MonoBehaviour
         }
         KnifeIcons[(KnifeIcons.Count - 1)- RemainKnives].GetComponent<Image>().color = Color.black;
     }
+
+    public void Initialize() {
+        KnifeIcons.Clear();
+    }
 } 

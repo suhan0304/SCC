@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor.Validation;
 using UnityEngine;
 
 public class Target : MonoBehaviour
@@ -65,7 +64,7 @@ public class Target : MonoBehaviour
             float waitTime = Random.Range(minRotateDelay, maxRotateDelay);
             yield return new WaitForSeconds(waitTime);
 
-            yield return StartCoroutine(RotateTarget());
+            //yield return StartCoroutine(RotateTarget());
         }
     }
 
