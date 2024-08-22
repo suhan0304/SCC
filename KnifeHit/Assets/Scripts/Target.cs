@@ -8,6 +8,7 @@ public class Target : MonoBehaviour
 {
     [TabGroup("Tap","Rotate",SdfIconType.CodeSlash, TextColor="Green")]
     [TabGroup("Tap","OnHit Effect",SdfIconType.CodeSlash, TextColor="Red")]
+    [TabGroup("Tap","Position",SdfIconType.CodeSlash, TextColor="Blue")]
     
     [TabGroup("Tap","Rotate")] public float minRotation = 90f;
     [TabGroup("Tap","Rotate")] public float maxRotation = 500f;
@@ -17,6 +18,9 @@ public class Target : MonoBehaviour
     [TabGroup("Tap","Rotate")] public float minRotateDelay = 0.5f;
     [TabGroup("Tap","Rotate")] public float maxRotateDelay = 1f;
     [TabGroup("Tap","Position")] public float startPositionY = 0.5f;
+
+    [TabGroup("OnHit Effect","Shake",SdfIconType.CodeSlash, TextColor="Yellow")]
+    [TabGroup("OnHit Effect","Flash",SdfIconType.CodeSlash, TextColor="Yellow")]
 
     [TabGroup("OnHit Effect","Shake")] public float shakeDuration = 0.2f;
     [TabGroup("OnHit Effect","Shake")] public float shakeStrength = 0.125f;

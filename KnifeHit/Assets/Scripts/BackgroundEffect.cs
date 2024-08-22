@@ -7,12 +7,12 @@ public class BackgroundEffect : MonoBehaviour
 {
     public GameObject Background_White;
 
-    public SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
 
     public float flashDuration = 0.1f;
 
     private void Start() {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = Background_White.GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable() {

@@ -7,10 +7,13 @@ public class GameManager : MonoBehaviour
 {
     [ReadOnly] public static GameManager Instance;
 
-    [TabGroup("Prefabs")] public GameObject knife;
-    [TabGroup("Prefabs")] public GameObject target;
+    [TabGroup("Tab","Prefabs",SdfIconType.CodeSlash, TextColor="Green")]
+    [TabGroup("Tab","Variables",SdfIconType.CodeSlash, TextColor="Red")]
 
-    [Header("Variables")] public int RemainKnives;
+    [TabGroup("Tab","Prefabs")] public GameObject knife;
+    [TabGroup("Tab","Prefabs")] public GameObject target;
+
+    [TabGroup("Tab","Variables")] public int RemainKnives;
 
     private void OnEnable() {
         if (Instance == null) {
