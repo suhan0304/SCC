@@ -4,5 +4,5 @@ public static class Events
 {
     public static Action OnTouchScreen;
 
-    public static Action targetHPzero;
+    public static Action OnAllKnivesOnHit;
 }

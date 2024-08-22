@@ -28,14 +28,14 @@ public class Target : MonoBehaviour
     [TabGroup("OnHit Effect","Flash"),ReadOnly] private Material originalMaterial; 
     [TabGroup("OnHit Effect","Flash"),ReadOnly] private SpriteRenderer spriteRenderer; 
 
-    public int TargetHP = 10;
+    public readonly int knivesToDestroy = 10;
     
     private void OnEnable() {
-        Events.targetHPzero += DestroyTarget;
+        Events.OnAllKnivesOnHit += DestroyTarget;
     }
 
     private void OnDisable() {
-        Events.targetHPzero -= DestroyTarget;
+        Events.OnAllKnivesOnHit -= DestroyTarget;
     }
 
 
@@ -70,15 +70,8 @@ public class Target : MonoBehaviour
 
     [Button("OnHit")]
     public void OnHit() {
-
         transform.DOPunchPosition(Vector3.right * shakeStrength, shakeDuration, vibrato, randomness);
         StartCoroutine(FlashCoroutine());
-
-        TargetHP--;
-        if(TargetHP == 0) {
-            transform.DOKill();
-            Events.targetHPzero.Invoke();
-        }
     }
 
     private IEnumerator FlashCoroutine()
@@ -90,6 +83,7 @@ public class Target : MonoBehaviour
 
     [Button]
     public void DestroyTarget() {
-        Destroy(gameObject);
+        transform.DOKill();
+        //Destroy(gameObject);
     }
 }

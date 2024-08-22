@@ -7,6 +7,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [Header("Prefabs")]
+    public GameObject knife;
+    public GameObject target;
+
+    [Header("Knives")]
+    public int RemainKnives;
+
     private void OnEnable() {
         if (Instance == null) {
             Instance = this;
@@ -16,10 +23,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [Header("Prefabs")]
-    public GameObject knife;
-    public GameObject target;
-
     [Button("SpawnKnife")]
     public void SpawnKnife() {
         GameObject currentKnife = Instantiate(knife);
@@ -28,10 +31,12 @@ public class GameManager : MonoBehaviour
     [Button("SpawnTarget")]
     public void SpawnTarget() {
         GameObject currentTarget = Instantiate(target);
+        RemainKnives = currentTarget.GetComponent<Target>().knivesToDestroy;
+        UIManager.Instance.SpawnKnivesIcon(RemainKnives);
     }
 
     public void Start() {
-        new WaitForSeconds(0.5f);
+        SpawnTarget();
         SpawnKnife();
     }
 }
