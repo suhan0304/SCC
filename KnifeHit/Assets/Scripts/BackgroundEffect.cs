@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class BackgroundEffect : MonoBehaviour
@@ -9,7 +10,8 @@ public class BackgroundEffect : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-    public float flashDuration = 0.1f;
+    public float flashDuration = 0.2f;
+    public float flashStrength = 0.05f;
 
     private void Start() {
         spriteRenderer = Background_White.GetComponent<SpriteRenderer>();
@@ -23,9 +25,10 @@ public class BackgroundEffect : MonoBehaviour
         Events.OnCollisionBetweenKnives -= BackgroundFlash;
     }
 
+    [Button("Flash")]
     public void BackgroundFlash() {
-        spriteRenderer.DOFade(1f, flashDuration / 2)
-            .OnComplete(() => spriteRenderer.DOFade(0f, flashDuration/2));
+        spriteRenderer.DOFade(flashStrength, flashDuration / 3)
+            .OnComplete(() => spriteRenderer.DOFade(0f, flashDuration / 3 * 2));
     }
 
 }
