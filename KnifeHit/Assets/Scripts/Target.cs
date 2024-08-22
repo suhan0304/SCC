@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor.Validation;
 using UnityEngine;
 
 public class Target : MonoBehaviour
@@ -72,6 +73,10 @@ public class Target : MonoBehaviour
     public void OnHit() {
         transform.DOPunchPosition(Vector3.right * shakeStrength, shakeDuration, vibrato, randomness);
         StartCoroutine(FlashCoroutine());
+
+        if (GameManager.Instance.RemainKnives == 0) {
+            Events.OnAllKnivesOnHit.Invoke();
+        }
     }
 
     private IEnumerator FlashCoroutine()
@@ -84,6 +89,11 @@ public class Target : MonoBehaviour
     [Button("DestroyTarget")]
     public void DestroyTarget() {
         transform.DOKill();
+        StartCoroutine(DestroyTargetCoroutine());
+    }
+
+    IEnumerator DestroyTargetCoroutine() {
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 }
