@@ -29,6 +29,6 @@ public class UIManager : MonoBehaviour
     }
 
     public void DecreaseKnifeCount(int RemainKnives) {
-        KnifeIcons[RemainKnives].GetComponent<Image>().color = Color.black;
+        KnifeIcons[(KnifeIcons.Count - 1)- RemainKnives].GetComponent<Image>().color = Color.black;
     }
 }
