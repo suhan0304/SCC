@@ -84,6 +84,6 @@ public class Target : MonoBehaviour
     [Button("DestroyTarget")]
     public void DestroyTarget() {
         transform.DOKill();
-        //Destroy(gameObject);
+        //TODO - Destroy(gameObject);
     }
 }
