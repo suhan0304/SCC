@@ -21,6 +21,12 @@ public class GameManager : MonoBehaviour
         else {
             Destroy(gameObject);
         }
+
+        Events.OnTouchScreen += OnTouchScreen;
+    }
+
+    private void OnDisable() {
+        Events.OnTouchScreen -= OnTouchScreen;
     }
 
     [Button("SpawnKnife")]
@@ -38,5 +44,13 @@ public class GameManager : MonoBehaviour
     public void Start() {
         SpawnTarget();
         SpawnKnife();
+    }
+
+    public void OnTouchScreen() {
+        RemainKnives--;
+        UIManager.Instance.DecreaseKnifeCount(RemainKnives);
+        if (RemainKnives == 0) {
+            Events.OnAllKnivesOnHit.Invoke();
+        }
     }
 }

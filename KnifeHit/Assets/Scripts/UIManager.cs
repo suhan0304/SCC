@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -22,8 +23,12 @@ public class UIManager : MonoBehaviour
     public void SpawnKnivesIcon(int cntKnives) {
         for (int i = 0; i < cntKnives; i++) {
             GameObject knifeIcon = Instantiate(KnifeIconPrefab);
-            KnifeIconPrefab.transform.SetParent(knifeIconsContainer.transform);
+            knifeIcon.transform.SetParent(knifeIconsContainer.transform);
             KnifeIcons.Add(knifeIcon);
         }
+    }
+
+    public void DecreaseKnifeCount(int RemainKnives) {
+        KnifeIcons[RemainKnives].GetComponent<Image>().color = Color.black;
     }
 }

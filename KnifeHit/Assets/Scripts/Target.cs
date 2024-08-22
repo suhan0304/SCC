@@ -29,7 +29,7 @@ public class Target : MonoBehaviour
     [TabGroup("OnHit Effect","Flash"),ReadOnly] private SpriteRenderer spriteRenderer; 
 
     public readonly int knivesToDestroy = 10;
-    
+
     private void OnEnable() {
         Events.OnAllKnivesOnHit += DestroyTarget;
     }
@@ -81,7 +81,7 @@ public class Target : MonoBehaviour
         spriteRenderer.material = originalMaterial;
     }
 
-    [Button]
+    [Button("DestroyTarget")]
     public void DestroyTarget() {
         transform.DOKill();
         //Destroy(gameObject);
