@@ -105,7 +105,7 @@ MonoBehaviour:
   maxRotationSpeed: 90
   minRotateDelay: 0.5
   maxRotateDelay: 1
-  startPositionY: 0.5
+  startPositionY: 1.25
   shakeDuration: 0.2
   shakeStrength: 0.1
   vibrato: 10

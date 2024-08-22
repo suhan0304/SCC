@@ -27,7 +27,18 @@ public class Target : MonoBehaviour
     [TabGroup("OnHit Effect","Flash")] public Material paintWhiteMaterial; 
     [TabGroup("OnHit Effect","Flash"),ReadOnly] private Material originalMaterial; 
     [TabGroup("OnHit Effect","Flash"),ReadOnly] private SpriteRenderer spriteRenderer; 
+
+    public int TargetHP = 10;
     
+    private void OnEnable() {
+        Events.targetHPzero += DestroyTarget;
+    }
+
+    private void OnDisable() {
+        Events.targetHPzero -= DestroyTarget;
+    }
+
+
     private void Start() {        
         spriteRenderer = GetComponent<SpriteRenderer>(); 
         originalMaterial = spriteRenderer.material; 
@@ -61,8 +72,13 @@ public class Target : MonoBehaviour
     public void OnHit() {
 
         transform.DOPunchPosition(Vector3.right * shakeStrength, shakeDuration, vibrato, randomness);
-
         StartCoroutine(FlashCoroutine());
+
+        TargetHP--;
+        if(TargetHP == 0) {
+            transform.DOKill();
+            Events.targetHPzero.Invoke();
+        }
     }
 
     private IEnumerator FlashCoroutine()
@@ -70,5 +86,10 @@ public class Target : MonoBehaviour
         spriteRenderer.material = paintWhiteMaterial;
         yield return new WaitForSeconds(flashDuration);
         spriteRenderer.material = originalMaterial;
+    }
+
+    [Button]
+    public void DestroyTarget() {
+        Destroy(gameObject);
     }
 }

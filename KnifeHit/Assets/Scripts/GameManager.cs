@@ -16,14 +16,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [Header("Prefabs")]
     public GameObject knife;
+    public GameObject target;
 
     [Button("SpawnKnife")]
     public void SpawnKnife() {
         GameObject currentKnife = Instantiate(knife);
     }
 
+    [Button("SpawnTarget")]
+    public void SpawnTarget() {
+        GameObject currentTarget = Instantiate(target);
+    }
+
     public void Start() {
+        new WaitForSeconds(0.5f);
         SpawnKnife();
     }
 }
