@@ -407,10 +407,11 @@ MonoBehaviour:
   - {fileID: 8435270162272879899}
   - {fileID: 5161170736858518140}
   - {fileID: 5506509006409840330}
-  forceMagnitude: 0.5
+  forceMagnitude: 10
   upwardForceMultiplier: 1.5
-  destructionDelay: 2
+  destructionDelay: 5
   torqueMagnitude: 300
+  segmentGravityScale: 1
 --- !u!58 &2135970965772391019
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -355,7 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knife: {fileID: 612295153989972779, guid: a5e0e36bac0ea354e8857864545c7674, type: 3}
   target: {fileID: 7048496678587647813, guid: d52be0aa356c25448a2af47ccfb0a884, type: 3}
-  RemainKnives: 0
+  RemainKnives: 10
 --- !u!4 &715375079
 Transform:
   m_ObjectHideFlags: 0
