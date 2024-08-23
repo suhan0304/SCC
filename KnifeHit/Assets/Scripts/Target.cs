@@ -28,9 +28,7 @@ public class Target : MonoBehaviour
     [TabGroup("OnHit Effect","Shake")] public float randomness = 90f; 
 
     [TabGroup("OnHit Effect","Flash")] public float flashDuration = 0.05f; 
-    [TabGroup("OnHit Effect","Flash")] public Material paintWhiteMaterial; 
-    [TabGroup("OnHit Effect","Flash"),ReadOnly] private Material originalMaterial; 
-    [TabGroup("OnHit Effect","Flash"),ReadOnly] private SpriteRenderer spriteRenderer; 
+    [TabGroup("OnHit Effect","Flash")] public SpriteRenderer FlashWhiteRenderer;
 
     public readonly int knivesToDestroy = 10;
 
@@ -43,9 +41,7 @@ public class Target : MonoBehaviour
     }
 
 
-    private void Start() {        
-        spriteRenderer = GetComponent<SpriteRenderer>(); 
-        originalMaterial = spriteRenderer.material; 
+    private void Start() {
 
         transform.position = new Vector3(0f, startPositionY, 0f);
         StartCoroutine(RotateTargetObject());
@@ -68,25 +64,19 @@ public class Target : MonoBehaviour
             float waitTime = Random.Range(minRotateDelay, maxRotateDelay);
             yield return new WaitForSeconds(waitTime);
 
-            //yield return StartCoroutine(RotateTarget());
+            yield return StartCoroutine(RotateTarget());
         }
     }
 
     [Button("OnHit")]
     public void OnHit() {
         transform.DOPunchPosition(Vector3.right * shakeStrength, shakeDuration, vibrato, randomness);
-        StartCoroutine(FlashCoroutine());
+        FlashWhiteRenderer.DOFade(1f, flashDuration / 2)
+            .OnComplete(() => FlashWhiteRenderer.DOFade(0f, flashDuration /2));
 
         if (GameManager.Instance.RemainKnives == 0) {
             Events.OnAllKnivesOnHit.Invoke();
         }
-    }
-
-    private IEnumerator FlashCoroutine()
-    {
-        spriteRenderer.material = paintWhiteMaterial;
-        yield return new WaitForSeconds(flashDuration);
-        spriteRenderer.material = originalMaterial;
     }
 
     [Button("DestroyTarget")]
