@@ -45,6 +45,8 @@ public class Knife : MonoBehaviour
         else if(collision.gameObject.CompareTag("Knife") && canMove) {
             canMove = false;
             Events.OnTouchScreen -= FireKnife;   
+            
+            rb.bodyType = RigidbodyType2D.Dynamic;
 
             Events.OnCollisionBetweenKnives.Invoke();
             rb.velocity = Vector3.zero;

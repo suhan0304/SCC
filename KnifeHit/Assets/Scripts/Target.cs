@@ -38,10 +38,14 @@ public class Target : MonoBehaviour
     [TabGroup("Destruction Effect","Segements")] public float forceMagnitude = 0f; 
     [TabGroup("Destruction Effect","Segements")] public float upwardForceMultiplier = 2f;
     [TabGroup("Destruction Effect","Segements")] public float destructionDelay = 5f; 
+    [TabGroup("Destruction Effect","Segements")] public float torqueMagnitude = 300f;
+
+    
+    private Coroutine rotateCoroutine;
+    private Tween rotateTween;
 #endregion
 
 
-    private Coroutine rotateCoroutine;
 
 
     public readonly int knivesToDestroy = 10;
@@ -66,7 +70,9 @@ public class Target : MonoBehaviour
         float targetRotation = transform.eulerAngles.z + rotationDirection * randomZRotation;
         float calculatedDurtaion = Mathf.Clamp(Mathf.Abs(rotationDirection * randomZRotation) / maxRotationSpeed, minDuration, maxDuration);
 
-        transform.DORotate(new Vector3(0f, 0f, targetRotation), calculatedDurtaion, RotateMode.FastBeyond360)
+        rotateTween?.Kill();
+
+        rotateTween = transform.DORotate(new Vector3(0f, 0f, targetRotation), calculatedDurtaion, RotateMode.FastBeyond360)
             .SetEase(Ease.InOutSine);
         
         yield return new WaitForSeconds(calculatedDurtaion);;
@@ -96,8 +102,7 @@ public class Target : MonoBehaviour
     public void DestroyTarget() {
         StopCoroutine(rotateCoroutine);
 
-        if (DOTween.IsTweening(transform))
-            transform.DOKill();
+        rotateTween?.Kill();
 
         ApplyForceToSegments();
 
@@ -110,7 +115,7 @@ public class Target : MonoBehaviour
         foreach(GameObject segement in Segements) {
             Rigidbody2D rb = segement.GetComponent<Rigidbody2D>();
             if (rb != null) {
-                forceMagnitude = Random.Range(2f, 4f);
+                forceMagnitude = Random.Range(5f, 7.5f);
                 Vector3 direction = ((segement.transform.position - parentPosition).normalized + Vector3.up * upwardForceMultiplier).normalized;
 
                 Vector3 force = direction * forceMagnitude;
@@ -120,7 +125,7 @@ public class Target : MonoBehaviour
 
             }       
 
-            float randomTorque = Random.Range(-200f, 200f);
+            float randomTorque = Random.Range(-torqueMagnitude, torqueMagnitude);
             rb.angularVelocity = randomTorque;
         }
     }
