@@ -36,10 +36,10 @@ public class Target : MonoBehaviour
 
     [TabGroup("Destruction Effect","Segements")] public GameObject[] Segements;    
     [TabGroup("Destruction Effect","Segements")] public float forceMagnitude = 0f; 
-    [TabGroup("Destruction Effect","Segements")] public float upwardForceMultiplier = 2f;
+    [TabGroup("Destruction Effect","Segements")] public float upwardForceMultiplier = 3f;
     [TabGroup("Destruction Effect","Segements")] public float destructionDelay = 5f; 
     [TabGroup("Destruction Effect","Segements")] public float torqueMagnitude = 300f;
-
+    [TabGroup("Destruction Effect","Segements")] public float segmentGravityScale = 1.5f;
     
     private Coroutine rotateCoroutine;
     private Tween rotateTween;
@@ -115,11 +115,12 @@ public class Target : MonoBehaviour
         foreach(GameObject segement in Segements) {
             Rigidbody2D rb = segement.GetComponent<Rigidbody2D>();
             if (rb != null) {
-                forceMagnitude = Random.Range(5f, 7.5f);
+                forceMagnitude = Random.Range(2f, 3f);
                 Vector3 direction = ((segement.transform.position - parentPosition).normalized + Vector3.up * upwardForceMultiplier).normalized;
 
                 Vector3 force = direction * forceMagnitude;
-                
+
+                rb.gravityScale = segmentGravityScale;
                 rb.bodyType = RigidbodyType2D.Dynamic;
                 rb.AddForce(force, ForceMode2D.Impulse);
 
