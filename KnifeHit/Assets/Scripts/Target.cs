@@ -30,6 +30,11 @@ public class Target : MonoBehaviour
     [TabGroup("OnHit Effect","Flash")] public float flashDuration = 0.05f; 
     [TabGroup("OnHit Effect","Flash")] public SpriteRenderer FlashWhiteRenderer;
 
+    [TabGroup("Destruction Effect","Rigidbody",SdfIconType.CodeSlash, TextColor="Purple")]
+
+    [TabGroup("Destruction Effect","Rigidbody")] public Rigidbody2D[] rigidbodys;
+
+
     public readonly int knivesToDestroy = 10;
 
     private void OnEnable() {
@@ -82,6 +87,9 @@ public class Target : MonoBehaviour
     [Button("DestroyTarget")]
     public void DestroyTarget() {
         transform.DOKill();
+
+        //TODO - Segment Physics Simulate
+
         StartCoroutine(DestroyTargetCoroutine());
     }
 
