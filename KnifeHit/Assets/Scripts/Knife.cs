@@ -49,8 +49,6 @@ public class Knife : MonoBehaviour
             Events.OnCollisionBetweenKnives.Invoke();
             rb.velocity = Vector3.zero;
 
-            rb.isKinematic = false;
-
             Vector2 collisionDirection = (transform.position - collision.transform.position).normalized;
             float bounceForce = Random.Range(5f, 7.5f);
 
