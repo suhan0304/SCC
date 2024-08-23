@@ -30,9 +30,13 @@ public class Target : MonoBehaviour
     [TabGroup("OnHit Effect","Flash")] public float flashDuration = 0.05f; 
     [TabGroup("OnHit Effect","Flash")] public SpriteRenderer FlashWhiteRenderer;
 
-    [TabGroup("Destruction Effect","Rigidbody",SdfIconType.CodeSlash, TextColor="Purple")]
+    [TabGroup("Destruction Effect","Segements",SdfIconType.CodeSlash, TextColor="Purple")]
 
-    [TabGroup("Destruction Effect","Rigidbody")] public Rigidbody2D[] rigidbodys;
+    [TabGroup("Destruction Effect","Segements")] public GameObject[] Segements;    
+    [TabGroup("Destruction Effect","Segements")] public float forceMagnitude = 5f; 
+    [TabGroup("Destruction Effect","Segements")] public float upwardForceMultiplier = 1.5f;
+    [TabGroup("Destruction Effect","Segements")] public float rotationalForceMagnitude = 5f;
+    [TabGroup("Destruction Effect","Segements")] public float destructionDelay = 2f; 
 
 
     public readonly int knivesToDestroy = 10;
@@ -86,15 +90,41 @@ public class Target : MonoBehaviour
 
     [Button("DestroyTarget")]
     public void DestroyTarget() {
-        transform.DOKill();
+        StopCoroutine(RotateTargetObject());
 
-        //TODO - Segment Physics Simulate
+        transform.DOKill();
+        ApplyForceToSegments();
 
         StartCoroutine(DestroyTargetCoroutine());
     }
 
+    private void ApplyForceToSegments() {
+        Vector3 parentPosition = transform.position;
+
+        foreach(GameObject segement in Segements) {
+            Rigidbody rb = segement.GetComponent<Rigidbody>();
+            if (rb != null) {
+                forceMagnitude = Random.Range(5f, 7.5f);
+                Vector3 direction = ((segement.transform.position - parentPosition).normalized + Vector3.up * upwardForceMultiplier).normalized;
+
+                Vector3 force = direction * forceMagnitude;
+
+                rb.useGravity = true;
+                rb.AddForce(force, ForceMode.Impulse);
+
+            }       
+            Vector3 randomTorque = new Vector3(
+                Random.Range(-rotationalForceMagnitude, rotationalForceMagnitude),
+                Random.Range(-rotationalForceMagnitude, rotationalForceMagnitude),
+                Random.Range(-rotationalForceMagnitude, rotationalForceMagnitude)
+            );
+            rb.AddTorque(randomTorque, ForceMode.Impulse);
+
+        }
+    }
+
     IEnumerator DestroyTargetCoroutine() {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(destructionDelay);
         Destroy(gameObject);
     }
 }

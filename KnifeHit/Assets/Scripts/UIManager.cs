@@ -37,6 +37,9 @@ public class UIManager : MonoBehaviour
     }
 
     public void Initialize() {
+        foreach (GameObject icon in KnifeIcons) {
+            Destroy(icon);
+        }
         KnifeIcons.Clear();
     }
 } 
