@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Knife : MonoBehaviour
@@ -39,7 +40,6 @@ public class Knife : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
-        sr.color = new Color(1, 1, 1, 0); 
         rb.gravityScale = knifeGravityScale;
 
         StartKnifeAnimation();
@@ -47,27 +47,27 @@ public class Knife : MonoBehaviour
 
     private void StartKnifeAnimation() {
         animEndPosition = transform.position;
-        animStartPosition = transform.position - new Vector3(0, 2f, 0);
+        animStartPosition = transform.position - new Vector3(0, 1f, 0);
+
+        sr.color = new Color(1, 1, 1, 0); 
+        transform.position = animStartPosition;
 
         animationTween = DOTween.Sequence()
             .Append(transform.DOMove(animEndPosition, animationDuration))
             .Join(sr.DOFade(1, animationDuration))
-            .OnKill(() =>  {StopKnifeAnimation();})
+            .OnKill(() => {
+                sr.color = new Color(1, 1, 1, 1);
+                transform.position = animEndPosition;
+            })
             .Play();
         
     }
 
-    private void StopKnifeAnimation() {
+    [Button("Fire")]
+    public void FireKnife() {
         if (animationTween != null && animationTween.IsPlaying()) {
             animationTween.Kill();
         }
-        sr.color = new Color(1, 1, 1, 1);
-        transform.position = animEndPosition;
-    }
-
-    [Button("Fire")]
-    public void FireKnife() {
-        StopKnifeAnimation();
         rb.velocity = Vector3.up * speed;
     }
 
