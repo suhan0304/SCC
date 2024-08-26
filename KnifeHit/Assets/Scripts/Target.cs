@@ -46,9 +46,7 @@ public class Target : MonoBehaviour
 #endregion
 
 
-
-
-    public readonly int knivesToDestroy = 10;
+    public readonly int knivesToDestroy = 5;
 
     private void OnEnable() {
         Events.OnAllKnivesOnHit += DestroyTarget;

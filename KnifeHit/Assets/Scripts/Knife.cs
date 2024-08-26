@@ -8,7 +8,7 @@ public class Knife : MonoBehaviour
     public Rigidbody2D rb;
 
     public ParticleSystem particle;
-    [TabGroup("Variables")] public bool canMove = true;
+    [TabGroup("Variables")] public bool hasInteracted = false;
     [TabGroup("Variables")] public float speed = 30f;
     [TabGroup("Variables")] public float knifeOffsetY = 0.7f;
 
@@ -19,11 +19,11 @@ public class Knife : MonoBehaviour
 
     private void OnEnable() {
         Events.OnTouchScreen += FireKnife;    
-        Events.OnTouchScreen += KnifeDestroy;    
+        Events.OnAllKnivesOnHit += KnifeDestroy;    
     }
     private void OnDisable() {
         Events.OnTouchScreen -= FireKnife;  
-        Events.OnTouchScreen -= KnifeDestroy;    
+        Events.OnAllKnivesOnHit -= KnifeDestroy;    
     }
 
     private void Start() {
@@ -36,8 +36,8 @@ public class Knife : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Target") && canMove) {
-            canMove = false;
+        if (collision.gameObject.CompareTag("Target") && !hasInteracted) {
+            hasInteracted = true;
             Events.OnTouchScreen -= FireKnife;   
 
             rb.velocity = Vector3.zero;
@@ -49,8 +49,8 @@ public class Knife : MonoBehaviour
             
             GameManager.Instance.SpawnKnife();
         }
-        else if(collision.gameObject.CompareTag("Knife") && canMove) {
-            canMove = false;
+        else if(collision.gameObject.CompareTag("Knife") && !hasInteracted) {
+            hasInteracted = true;
             Events.OnTouchScreen -= FireKnife;   
             
             rb.bodyType = RigidbodyType2D.Dynamic;
@@ -75,6 +75,7 @@ public class Knife : MonoBehaviour
     }
 
     public void KnifeDestroy() {
+        hasInteracted = true;
         StartCoroutine(KnifeDestroyCoroutine());
     }
 
