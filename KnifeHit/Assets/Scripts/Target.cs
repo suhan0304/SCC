@@ -40,6 +40,9 @@ public class Target : MonoBehaviour
     [TabGroup("Destruction Effect","Segements")] public float destructionDelay = 5f; 
     [TabGroup("Destruction Effect","Segements")] public float torqueMagnitude = 300f;
     [TabGroup("Destruction Effect","Segements")] public float segmentGravityScale = 2f;
+
+    [TabGroup("Animation","StartAnimation")] public float targetScale = 0.6f;
+    [TabGroup("Animation","StartAnimation")] public float animationDuration = 0.35f;
     
     private Coroutine rotateCoroutine;
     private Tween rotateTween;
@@ -60,6 +63,18 @@ public class Target : MonoBehaviour
     private void Start() {
         transform.position = new Vector3(0f, startPositionY, 0f);
         rotateCoroutine = StartCoroutine(RotateTargetObject());
+
+        StartTargetAnimation();
+    }
+
+    
+    private void StartTargetAnimation() {
+        transform.localScale = Vector3.zero;
+        
+        DOTween.Sequence()
+            .Append(transform.DOScale(targetScale, animationDuration)
+                .SetEase(Ease.InOutBounce)) 
+            .Play();
     }
 
     IEnumerator RotateTarget() {

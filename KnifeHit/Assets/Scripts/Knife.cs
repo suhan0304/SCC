@@ -57,11 +57,8 @@ public class Knife : MonoBehaviour
             .Join(sr.DOFade(1, animationDuration))
             .OnKill(() => {EndKnifeAnimation();
             });
-        
-        if (animationTween != null)
-            animationTween.Play();
     }
-    
+
     private void EndKnifeAnimation() {
         sr.color = new Color(1, 1, 1, 1);
         transform.position = animEndPosition;
@@ -69,9 +66,7 @@ public class Knife : MonoBehaviour
 
     [Button("Fire")]
     public void FireKnife() {
-        if (animationTween != null && animationTween.IsPlaying()) {
-            animationTween.Kill();
-        }
+        animationTween?.Kill();
         EndKnifeAnimation();
         rb.velocity = Vector3.up * speed;
     }
