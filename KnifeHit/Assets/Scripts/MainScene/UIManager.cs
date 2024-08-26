@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     public GameObject KnifeIconPrefab;
     public List<GameObject> KnifeIcons;
 
-    private float fadeDuration = 0.2f;
+    private float fadeDuration = 0.35f;
 
     public TMP_Text stageText;
 

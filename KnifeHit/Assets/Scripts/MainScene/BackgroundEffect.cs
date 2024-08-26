@@ -30,5 +30,4 @@ public class BackgroundEffect : MonoBehaviour
         spriteRenderer.DOFade(flashStrength, flashDuration / 2)
             .OnComplete(() => spriteRenderer.DOFade(0f, flashDuration / 2));
     }
-
-}
+} 

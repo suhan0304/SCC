@@ -10,13 +10,16 @@ public class GameManager : MonoBehaviour
     [ReadOnly] public static GameManager Instance;
 
     [TabGroup("Tab","Prefabs",SdfIconType.CodeSlash, TextColor="Green")]
-    [TabGroup("Tab","Variables",SdfIconType.CodeSlash, TextColor="Red")]
 
     [TabGroup("Tab","Prefabs")] public GameObject knife;
     [TabGroup("Tab","Prefabs")] public GameObject target;
 
+    [TabGroup("Tab","Variables",SdfIconType.CodeSlash, TextColor="Red")]
     [TabGroup("Tab","Variables")] public int RemainKnives;
     [TabGroup("Tab","Variables")] public int stageNum;
+
+    [TabGroup("Tab","GameObjects",SdfIconType.CodeSlash, TextColor="Yellow")]
+    [TabGroup("Tab","GameObjects")] public GameObject PlayObects;
 
     private void OnEnable() {
         if (Instance == null) {
@@ -63,7 +66,10 @@ public class GameManager : MonoBehaviour
     [Button("SpawnTarget")]
     public void SpawnTarget() {
         GameObject currentTarget = Instantiate(target);
+
+        currentTarget.transform.SetParent(PlayObects.transform);
         RemainKnives = currentTarget.GetComponent<Target>().knivesToDestroy;
+
         UIManager.Instance.Initialize();
         UIManager.Instance.SpawnKnivesIcon(RemainKnives);
     }
@@ -77,7 +83,8 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void Retry() {
+    [Button("Reload MainScene")]
+    public void ReloadMainScene() {
         SceneManager.LoadScene("MainScene");
     }
 }

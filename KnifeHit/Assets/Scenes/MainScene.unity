@@ -403,6 +403,7 @@ MonoBehaviour:
   target: {fileID: 7048496678587647813, guid: d52be0aa356c25448a2af47ccfb0a884, type: 3}
   RemainKnives: 10
   stageNum: 0
+  PlayObects: {fileID: 1274864523}
 --- !u!4 &715375079
 Transform:
   m_ObjectHideFlags: 0
@@ -5606,6 +5607,37 @@ MonoBehaviour:
   Background_White: {fileID: 1414228977}
   flashDuration: 0.15
   flashStrength: 0.05
+--- !u!1 &1274864523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1274864524}
+  m_Layer: 0
+  m_Name: PlayObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1274864524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274864523}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1306962164
 GameObject:
   m_ObjectHideFlags: 0
@@ -6183,6 +6215,7 @@ SceneRoots:
   - {fileID: 2146103461}
   - {fileID: 1539705881}
   - {fileID: 749901981}
+  - {fileID: 1274864524}
   - {fileID: 715375079}
   - {fileID: 616787265}
   - {fileID: 793531555}

@@ -447,6 +447,7 @@ MonoBehaviour:
   - {fileID: 5506509006409840330}
   targetScale: 0.6
   animationDuration: 0.35
+  startScale: 0.001
 --- !u!58 &2135970965772391019
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -512,7 +513,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.2, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6576150341560688807}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

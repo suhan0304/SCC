@@ -14,10 +14,6 @@ public class Segment : MonoBehaviour
     [TabGroup("Destruction Effect","Segements")] public float segmentGravityScale = 2f;
     
     Tween fadeAnimationTween;
-
-    public void Start() {
-        Debug.Log(transform.localPosition);
-    }
     
     public void ApplyForceToSegments() {
 

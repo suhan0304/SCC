@@ -38,7 +38,10 @@ public class Target : MonoBehaviour
 
     [TabGroup("Animation","StartAnimation")] public float targetScale = 0.6f;
     [TabGroup("Animation","StartAnimation")] public float animationDuration = 0.35f;
+    [TabGroup("Animation","StartAnimation")] public float startScale = 0.001f;
     
+
+
     private Coroutine rotateCoroutine;
     private Tween rotateTween;
 
@@ -62,12 +65,11 @@ public class Target : MonoBehaviour
 
 
     private void StartTargetAnimation() {
-        transform.localScale = Vector3.zero;
+        transform.localScale = Vector3.one * startScale;
         
         DOTween.Sequence()
             .Append(transform.DOScale(targetScale, animationDuration)
-                .SetEase(Ease.OutBack)) 
-            .Play();
+                .SetEase(Ease.OutBack));
     }
 
     IEnumerator RotateTarget() {
