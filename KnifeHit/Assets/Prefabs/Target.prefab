@@ -369,7 +369,7 @@ Transform:
   m_GameObject: {fileID: 7048496678587647813}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: 10}
+  m_LocalPosition: {x: 0, y: 1, z: 10}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -396,7 +396,7 @@ MonoBehaviour:
   maxRotationSpeed: 180
   minRotateDelay: 0.5
   maxRotateDelay: 1
-  startPositionY: 0.5
+  startPositionY: 1
   shakeDuration: 0.2
   shakeStrength: 0.125
   vibrato: 10
@@ -409,7 +409,7 @@ MonoBehaviour:
   - {fileID: 5506509006409840330}
   forceMagnitude: 10
   upwardForceMultiplier: 2
-  destructionDelay: 5
+  destructionDelay: 1
   torqueMagnitude: 300
   segmentGravityScale: 2
   targetScale: 0.6

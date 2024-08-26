@@ -37,7 +37,7 @@ public class Target : MonoBehaviour
     [TabGroup("Destruction Effect","Segements")] public GameObject[] Segements;    
     [TabGroup("Destruction Effect","Segements")] public float forceMagnitude = 10f; 
     [TabGroup("Destruction Effect","Segements")] public float upwardForceMultiplier = 2f;
-    [TabGroup("Destruction Effect","Segements")] public float destructionDelay = 5f; 
+    [TabGroup("Destruction Effect","Segements")] public float destroyDuration = 1f; 
     [TabGroup("Destruction Effect","Segements")] public float torqueMagnitude = 300f;
     [TabGroup("Destruction Effect","Segements")] public float segmentGravityScale = 2f;
 
@@ -119,7 +119,6 @@ public class Target : MonoBehaviour
 
         ApplyForceToSegments();
 
-        StartCoroutine(DestroyTargetCoroutine());
     }
 
     private void ApplyForceToSegments() {
@@ -127,28 +126,28 @@ public class Target : MonoBehaviour
 
         foreach(GameObject segement in Segements) {
             Rigidbody2D rb = segement.GetComponent<Rigidbody2D>();
-            if (rb != null) {
-                float RandomUpwardForceMultiplier = Random.Range(upwardForceMultiplier - 2 , upwardForceMultiplier + 2);
-                Vector3 direction = ((segement.transform.position - parentPosition).normalized + Vector3.up * RandomUpwardForceMultiplier).normalized;
+            SpriteRenderer sr = segement.GetComponent<SpriteRenderer>();
+            
+            float RandomUpwardForceMultiplier = Random.Range(upwardForceMultiplier - 2 , upwardForceMultiplier + 2);
+            Vector3 direction = ((segement.transform.position - parentPosition).normalized + Vector3.up * RandomUpwardForceMultiplier).normalized;
 
-                float RandomforceMagnitude = Random.Range(forceMagnitude - 2 , forceMagnitude + 2);
-                Vector3 force = direction * RandomforceMagnitude;
+            float RandomforceMagnitude = Random.Range(forceMagnitude - 2 , forceMagnitude + 2);
+            Vector3 force = direction * RandomforceMagnitude;
 
-                rb.gravityScale = segmentGravityScale;
-                rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.gravityScale = segmentGravityScale;
+            rb.bodyType = RigidbodyType2D.Dynamic;
 
-                rb.AddForce(force, ForceMode2D.Impulse);
-
-            }       
+            rb.AddForce(force, ForceMode2D.Impulse);
+            
             float randomTorque = Random.Range(-torqueMagnitude, torqueMagnitude);
             rb.angularVelocity = randomTorque;
+
+            sr.DOFade(0, destroyDuration)
+                .OnComplete(() => destroyTarget());
         }
     }
 
-    IEnumerator DestroyTargetCoroutine() {
-        yield return new WaitForSeconds(destructionDelay);
-        GameManager.Instance.SpawnTarget();
-        yield return null;
+    private void destroyTarget() {
         Destroy(gameObject);
     }
 }

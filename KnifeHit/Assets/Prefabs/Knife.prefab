@@ -135,7 +135,7 @@ MonoBehaviour:
   speed: 30
   knifeOffsetY: 1.25
   bounceForce: 10
-  delayDestroyTime: 5
+  destroyDuration: 1.5
   knifeGravityScale: 2
   animEndPosition: {x: 0, y: 0, z: 0}
   animStartPosition: {x: 0, y: 0, z: 0}

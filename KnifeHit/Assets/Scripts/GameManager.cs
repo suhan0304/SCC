@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void Start() {
+        stageNum = 1;
         StartStage();
     }
 
@@ -43,6 +44,11 @@ public class GameManager : MonoBehaviour
         SpawnTarget();
         SpawnKnife();
         Events.OnStartStage?.Invoke(stageNum);
+    }
+
+    private void NextStage() {
+        stageNum += 1;
+        StartStage();
     }
 
     [Button("SpawnKnife")]

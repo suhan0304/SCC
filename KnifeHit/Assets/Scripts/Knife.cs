@@ -16,7 +16,7 @@ public class Knife : MonoBehaviour
     [TabGroup("Variables")] public float knifeOffsetY = 1.25f;
 
     [TabGroup("Variables")] public float bounceForce = 10f;
-    [TabGroup("Variables")] public float delayDestroyTime = 5f;
+    [TabGroup("Variables")] public float destroyDuration = 0.75f;
     [TabGroup("Variables")] public float knifeGravityScale = 2f;
 
 
@@ -72,6 +72,8 @@ public class Knife : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        gameObject.GetComponent<TrailRenderer>().enabled = false;
+
         if (collision.gameObject.CompareTag("Target") && !hasInteracted) {
             hasInteracted = true;
             Events.OnTouchScreen -= FireKnife;   
@@ -114,10 +116,6 @@ public class Knife : MonoBehaviour
 
     public void KnifeDestroy() {
         hasInteracted = true;
-        StartCoroutine(KnifeDestroyCoroutine());
-    }
-
-    IEnumerator KnifeDestroyCoroutine() {
         rb.bodyType = RigidbodyType2D.Dynamic;
 
         float randBounceForce = Random.Range(bounceForce, bounceForce * 1.5f);
@@ -126,8 +124,6 @@ public class Knife : MonoBehaviour
         float randomTorque = Random.Range(-200f, 200f);
         rb.angularVelocity = randomTorque;
 
-        yield return new WaitForSeconds(delayDestroyTime);
-
-        Destroy(gameObject);
+        sr.DOFade(0, destroyDuration);
     }
 }

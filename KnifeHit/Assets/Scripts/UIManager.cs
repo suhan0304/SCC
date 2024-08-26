@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     public GameObject KnifeIconPrefab;
     public List<GameObject> KnifeIcons;
 
-    public TextMeshPro stageText;
+    public TMP_Text stageText;
 
     private void OnEnable() {
         if (Instance == null) {
