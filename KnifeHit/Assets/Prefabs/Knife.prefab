@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  sr: {fileID: 0}
   particle: {fileID: 1270507251375198698}
   hasInteracted: 0
   speed: 30
@@ -136,6 +137,9 @@ MonoBehaviour:
   bounceForce: 10
   delayDestroyTime: 5
   knifeGravityScale: 2
+  animEndPosition: {x: 0, y: 0, z: 0}
+  animStartPosition: {x: 0, y: 0, z: 0}
+  animationDuration: 0.5
 --- !u!96 &6679937937961188769
 TrailRenderer:
   serializedVersion: 3

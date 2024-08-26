@@ -13,17 +13,17 @@ public class Knife : MonoBehaviour
     public ParticleSystem particle;
     [TabGroup("Variables")] public bool hasInteracted = false;
     [TabGroup("Variables")] public float speed = 30f;
-    [TabGroup("Variables")] public float knifeOffsetY = 0.7f;
+    [TabGroup("Variables")] public float knifeOffsetY = 1.25f;
 
-    [TabGroup("Variables")] public float bounceForce = 5f;
+    [TabGroup("Variables")] public float bounceForce = 10f;
     [TabGroup("Variables")] public float delayDestroyTime = 5f;
-    [TabGroup("Variables")] public float knifeGravityScale = 1f;
+    [TabGroup("Variables")] public float knifeGravityScale = 2f;
 
 
      [TabGroup("Animation")] private Tween animationTween;
      [TabGroup("Animation")] public Vector3 animEndPosition;
      [TabGroup("Animation")] public Vector3 animStartPosition;
-     [TabGroup("Animation")] public float animationDuration = 1f;
+     [TabGroup("Animation")] public float animationDuration = 0.5f;
 
     
 
@@ -55,12 +55,16 @@ public class Knife : MonoBehaviour
         animationTween = DOTween.Sequence()
             .Append(transform.DOMove(animEndPosition, animationDuration))
             .Join(sr.DOFade(1, animationDuration))
-            .OnKill(() => {
-                sr.color = new Color(1, 1, 1, 1);
-                transform.position = animEndPosition;
-            })
-            .Play();
+            .OnKill(() => {EndKnifeAnimation();
+            });
         
+        if (animationTween != null)
+            animationTween.Play();
+    }
+    
+    private void EndKnifeAnimation() {
+        sr.color = new Color(1, 1, 1, 1);
+        transform.position = animEndPosition;
     }
 
     [Button("Fire")]
@@ -68,6 +72,7 @@ public class Knife : MonoBehaviour
         if (animationTween != null && animationTween.IsPlaying()) {
             animationTween.Kill();
         }
+        EndKnifeAnimation();
         rb.velocity = Vector3.up * speed;
     }
 
