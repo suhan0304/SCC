@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public SpriteRenderer sr;
 
     public ParticleSystem particle;
     [TabGroup("Variables")] public bool hasInteracted = false;
@@ -15,6 +17,12 @@ public class Knife : MonoBehaviour
     [TabGroup("Variables")] public float bounceForce = 5f;
     [TabGroup("Variables")] public float delayDestroyTime = 5f;
     [TabGroup("Variables")] public float knifeGravityScale = 1f;
+
+
+     [TabGroup("Animation")] private Tween animationTween;
+     [TabGroup("Animation")] public Vector3 animEndPosition;
+     [TabGroup("Animation")] public Vector3 animStartPosition;
+     [TabGroup("Animation")] public float animationDuration = 1f;
 
     
 
@@ -29,11 +37,36 @@ public class Knife : MonoBehaviour
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+
+        sr.color = new Color(1, 1, 1, 0); 
         rb.gravityScale = knifeGravityScale;
+
+        StartKnifeAnimation();
+    }
+
+    private void StartKnifeAnimation() {
+        animEndPosition = transform.position;
+        animStartPosition = transform.position - new Vector3(0, 2f, 0);
+
+        animationTween = DOTween.Sequence()
+            .Append(transform.DOMove(animEndPosition, animationDuration))
+            .Join(sr.DOFade(1, animationDuration))
+            .OnKill(() => StopKnifeAnimation())
+            .Play();
+    }
+
+    private void StopKnifeAnimation() {
+        if (animationTween != null) {
+            animationTween.Kill();
+        }
+        sr.color = new Color(1, 1, 1, 1);
+        transform.position = animEndPosition;
     }
 
     [Button("Fire")]
     public void FireKnife() {
+        StopKnifeAnimation();
         rb.velocity = Vector3.up * speed;
     }
 

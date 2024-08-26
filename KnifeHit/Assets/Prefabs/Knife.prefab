@@ -128,10 +128,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908fc9e68bebb01479d457eacbf84357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
   rb: {fileID: 0}
   particle: {fileID: 1270507251375198698}
+  hasInteracted: 0
+  speed: 30
   knifeOffsetY: 1.25
+  bounceForce: 10
+  delayDestroyTime: 5
+  knifeGravityScale: 2
 --- !u!96 &6679937937961188769
 TrailRenderer:
   serializedVersion: 3
