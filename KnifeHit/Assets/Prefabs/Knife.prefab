@@ -135,11 +135,12 @@ MonoBehaviour:
   speed: 30
   knifeOffsetY: 1.25
   bounceForce: 10
-  destroyDuration: 1.5
   knifeGravityScale: 2
   animEndPosition: {x: 0, y: 0, z: 0}
   animStartPosition: {x: 0, y: 0, z: 0}
-  animationDuration: 0.5
+  delayBeforeFade: 0.5
+  startAnimationDuration: 0.25
+  destroyDuration: 0.75
 --- !u!96 &6679937937961188769
 TrailRenderer:
   serializedVersion: 3
@@ -298,9 +299,10 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0, y: 1.25}
-      - {x: 0.25, y: -1.25}
-      - {x: -0.25, y: -1.25}
-      - {x: 0, y: 1.25}
+      - {x: -0.25, y: 0}
+      - {x: -0.3, y: -1.25}
+      - {x: 0.3, y: -1.25}
+      - {x: 0.25, y: 0}
   m_UseDelaunayMesh: 0
 --- !u!1 &826299818030536771
 GameObject:

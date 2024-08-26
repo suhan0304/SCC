@@ -2,20 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor.Internal;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-#region OrdinInspector settings
     [TabGroup("Tap","Rotate",SdfIconType.CodeSlash, TextColor="Green")]
-    [TabGroup("Tap","OnHit Effect",SdfIconType.CodeSlash, TextColor="Red")]
-    [TabGroup("Tap","Position",SdfIconType.CodeSlash, TextColor="Blue")]
-    [TabGroup("OnHit Effect","Shake",SdfIconType.CodeSlash, TextColor="Yellow")]
-    [TabGroup("OnHit Effect","Flash",SdfIconType.CodeSlash, TextColor="Yellow")]
-    [TabGroup("Destruction Effect","Segements",SdfIconType.CodeSlash, TextColor="Purple")]
-#endregion
     
-#region variables
     [TabGroup("Tap","Rotate")] public float minRotation = 90f;
     [TabGroup("Tap","Rotate")] public float maxRotation = 500f;
     [TabGroup("Tap","Rotate")] public float minDuration = 1f;
@@ -23,30 +17,30 @@ public class Target : MonoBehaviour
     [TabGroup("Tap","Rotate")] public float maxRotationSpeed = 180f;
     [TabGroup("Tap","Rotate")] public float minRotateDelay = 0.5f;
     [TabGroup("Tap","Rotate")] public float maxRotateDelay = 1f;
+
+    [TabGroup("Tap","Position",SdfIconType.CodeSlash, TextColor="Blue")]
     [TabGroup("Tap","Position")] public float startPositionY = 0.5f;
 
+    [TabGroup("Tap","OnHit Effect",SdfIconType.CodeSlash, TextColor="Red")]
+
+    [TabGroup("OnHit Effect","Shake",SdfIconType.CodeSlash, TextColor="Yellow")]
     [TabGroup("OnHit Effect","Shake")] public float shakeDuration = 0.2f;
     [TabGroup("OnHit Effect","Shake")] public float shakeStrength = 0.125f;
     [TabGroup("OnHit Effect","Shake")] public int vibrato = 10;
     [TabGroup("OnHit Effect","Shake")] public float randomness = 90f; 
 
+    [TabGroup("OnHit Effect","Flash",SdfIconType.CodeSlash, TextColor="Yellow")]
     [TabGroup("OnHit Effect","Flash")] public float flashDuration = 0.05f; 
     [TabGroup("OnHit Effect","Flash")] public SpriteRenderer FlashWhiteRenderer;
 
-
-    [TabGroup("Destruction Effect","Segements")] public GameObject[] Segements;    
-    [TabGroup("Destruction Effect","Segements")] public float forceMagnitude = 10f; 
-    [TabGroup("Destruction Effect","Segements")] public float upwardForceMultiplier = 2f;
-    [TabGroup("Destruction Effect","Segements")] public float destroyDuration = 1f; 
-    [TabGroup("Destruction Effect","Segements")] public float torqueMagnitude = 300f;
-    [TabGroup("Destruction Effect","Segements")] public float segmentGravityScale = 2f;
+    [TabGroup("Destruction Effect","Segements",SdfIconType.CodeSlash, TextColor="Purple")]
+    [TabGroup("Destruction Effect","Segements")] public List<GameObject> Segments;    
 
     [TabGroup("Animation","StartAnimation")] public float targetScale = 0.6f;
     [TabGroup("Animation","StartAnimation")] public float animationDuration = 0.35f;
     
     private Coroutine rotateCoroutine;
     private Tween rotateTween;
-#endregion
 
 
     public readonly int knivesToDestroy = 5;
@@ -61,7 +55,6 @@ public class Target : MonoBehaviour
 
 
     private void Start() {
-        transform.position = new Vector3(0f, startPositionY, 0f);
         rotateCoroutine = StartCoroutine(RotateTargetObject());
 
         StartTargetAnimation();
@@ -117,37 +110,9 @@ public class Target : MonoBehaviour
 
         rotateTween?.Kill();
 
-        ApplyForceToSegments();
 
-    }
-
-    private void ApplyForceToSegments() {
-        Vector3 parentPosition = transform.position;
-
-        foreach(GameObject segement in Segements) {
-            Rigidbody2D rb = segement.GetComponent<Rigidbody2D>();
-            SpriteRenderer sr = segement.GetComponent<SpriteRenderer>();
-            
-            float RandomUpwardForceMultiplier = Random.Range(upwardForceMultiplier - 2 , upwardForceMultiplier + 2);
-            Vector3 direction = ((segement.transform.position - parentPosition).normalized + Vector3.up * RandomUpwardForceMultiplier).normalized;
-
-            float RandomforceMagnitude = Random.Range(forceMagnitude - 2 , forceMagnitude + 2);
-            Vector3 force = direction * RandomforceMagnitude;
-
-            rb.gravityScale = segmentGravityScale;
-            rb.bodyType = RigidbodyType2D.Dynamic;
-
-            rb.AddForce(force, ForceMode2D.Impulse);
-            
-            float randomTorque = Random.Range(-torqueMagnitude, torqueMagnitude);
-            rb.angularVelocity = randomTorque;
-
-            sr.DOFade(0, destroyDuration)
-                .OnComplete(() => destroyTarget());
+        foreach(GameObject segment in Segments) {
+            segment.GetComponent<Segment>().ApplyForceToSegments();
         }
-    }
-
-    private void destroyTarget() {
-        Destroy(gameObject);
     }
 }

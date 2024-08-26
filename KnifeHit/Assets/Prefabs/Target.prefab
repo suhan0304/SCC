@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6576150341560688807}
   m_Layer: 0
-  m_Name: Segements
+  m_Name: Segments
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 6413343608313871206}
   - component: {fileID: 2038702651682226197}
   m_Layer: 0
-  m_Name: Segement_2
+  m_Name: Segment_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 4031776724836939203}
   - component: {fileID: 2112802263287690908}
   m_Layer: 0
-  m_Name: Segement_3
+  m_Name: Segment_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,20 +396,21 @@ MonoBehaviour:
   maxRotationSpeed: 180
   minRotateDelay: 0.5
   maxRotateDelay: 1
-  startPositionY: 1
+  startPositionY: 0.5
   shakeDuration: 0.2
   shakeStrength: 0.125
   vibrato: 10
   randomness: 90
   flashDuration: 0.05
   FlashWhiteRenderer: {fileID: 8940096590278933880}
-  Segements:
+  Segments:
   - {fileID: 8435270162272879899}
   - {fileID: 5161170736858518140}
   - {fileID: 5506509006409840330}
   forceMagnitude: 10
   upwardForceMultiplier: 2
-  destructionDelay: 1
+  destroyDuration: 0.5
+  delayBeforeFade: 0.5
   torqueMagnitude: 300
   segmentGravityScale: 2
   targetScale: 0.6
@@ -461,7 +462,7 @@ GameObject:
   - component: {fileID: 8409422645827736583}
   - component: {fileID: 7159690563985624172}
   m_Layer: 0
-  m_Name: Segement_1
+  m_Name: Segment_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

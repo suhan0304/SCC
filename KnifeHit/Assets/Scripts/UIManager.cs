@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,8 @@ public class UIManager : MonoBehaviour
     public GameObject knifeIconsContainer;
     public GameObject KnifeIconPrefab;
     public List<GameObject> KnifeIcons;
+
+    private float fadeDuration = 0.2f;
 
     public TMP_Text stageText;
 
@@ -24,10 +27,12 @@ public class UIManager : MonoBehaviour
         }
 
         Events.OnStartStage += OnStartStage;
+        Events.OnFinishStage += OnFinishStage;
     }
 
     private void OnDisable() {
         Events.OnStartStage -= OnStartStage;
+        Events.OnFinishStage -= OnFinishStage;
     }
 
     public void SpawnKnivesIcon(int cntKnives) {
@@ -53,6 +58,11 @@ public class UIManager : MonoBehaviour
     }
 
     public void OnStartStage(int _stageNum) {
+        stageText.DOFade(1, fadeDuration);
         stageText.text = "STAGE " + _stageNum;
+    }
+
+    public void OnFinishStage() {
+        stageText.DOFade(0, fadeDuration);
     }
 } 

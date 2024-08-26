@@ -27,11 +27,13 @@ public class GameManager : MonoBehaviour
 
         Events.OnTouchScreen += OnTouchScreen;
         Events.OnCollisionBetweenKnives += GameOver;
+        Events.OnFinishStage += NextStage;
     }
 
     private void OnDisable() {
         Events.OnTouchScreen -= OnTouchScreen;
         Events.OnCollisionBetweenKnives -= GameOver;
+        Events.OnFinishStage -= NextStage;
     }
 
     public void Start() {

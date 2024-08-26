@@ -16,14 +16,16 @@ public class Knife : MonoBehaviour
     [TabGroup("Variables")] public float knifeOffsetY = 1.25f;
 
     [TabGroup("Variables")] public float bounceForce = 10f;
-    [TabGroup("Variables")] public float destroyDuration = 0.75f;
     [TabGroup("Variables")] public float knifeGravityScale = 2f;
 
 
      [TabGroup("Animation")] private Tween animationTween;
      [TabGroup("Animation")] public Vector3 animEndPosition;
      [TabGroup("Animation")] public Vector3 animStartPosition;
-     [TabGroup("Animation")] public float animationDuration = 0.5f;
+     [TabGroup("Animation")] public float delayBeforeFade = 0.5f;
+     [TabGroup("Animation")] public float startAnimationDuration = 0.25f;
+    [TabGroup("Animation")] public float destroyDuration = 0.25f;
+    [TabGroup("Animation")]  private Tween fadeAnimationTween;
 
     
 
@@ -53,8 +55,8 @@ public class Knife : MonoBehaviour
         transform.position = animStartPosition;
 
         animationTween = DOTween.Sequence()
-            .Append(transform.DOMove(animEndPosition, animationDuration))
-            .Join(sr.DOFade(1, animationDuration))
+            .Append(transform.DOMove(animEndPosition, startAnimationDuration))
+            .Join(sr.DOFade(1, startAnimationDuration))
             .OnKill(() => {EndKnifeAnimation();
             });
     }
@@ -73,10 +75,10 @@ public class Knife : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         gameObject.GetComponent<TrailRenderer>().enabled = false;
+        Events.OnTouchScreen -= FireKnife;   
 
         if (collision.gameObject.CompareTag("Target") && !hasInteracted) {
             hasInteracted = true;
-            Events.OnTouchScreen -= FireKnife;   
 
             rb.velocity = Vector3.zero;
             transform.position = new Vector3(0f, collision.gameObject.transform.position.y - knifeOffsetY, 0f);
@@ -91,7 +93,6 @@ public class Knife : MonoBehaviour
         }
         else if(collision.gameObject.CompareTag("Knife") && !hasInteracted) {
             hasInteracted = true;
-            Events.OnTouchScreen -= FireKnife;   
             
             rb.bodyType = RigidbodyType2D.Dynamic;
 
@@ -124,6 +125,12 @@ public class Knife : MonoBehaviour
         float randomTorque = Random.Range(-200f, 200f);
         rb.angularVelocity = randomTorque;
 
-        sr.DOFade(0, destroyDuration);
+        fadeAnimationTween = DOTween.Sequence()
+            .AppendInterval(delayBeforeFade)
+            .Append(sr.DOFade(0, destroyDuration)
+                        .OnComplete(() => {
+                            fadeAnimationTween?.Kill();
+                            Destroy(gameObject);
+                        }));
     }
 }
