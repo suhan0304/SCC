@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [TabGroup("Tab","Prefabs")] public GameObject target;
 
     [TabGroup("Tab","Variables")] public int RemainKnives;
+    [TabGroup("Tab","Variables")] public int stageNum;
 
     private void OnEnable() {
         if (Instance == null) {
@@ -33,6 +34,17 @@ public class GameManager : MonoBehaviour
         Events.OnCollisionBetweenKnives -= GameOver;
     }
 
+    public void Start() {
+        StartStage();
+    }
+
+
+    private void StartStage() {
+        SpawnTarget();
+        SpawnKnife();
+        Events.OnStartStage?.Invoke(stageNum);
+    }
+
     [Button("SpawnKnife")]
     public void SpawnKnife() {
         GameObject currentKnife = Instantiate(knife);
@@ -40,15 +52,10 @@ public class GameManager : MonoBehaviour
 
     [Button("SpawnTarget")]
     public void SpawnTarget() {
-        SpawnKnife();
         GameObject currentTarget = Instantiate(target);
         RemainKnives = currentTarget.GetComponent<Target>().knivesToDestroy;
         UIManager.Instance.Initialize();
         UIManager.Instance.SpawnKnivesIcon(RemainKnives);
-    }
-
-    public void Start() {
-        SpawnTarget();
     }
 
     public void OnTouchScreen() {

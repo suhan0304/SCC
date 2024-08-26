@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ public class UIManager : MonoBehaviour
     public GameObject KnifeIconPrefab;
     public List<GameObject> KnifeIcons;
 
+    public TextMeshPro stageText;
+
     private void OnEnable() {
         if (Instance == null) {
             Instance = this;
@@ -19,6 +22,12 @@ public class UIManager : MonoBehaviour
         else {
             Destroy(gameObject);
         }
+
+        Events.OnStartStage += OnStartStage;
+    }
+
+    private void OnDisable() {
+        Events.OnStartStage -= OnStartStage;
     }
 
     public void SpawnKnivesIcon(int cntKnives) {
@@ -41,5 +50,9 @@ public class UIManager : MonoBehaviour
             Destroy(icon);
         }
         KnifeIcons.Clear();
+    }
+
+    public void OnStartStage(int _stageNum) {
+        stageText.text = "STAGE " + _stageNum;
     }
 } 

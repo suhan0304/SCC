@@ -1,22 +1,21 @@
 fileFormatVersion: 2
-guid: 867995392e1faa74f8867fd5e418a38e
-timeCreated: 1520523500
-licenseType: Pro
+guid: 7506b798d84617f4198ecb940faf6a07
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 30
+  fontSize: 16
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: UTM Swiss 721 Black Condensed
   fontNames:
-  - UTM Swiss 721 Black Condensed
+  - Open Sans
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -396,7 +396,7 @@ MonoBehaviour:
   maxRotationSpeed: 180
   minRotateDelay: 0.5
   maxRotateDelay: 1
-  startPositionY: 1.25
+  startPositionY: 0.5
   shakeDuration: 0.2
   shakeStrength: 0.125
   vibrato: 10
@@ -407,11 +407,13 @@ MonoBehaviour:
   - {fileID: 8435270162272879899}
   - {fileID: 5161170736858518140}
   - {fileID: 5506509006409840330}
-  forceMagnitude: 5
+  forceMagnitude: 10
   upwardForceMultiplier: 2
-  destructionDelay: 2.5
+  destructionDelay: 5
   torqueMagnitude: 300
-  segmentGravityScale: 1
+  segmentGravityScale: 2
+  targetScale: 0.6
+  animationDuration: 0.35
 --- !u!58 &2135970965772391019
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class Target : MonoBehaviour
     [TabGroup("Tap","Rotate")] public float maxRotationSpeed = 180f;
     [TabGroup("Tap","Rotate")] public float minRotateDelay = 0.5f;
     [TabGroup("Tap","Rotate")] public float maxRotateDelay = 1f;
-    [TabGroup("Tap","Position")] public float startPositionY = 1.25f;
+    [TabGroup("Tap","Position")] public float startPositionY = 0.5f;
 
     [TabGroup("OnHit Effect","Shake")] public float shakeDuration = 0.2f;
     [TabGroup("OnHit Effect","Shake")] public float shakeStrength = 0.125f;
@@ -67,13 +67,13 @@ public class Target : MonoBehaviour
         StartTargetAnimation();
     }
 
-    
+
     private void StartTargetAnimation() {
         transform.localScale = Vector3.zero;
         
         DOTween.Sequence()
             .Append(transform.DOScale(targetScale, animationDuration)
-                .SetEase(Ease.InOutBounce)) 
+                .SetEase(Ease.OutBack)) 
             .Play();
     }
 
