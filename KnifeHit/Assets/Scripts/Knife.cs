@@ -12,11 +12,18 @@ public class Knife : MonoBehaviour
     [TabGroup("Variables")] public float speed = 30f;
     [TabGroup("Variables")] public float knifeOffsetY = 0.7f;
 
+    [TabGroup("Variables")] public float bounceForce = 5f;
+    [TabGroup("Variables")] public float delayDestroyTime = 5f;
+
+    
+
     private void OnEnable() {
         Events.OnTouchScreen += FireKnife;    
+        Events.OnTouchScreen += KnifeDestroy;    
     }
     private void OnDisable() {
-        Events.OnTouchScreen -= FireKnife;    
+        Events.OnTouchScreen -= FireKnife;  
+        Events.OnTouchScreen -= KnifeDestroy;    
     }
 
     private void Start() {
@@ -52,12 +59,12 @@ public class Knife : MonoBehaviour
             rb.velocity = Vector3.zero;
 
             Vector2 collisionDirection = (transform.position - collision.transform.position).normalized;
-            float bounceForce = Random.Range(5f, 7.5f);
+            float randBounceForce = Random.Range(bounceForce, bounceForce * 1.5f);
 
             float randomAngle = Random.Range(-60f, 60f);
             Vector2 forceDirection = Quaternion.Euler(0, 0, randomAngle) * collisionDirection;
 
-            rb.AddForce(forceDirection * bounceForce, ForceMode2D.Impulse);
+            rb.AddForce(forceDirection * randBounceForce, ForceMode2D.Impulse);
 
             float randomTorque = Random.Range(-200f, 200f);
             rb.angularVelocity = randomTorque;
@@ -65,5 +72,23 @@ public class Knife : MonoBehaviour
             Vector2 collisionPoint = collision.bounds.ClosestPoint(transform.position);
             SFXManager.Instance.playImpact(collisionPoint);
         }
+    }
+
+    public void KnifeDestroy() {
+        StartCoroutine(KnifeDestroyCoroutine());
+    }
+
+    IEnumerator KnifeDestroyCoroutine() {
+        rb.bodyType = RigidbodyType2D.Dynamic;
+
+        float randBounceForce = Random.Range(bounceForce, bounceForce * 1.5f);
+        rb.AddForce(Vector3.up * randBounceForce, ForceMode2D.Impulse);
+
+        float randomTorque = Random.Range(-200f, 200f);
+        rb.angularVelocity = randomTorque;
+
+        yield return new WaitForSeconds(delayDestroyTime);
+
+        Destroy(gameObject);
     }
 }
