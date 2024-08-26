@@ -14,6 +14,7 @@ public class Knife : MonoBehaviour
 
     [TabGroup("Variables")] public float bounceForce = 5f;
     [TabGroup("Variables")] public float delayDestroyTime = 5f;
+    [TabGroup("Variables")] public float knifeGravityScale = 1f;
 
     
 
@@ -28,6 +29,7 @@ public class Knife : MonoBehaviour
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = knifeGravityScale;
     }
 
     [Button("Fire")]
@@ -47,7 +49,9 @@ public class Knife : MonoBehaviour
             particle.Play();
             collision.gameObject.GetComponent<Target>().OnHit();
             
-            GameManager.Instance.SpawnKnife();
+            if ( GameManager.Instance.RemainKnives > 0) {
+                GameManager.Instance.SpawnKnife();
+            }
         }
         else if(collision.gameObject.CompareTag("Knife") && !hasInteracted) {
             hasInteracted = true;

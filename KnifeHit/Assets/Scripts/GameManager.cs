@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
 
     [Button("SpawnTarget")]
     public void SpawnTarget() {
+        SpawnKnife();
         GameObject currentTarget = Instantiate(target);
         RemainKnives = currentTarget.GetComponent<Target>().knivesToDestroy;
         UIManager.Instance.Initialize();
@@ -48,7 +49,6 @@ public class GameManager : MonoBehaviour
 
     public void Start() {
         SpawnTarget();
-        SpawnKnife();
     }
 
     public void OnTouchScreen() {

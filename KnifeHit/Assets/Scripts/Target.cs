@@ -36,7 +36,7 @@ public class Target : MonoBehaviour
 
     [TabGroup("Destruction Effect","Segements")] public GameObject[] Segements;    
     [TabGroup("Destruction Effect","Segements")] public float forceMagnitude = 5f; 
-    [TabGroup("Destruction Effect","Segements")] public float upwardForceMultiplier = 1f;
+    [TabGroup("Destruction Effect","Segements")] public float upwardForceMultiplier = 2f;
     [TabGroup("Destruction Effect","Segements")] public float destructionDelay = 5f; 
     [TabGroup("Destruction Effect","Segements")] public float torqueMagnitude = 300f;
     [TabGroup("Destruction Effect","Segements")] public float segmentGravityScale = 1f;
@@ -132,6 +132,8 @@ public class Target : MonoBehaviour
 
     IEnumerator DestroyTargetCoroutine() {
         yield return new WaitForSeconds(destructionDelay);
+        GameManager.Instance.SpawnTarget();
+        yield return null;
         Destroy(gameObject);
     }
 }
