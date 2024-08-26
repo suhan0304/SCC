@@ -52,12 +52,13 @@ public class Knife : MonoBehaviour
         animationTween = DOTween.Sequence()
             .Append(transform.DOMove(animEndPosition, animationDuration))
             .Join(sr.DOFade(1, animationDuration))
-            .OnKill(() => StopKnifeAnimation())
+            .OnKill(() =>  {StopKnifeAnimation();})
             .Play();
+        
     }
 
     private void StopKnifeAnimation() {
-        if (animationTween != null) {
+        if (animationTween != null && animationTween.IsPlaying()) {
             animationTween.Kill();
         }
         sr.color = new Color(1, 1, 1, 1);
