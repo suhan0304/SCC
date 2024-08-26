@@ -27,12 +27,12 @@ public class UIManager : MonoBehaviour
         }
 
         Events.OnStartStage += OnStartStage;
-        Events.OnFinishStage += OnFinishStage;
+        Events.OnAllKnivesOnHit += OnAllKnivesOnHit;
     }
 
     private void OnDisable() {
         Events.OnStartStage -= OnStartStage;
-        Events.OnFinishStage -= OnFinishStage;
+        Events.OnAllKnivesOnHit -= OnAllKnivesOnHit;
     }
 
     public void SpawnKnivesIcon(int cntKnives) {
@@ -58,11 +58,19 @@ public class UIManager : MonoBehaviour
     }
 
     public void OnStartStage(int _stageNum) {
-        stageText.DOFade(1, fadeDuration);
         stageText.text = "STAGE " + _stageNum;
+        ShowFadeAnimation();
     }
 
-    public void OnFinishStage() {
+    public void OnAllKnivesOnHit() {
+        HideFadeAnimation();
+    }
+
+    private void ShowFadeAnimation() {
+        stageText.DOFade(1, fadeDuration);
+    }
+    private void HideFadeAnimation() {
         stageText.DOFade(0, fadeDuration);
     }
+
 } 

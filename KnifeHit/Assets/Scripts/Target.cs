@@ -110,9 +110,17 @@ public class Target : MonoBehaviour
 
         rotateTween?.Kill();
 
-
+        
         foreach(GameObject segment in Segments) {
             segment.GetComponent<Segment>().ApplyForceToSegments();
         }
+
+        DOTween.Sequence()
+            .AppendInterval(1f)
+            .OnComplete(() => {
+                DOTween.KillAll();
+                Events.OnFinishStage.Invoke();
+                Destroy(gameObject);
+            });
     }
 }

@@ -16,7 +16,7 @@ public class Segment : MonoBehaviour
     Tween fadeAnimationTween;
 
     public void Start() {
-        Debug.Log(transform.position);
+        Debug.Log(transform.localPosition);
     }
     
     public void ApplyForceToSegments() {

@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 9034120402341562148}
   - component: {fileID: 6413343608313871206}
   - component: {fileID: 2038702651682226197}
+  - component: {fileID: 4825283590309814603}
   m_Layer: 0
   m_Name: Segment_2
   m_TagString: Untagged
@@ -230,6 +231,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4825283590309814603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161170736858518140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30463e393734d2c4fb21cf7a4e425366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceMagnitude: 10
+  upwardForceMultiplier: 2
+  destroyDuration: 0.5
+  delayBeforeFade: 0.5
+  torqueMagnitude: 300
+  segmentGravityScale: 2
 --- !u!1 &5506509006409840330
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,6 +260,7 @@ GameObject:
   - component: {fileID: 6981573061563288068}
   - component: {fileID: 4031776724836939203}
   - component: {fileID: 2112802263287690908}
+  - component: {fileID: 7084399735537299251}
   m_Layer: 0
   m_Name: Segment_3
   m_TagString: Untagged
@@ -342,6 +362,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7084399735537299251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5506509006409840330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30463e393734d2c4fb21cf7a4e425366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceMagnitude: 10
+  upwardForceMultiplier: 2
+  destroyDuration: 0.5
+  delayBeforeFade: 0.5
+  torqueMagnitude: 300
+  segmentGravityScale: 2
 --- !u!1 &7048496678587647813
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,12 +445,6 @@ MonoBehaviour:
   - {fileID: 8435270162272879899}
   - {fileID: 5161170736858518140}
   - {fileID: 5506509006409840330}
-  forceMagnitude: 10
-  upwardForceMultiplier: 2
-  destroyDuration: 0.5
-  delayBeforeFade: 0.5
-  torqueMagnitude: 300
-  segmentGravityScale: 2
   targetScale: 0.6
   animationDuration: 0.35
 --- !u!58 &2135970965772391019
@@ -461,6 +493,7 @@ GameObject:
   - component: {fileID: 311922811647928528}
   - component: {fileID: 8409422645827736583}
   - component: {fileID: 7159690563985624172}
+  - component: {fileID: 304093892191645751}
   m_Layer: 0
   m_Name: Segment_1
   m_TagString: Untagged
@@ -562,3 +595,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &304093892191645751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435270162272879899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30463e393734d2c4fb21cf7a4e425366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceMagnitude: 10
+  upwardForceMultiplier: 2
+  destroyDuration: 0.5
+  delayBeforeFade: 0.5
+  torqueMagnitude: 300
+  segmentGravityScale: 2
