@@ -100,4 +100,9 @@ public class GameManager : MonoBehaviour
     public void ReloadMainScene() {
         SceneManager.LoadScene("MainScene");
     }
+
+    [Button("GameOver")]
+    public void GameOver() {
+        Events.OnGameOver.Invoke();
+    }
 }

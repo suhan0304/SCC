@@ -132,6 +132,6 @@ public class Target : MonoBehaviour
 
     public void OnGameOver() {
         StopCoroutine(rotateCoroutine);
-        DOTween.KillAll();
+        DOTween.Kill(gameObject);
     }
 }

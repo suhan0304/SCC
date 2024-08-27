@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -65,7 +66,7 @@ public class UIManager : MonoBehaviour
 
     private void Start() {
         gameOverUI.SetActive(false);
-        gameOverUI.SetActive(false);
+        NewBestUI.SetActive(false);
     }
 
     public void Initialize() {
@@ -90,13 +91,14 @@ public class UIManager : MonoBehaviour
     }
 
     public void OnGameOver() {
-        gameOverUI.SetActive(true);
+        CanvasGroup canvasGroup = gameOverUI.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0f; 
 
-        gameOverUI.GetComponent<CanvasGroup>().DOFade(1, gameOverFadeDuration);
         gameoverStageText.text = GameManager.Instance.stageNum.ToString();
         gameoverScoreText.text = GameManager.Instance.scoreNum.ToString();
-
-
+        
+        gameOverUI.SetActive(true);
+        canvasGroup.DOFade(1f, gameOverFadeDuration); 
     }
 
     public void OnNewBestScore() {
@@ -108,6 +110,14 @@ public class UIManager : MonoBehaviour
     }
     private void HideFadeAnimation() {
         stageText.DOFade(0, fadeDuration);
+    }
+
+    public void Restart() {
+        SceneManager.LoadScene("MainScene");
+    }
+
+    public void Continue() {
+        //TODO - Continue Logic
     }
 
 } 

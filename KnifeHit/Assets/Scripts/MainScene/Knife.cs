@@ -117,6 +117,8 @@ public class Knife : MonoBehaviour
             SFXManager.Instance.playImpact(collisionPoint);
 
             Events.OnGameOver.Invoke();
+
+            KnifeDestroy();
         }
     }
 
