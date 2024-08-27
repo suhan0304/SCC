@@ -28,7 +28,6 @@ public class UIManager : MonoBehaviour
     private void OnEnable() {
         if (Instance == null) {
             Instance = this;
-            DontDestroyOnLoad(this);
         }
         else {
             Destroy(gameObject);
@@ -117,6 +116,10 @@ public class UIManager : MonoBehaviour
         gameOverUI.SetActive(false);
 
         Events.OnRestartButton?.Invoke();
+    }
+
+    public void HomeButton() {
+        SceneManager.LoadScene("TitleScene");
     }
 
     public void Continue() {
