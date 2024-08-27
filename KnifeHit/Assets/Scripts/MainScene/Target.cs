@@ -51,11 +51,13 @@ public class Target : MonoBehaviour
     private void OnEnable() {
         Events.OnAllKnivesOnHit += DestroyTarget;
         Events.OnHitTarget += OnHitTarget;
+        Events.OnGameOver += OnGameOver;
     }
 
     private void OnDisable() {
         Events.OnAllKnivesOnHit -= DestroyTarget;
         Events.OnHitTarget -= OnHitTarget;
+        Events.OnGameOver -= OnGameOver;
     }
 
 
@@ -113,10 +115,8 @@ public class Target : MonoBehaviour
     [Button("DestroyTarget")]
     public void DestroyTarget() {
         StopCoroutine(rotateCoroutine);
-
         rotateTween?.Kill();
 
-        
         foreach(GameObject segment in Segments) {
             segment.GetComponent<Segment>().ApplyForceToSegments();
         }
@@ -128,5 +128,10 @@ public class Target : MonoBehaviour
                 Events.OnFinishStage.Invoke();
                 Destroy(gameObject);
             });
+    }
+
+    public void OnGameOver() {
+        StopCoroutine(rotateCoroutine);
+        DOTween.KillAll();
     }
 }

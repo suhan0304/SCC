@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
         Events.OnStartStage += OnStartStage;
         Events.OnAllKnivesOnHit += OnAllKnivesOnHit;
         Events.OnHitTarget += UpdateScore;
+        Events.OnGameOver += OnGameOver;
         Events.OnNewBestScore += OnNewBestScore;
     }
 
@@ -43,6 +44,7 @@ public class UIManager : MonoBehaviour
         Events.OnStartStage -= OnStartStage;
         Events.OnAllKnivesOnHit -= OnAllKnivesOnHit;
         Events.OnHitTarget -= UpdateScore;
+        Events.OnGameOver -= OnGameOver;
         Events.OnNewBestScore -= OnNewBestScore;
     }
 

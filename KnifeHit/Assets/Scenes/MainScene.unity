@@ -563,13 +563,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knifeIconsContainer: {fileID: 175399999}
   KnifeIconPrefab: {fileID: 8060063415773805420, guid: 13cca387d0e164d47b4276aa6ed6cbd0, type: 3}
-  gameOverUI: {fileID: 0}
-  NewBestUI: {fileID: 0}
+  gameOverUI: {fileID: 1844977975}
+  NewBestUI: {fileID: 2079269684}
   KnifeIcons: []
   stageText: {fileID: 2134833613}
   scoreText: {fileID: 1132780933}
-  gameoverStageText: {fileID: 0}
-  gameoverScoreText: {fileID: 0}
+  gameoverStageText: {fileID: 222754909}
+  gameoverScoreText: {fileID: 1237872598}
 --- !u!4 &616787265
 Transform:
   m_ObjectHideFlags: 0
@@ -6890,12 +6890,12 @@ GameObject:
   - component: {fileID: 1844977977}
   - component: {fileID: 1844977979}
   m_Layer: 5
-  m_Name: GameOverPanel
+  m_Name: GameOverUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1844977976
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6965,7 +6965,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844977975}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -6984,7 +6984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2079269685
 RectTransform:
   m_ObjectHideFlags: 0
