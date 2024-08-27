@@ -47,8 +47,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void Start() {
-        bestStageNum = PlayerPrefs.GetInt();
-        bestScoreNum = PlayerPrefs.GetInt();
+        bestStageNum = PlayerPrefs.GetInt("BestStage", 1);
+        bestScoreNum = PlayerPrefs.GetInt("BestScore", 0);
 
         scoreNum = 0;
         stageNum = 1;
