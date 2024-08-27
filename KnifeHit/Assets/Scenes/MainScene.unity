@@ -563,9 +563,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knifeIconsContainer: {fileID: 175399999}
   KnifeIconPrefab: {fileID: 8060063415773805420, guid: 13cca387d0e164d47b4276aa6ed6cbd0, type: 3}
+  gameOverUI: {fileID: 0}
+  NewBestUI: {fileID: 0}
   KnifeIcons: []
   stageText: {fileID: 2134833613}
   scoreText: {fileID: 1132780933}
+  gameoverStageText: {fileID: 0}
+  gameoverScoreText: {fileID: 0}
 --- !u!4 &616787265
 Transform:
   m_ObjectHideFlags: 0
@@ -614,7 +618,9 @@ MonoBehaviour:
   target: {fileID: 7048496678587647813, guid: d52be0aa356c25448a2af47ccfb0a884, type: 3}
   RemainKnives: 10
   stageNum: 0
-  ScoreNum: 0
+  scoreNum: 0
+  bestStageNum: 0
+  bestScoreNum: 0
   PlayObects: {fileID: 1274864523}
 --- !u!4 &715375079
 Transform:
@@ -6882,6 +6888,7 @@ GameObject:
   - component: {fileID: 1844977976}
   - component: {fileID: 1844977978}
   - component: {fileID: 1844977977}
+  - component: {fileID: 1844977979}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
@@ -6925,15 +6932,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: c2634ab7268db8241b414eb423d4e3d3, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6950,6 +6957,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844977975}
   m_CullTransparentMesh: 1
+--- !u!225 &1844977979
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844977975}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2079269684
 GameObject:
   m_ObjectHideFlags: 0

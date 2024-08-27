@@ -18,8 +18,8 @@ public class StageScoreText : MonoBehaviour
     }
 
     private void InitailizeTexts() {
-        bestStage = PlayerPrefs.GetInt("BestStage", 9);
-        bestScore = PlayerPrefs.GetInt("BestScore", 9);
+        bestStage = PlayerPrefs.GetInt("BestStage", 0);
+        bestScore = PlayerPrefs.GetInt("BestScore", 0);
 
         stageText.text = "STAGE " + bestStage;
         scoreText.text = "SCORE " + bestScore;

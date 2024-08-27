@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     public List<GameObject> KnifeIcons;
 
     private float fadeDuration = 0.35f;
+    private float gameOverFadeDuration = 0.5f;
 
     public TMP_Text stageText;
     public TMP_Text scoreText;
@@ -62,6 +63,7 @@ public class UIManager : MonoBehaviour
 
     private void Start() {
         gameOverUI.SetActive(false);
+        gameOverUI.SetActive(false);
     }
 
     public void Initialize() {
@@ -86,8 +88,13 @@ public class UIManager : MonoBehaviour
     }
 
     public void OnGameOver() {
+        gameOverUI.SetActive(true);
+
+        gameOverUI.GetComponent<CanvasGroup>().DOFade(1, gameOverFadeDuration);
         gameoverStageText.text = GameManager.Instance.stageNum.ToString();
         gameoverScoreText.text = GameManager.Instance.scoreNum.ToString();
+
+
     }
 
     public void OnNewBestScore() {
