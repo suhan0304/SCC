@@ -97,7 +97,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void OnGameOver() {
-        Debug.Log(scoreNum + " " + bestScoreNum);
         if (scoreNum > bestScoreNum) {
             PlayerPrefs.SetInt("BestScore", bestScoreNum);
             PlayerPrefs.SetInt("BestStage", bestStageNum);
