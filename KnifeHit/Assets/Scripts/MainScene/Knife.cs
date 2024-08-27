@@ -85,7 +85,10 @@ public class Knife : MonoBehaviour
             transform.SetParent(collision.transform, true);
 
             particle.Play();
-            collision.gameObject.GetComponent<Target>().OnHit();
+            
+            GameManager.Instance.scoreNum++;
+
+            Events.OnHitTarget.Invoke();
             
             if ( GameManager.Instance.RemainKnives > 0) {
                 GameManager.Instance.SpawnKnife();
@@ -112,6 +115,8 @@ public class Knife : MonoBehaviour
 
             Vector2 collisionPoint = collision.bounds.ClosestPoint(transform.position);
             SFXManager.Instance.playImpact(collisionPoint);
+
+            Events.OnGameOver.Invoke();
         }
     }
 

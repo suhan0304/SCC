@@ -16,6 +16,10 @@ public class UIManager : MonoBehaviour
     private float fadeDuration = 0.35f;
 
     public TMP_Text stageText;
+    public TMP_Text scoreText;
+
+    public TMP_Text gameoverStageText;
+    public TMP_Text gameoverScoreText;
 
     private void OnEnable() {
         if (Instance == null) {
@@ -28,11 +32,13 @@ public class UIManager : MonoBehaviour
 
         Events.OnStartStage += OnStartStage;
         Events.OnAllKnivesOnHit += OnAllKnivesOnHit;
+        Events.OnHitTarget += UpdateScore;
     }
 
     private void OnDisable() {
         Events.OnStartStage -= OnStartStage;
         Events.OnAllKnivesOnHit -= OnAllKnivesOnHit;
+        Events.OnHitTarget -= UpdateScore;
     }
 
     public void SpawnKnivesIcon(int cntKnives) {
@@ -55,6 +61,7 @@ public class UIManager : MonoBehaviour
             Destroy(icon);
         }
         KnifeIcons.Clear();
+        UpdateScore();
     }
 
     public void OnStartStage(int _stageNum) {
@@ -62,8 +69,19 @@ public class UIManager : MonoBehaviour
         ShowFadeAnimation();
     }
 
+    public void UpdateScore() {
+        scoreText.text = GameManager.Instance.scoreNum.ToString();
+    }
+
     public void OnAllKnivesOnHit() {
         HideFadeAnimation();
+    }
+
+    public void OnGameOver() {
+        gameoverStageText.text = GameManager.Instance.stageNum.ToString();
+        gameoverScoreText.text = GameManager.Instance.scoreNum.ToString();
+
+        
     }
 
     private void ShowFadeAnimation() {

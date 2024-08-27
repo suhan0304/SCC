@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayButton : MonoBehaviour
 {
+    public TitleAnimation titleAnimation;
     public void Play() {
+        titleAnimation.StopTitleAnimation();
         SceneManager.LoadScene("MainScene");
     }
 }

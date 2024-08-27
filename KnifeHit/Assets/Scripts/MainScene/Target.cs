@@ -50,10 +50,12 @@ public class Target : MonoBehaviour
 
     private void OnEnable() {
         Events.OnAllKnivesOnHit += DestroyTarget;
+        Events.OnHitTarget += OnHitTarget;
     }
 
     private void OnDisable() {
         Events.OnAllKnivesOnHit -= DestroyTarget;
+        Events.OnHitTarget -= OnHitTarget;
     }
 
 
@@ -95,8 +97,8 @@ public class Target : MonoBehaviour
         }
     }
 
-    [Button("OnHit")]
-    public void OnHit() {
+    [Button("OnHitTarget")]
+    public void OnHitTarget() {
         transform.DOPunchPosition(Vector3.right * shakeStrength, shakeDuration, vibrato, randomness);
         FlashWhiteRenderer.DOFade(1f, flashDuration / 2)
             .OnComplete(() => FlashWhiteRenderer.DOFade(0f, flashDuration /2));
@@ -104,6 +106,8 @@ public class Target : MonoBehaviour
         if (GameManager.Instance.RemainKnives == 0) {
             Events.OnAllKnivesOnHit.Invoke();
         }
+
+        UIManager.Instance.UpdateScore();
     }
 
     [Button("DestroyTarget")]

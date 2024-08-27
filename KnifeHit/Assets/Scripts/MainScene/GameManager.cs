@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
     [TabGroup("Tab","Variables",SdfIconType.CodeSlash, TextColor="Red")]
     [TabGroup("Tab","Variables")] public int RemainKnives;
     [TabGroup("Tab","Variables")] public int stageNum;
+    [TabGroup("Tab","Variables")] public int scoreNum;
+    [TabGroup("Tab","Variables")] public int bestStageNum;
+    [TabGroup("Tab","Variables")] public int bestScoreNum;
+
+
 
     [TabGroup("Tab","GameObjects",SdfIconType.CodeSlash, TextColor="Yellow")]
     [TabGroup("Tab","GameObjects")] public GameObject PlayObects;
@@ -31,18 +36,24 @@ public class GameManager : MonoBehaviour
         }
 
         Events.OnTouchScreen += OnTouchScreen;
-        Events.OnCollisionBetweenKnives += GameOver;
+        Events.OnGameOver += OnGameOver;
         Events.OnFinishStage += NextStage;
     }
 
     private void OnDisable() {
         Events.OnTouchScreen -= OnTouchScreen;
-        Events.OnCollisionBetweenKnives -= GameOver;
+        Events.OnGameOver -= OnGameOver;
         Events.OnFinishStage -= NextStage;
     }
 
     public void Start() {
+        bestStageNum = PlayerPrefs.GetInt();
+        bestScoreNum = PlayerPrefs.GetInt();
+
+        scoreNum = 0;
         stageNum = 1;
+        
+        UIManager.Instance.Initialize();
         StartStage();
     }
 
@@ -79,7 +90,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.DecreaseKnifeCount(RemainKnives);
     }
 
-    public void GameOver() {
+    public void OnGameOver() {
 
     }
 
