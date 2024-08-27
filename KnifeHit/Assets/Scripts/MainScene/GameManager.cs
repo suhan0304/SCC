@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
 
     public void OnGameOver() {
         if (scoreNum > bestScoreNum) {
-            Events.OnNewBestScore.Invoke();
+            //Events.OnNewBestScore.Invoke();
         }
     }
 

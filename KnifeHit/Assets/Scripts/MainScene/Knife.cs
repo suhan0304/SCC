@@ -115,10 +115,9 @@ public class Knife : MonoBehaviour
 
             Vector2 collisionPoint = collision.bounds.ClosestPoint(transform.position);
             SFXManager.Instance.playImpact(collisionPoint);
+            
+            Events.OnGameOver?.Invoke();
 
-            Events.OnGameOver.Invoke();
-
-            KnifeDestroy();
         }
     }
 
