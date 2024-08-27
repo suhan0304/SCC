@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
 
     public GameObject knifeIconsContainer;
     public GameObject KnifeIconPrefab;
+    public GameObject gameOverUI;
+    public GameObject NewBestUI;
     public List<GameObject> KnifeIcons;
 
     private float fadeDuration = 0.35f;
@@ -33,12 +35,14 @@ public class UIManager : MonoBehaviour
         Events.OnStartStage += OnStartStage;
         Events.OnAllKnivesOnHit += OnAllKnivesOnHit;
         Events.OnHitTarget += UpdateScore;
+        Events.OnNewBestScore += OnNewBestScore;
     }
 
     private void OnDisable() {
         Events.OnStartStage -= OnStartStage;
         Events.OnAllKnivesOnHit -= OnAllKnivesOnHit;
         Events.OnHitTarget -= UpdateScore;
+        Events.OnNewBestScore -= OnNewBestScore;
     }
 
     public void SpawnKnivesIcon(int cntKnives) {
@@ -54,6 +58,10 @@ public class UIManager : MonoBehaviour
             return; 
         }
         KnifeIcons[(KnifeIcons.Count - 1)- RemainKnives].GetComponent<Image>().color = Color.black;
+    }
+
+    private void Start() {
+        gameOverUI.SetActive(false);
     }
 
     public void Initialize() {
@@ -80,8 +88,10 @@ public class UIManager : MonoBehaviour
     public void OnGameOver() {
         gameoverStageText.text = GameManager.Instance.stageNum.ToString();
         gameoverScoreText.text = GameManager.Instance.scoreNum.ToString();
+    }
 
-        
+    public void OnNewBestScore() {
+        NewBestUI.SetActive(true);
     }
 
     private void ShowFadeAnimation() {
