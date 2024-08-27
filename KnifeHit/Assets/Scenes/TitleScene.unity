@@ -1378,7 +1378,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f1627401de4e44d89f2e846e494341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneFader: {fileID: 2033887803}
   titleAnimation: {fileID: 929706795}
 --- !u!1 &1600299352
 GameObject:
@@ -1645,7 +1644,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf082e9cbea94d478fa67a85f6723f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 596740082}
+  img: {fileID: 0}
+  fadeDuration: 0.25
 --- !u!4 &2033887804
 Transform:
   m_ObjectHideFlags: 0

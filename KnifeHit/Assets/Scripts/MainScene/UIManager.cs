@@ -112,14 +112,18 @@ public class UIManager : MonoBehaviour
 
     public void RestartButton() {
         CanvasGroup canvasGroup = gameOverUI.GetComponent<CanvasGroup>();
-        canvasGroup.DOFade(0f, gameOverFadeDuration); 
-        gameOverUI.SetActive(false);
+        canvasGroup.DOFade(0f, gameOverFadeDuration)
+            .OnComplete(() => {
+                gameOverUI.SetActive(false);
+                NewBestUI.SetActive(false);
 
-        Events.OnRestartButton?.Invoke();
+                Events.OnRestartButton?.Invoke();
+            }); 
+
     }
 
     public void HomeButton() {
-        SceneManager.LoadScene("TitleScene");
+        SceneFader.Instance.FadeTo("TitleScene");
     }
 
     public void Continue() {

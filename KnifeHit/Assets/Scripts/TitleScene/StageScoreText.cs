@@ -15,8 +15,6 @@ public class StageScoreText : MonoBehaviour
 
     private void Start() {
         InitailizeTexts();
-
-        Debug.Log(bestStage + " " + bestScore);
     }
 
     private void InitailizeTexts() {
