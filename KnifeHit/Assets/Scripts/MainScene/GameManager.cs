@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     private void OnEnable() {
         if (Instance == null) {
             Instance = this;
-            DontDestroyOnLoad(this);
         }
         else {
             Destroy(gameObject);
@@ -98,8 +97,8 @@ public class GameManager : MonoBehaviour
 
     public void OnGameOver() {
         if (scoreNum > bestScoreNum) {
-            PlayerPrefs.SetInt("BestScore", bestScoreNum);
-            PlayerPrefs.SetInt("BestStage", bestStageNum);
+            PlayerPrefs.SetInt("BestScore", scoreNum);
+            PlayerPrefs.SetInt("BestStage", stageNum);
 
             Events.OnNewBestScore?.Invoke();
         }
@@ -111,7 +110,7 @@ public class GameManager : MonoBehaviour
 
     [Button("Reload MainScene")]
     public void ReloadMainScene() {
-        SceneManager.LoadScene("MainScene");
+        SceneFader.Instance.FadeTo("MainScene");
     }
 
     [Button("GameOver")]
