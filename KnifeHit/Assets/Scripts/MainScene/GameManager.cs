@@ -97,8 +97,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void OnGameOver() {
+        Debug.Log(scoreNum + " " + bestScoreNum);
         if (scoreNum > bestScoreNum) {
-            //Events.OnNewBestScore.Invoke();
+            PlayerPrefs.SetInt("BestScore", bestScoreNum);
+            PlayerPrefs.SetInt("BestStage", bestStageNum);
+
+            Events.OnNewBestScore?.Invoke();
         }
     }
 
@@ -113,6 +117,6 @@ public class GameManager : MonoBehaviour
 
     [Button("GameOver")]
     public void GameOver() {
-        Events.OnGameOver.Invoke();
+        Events.OnGameOver?.Invoke();
     }
 }

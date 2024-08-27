@@ -22,8 +22,8 @@ public class UIManager : MonoBehaviour
     public TMP_Text stageText;
     public TMP_Text scoreText;
 
-    public TMP_Text gameoverStageText;
     public TMP_Text gameoverScoreText;
+    public TMP_Text gameoverStageText;
 
     private void OnEnable() {
         if (Instance == null) {
@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
         Events.OnAllKnivesOnHit += OnAllKnivesOnHit;
         Events.OnHitTarget += UpdateScore;
         Events.OnGameOver += OnGameOver;
+        Events.OnNewBestScore += OnNewBestScore;
     }
 
     private void OnDisable() {
@@ -45,6 +46,7 @@ public class UIManager : MonoBehaviour
         Events.OnAllKnivesOnHit -= OnAllKnivesOnHit;
         Events.OnHitTarget -= UpdateScore;
         Events.OnGameOver -= OnGameOver;
+        Events.OnNewBestScore -= OnNewBestScore;
     }
 
     public void SpawnKnivesIcon(int cntKnives) {
@@ -91,8 +93,8 @@ public class UIManager : MonoBehaviour
     public void OnGameOver() {
         CanvasGroup canvasGroup = gameOverUI.GetComponent<CanvasGroup>();
 
-        gameoverStageText.text = GameManager.Instance.stageNum.ToString();
         gameoverScoreText.text = GameManager.Instance.scoreNum.ToString();
+        gameoverStageText.text = "STAGE " + GameManager.Instance.stageNum;
         
         gameOverUI.SetActive(true);
         canvasGroup.DOFade(1f, gameOverFadeDuration); 
@@ -114,7 +116,7 @@ public class UIManager : MonoBehaviour
         canvasGroup.DOFade(0f, gameOverFadeDuration); 
         gameOverUI.SetActive(false);
 
-        Events.OnRestartButton.Invoke();
+        Events.OnRestartButton?.Invoke();
     }
 
     public void Continue() {

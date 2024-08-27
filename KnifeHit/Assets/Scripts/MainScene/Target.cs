@@ -115,6 +115,7 @@ public class Target : MonoBehaviour
     [Button("DestroyTarget")]
     public void DestroyTarget() {
         StopCoroutine(rotateCoroutine);
+
         rotateTween?.Kill();
 
         foreach(GameObject segment in Segments) {
@@ -132,6 +133,13 @@ public class Target : MonoBehaviour
 
     public void OnGameOver() {
         StopCoroutine(rotateCoroutine);
-        DOTween.Kill(gameObject);
+        rotateTween?.Kill();
+
+        DOTween.Sequence()
+            .AppendInterval(1f)
+            .OnComplete(() => {
+                DOTween.Kill(gameObject);
+                Destroy(gameObject);
+            });
     }
 }

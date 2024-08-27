@@ -88,7 +88,7 @@ public class Knife : MonoBehaviour
             
             GameManager.Instance.scoreNum++;
 
-            Events.OnHitTarget.Invoke();
+            Events.OnHitTarget?.Invoke();
             
             if ( GameManager.Instance.RemainKnives > 0) {
                 GameManager.Instance.SpawnKnife();
@@ -99,7 +99,7 @@ public class Knife : MonoBehaviour
             
             rb.bodyType = RigidbodyType2D.Dynamic;
 
-            Events.OnCollisionBetweenKnives.Invoke();
+            Events.OnCollisionBetweenKnives?.Invoke();
             rb.velocity = Vector3.zero;
 
             Vector2 collisionDirection = (transform.position - collision.transform.position).normalized;
@@ -118,6 +118,7 @@ public class Knife : MonoBehaviour
             
             Events.OnGameOver?.Invoke();
 
+            KnifeDestroy();
         }
     }
 
@@ -131,11 +132,11 @@ public class Knife : MonoBehaviour
         float randomTorque = Random.Range(-200f, 200f);
         rb.angularVelocity = randomTorque;
 
-        fadeAnimationTween = DOTween.Sequence()
+        DOTween.Sequence()
             .AppendInterval(delayBeforeFade)
             .Append(sr.DOFade(0, destroyDuration)
                         .OnComplete(() => {
-                            fadeAnimationTween?.Kill();
+                            DOTween.Kill(gameObject);
                             Destroy(gameObject);
                         }));
     }
