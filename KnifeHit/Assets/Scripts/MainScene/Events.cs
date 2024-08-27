@@ -10,4 +10,9 @@ public static class Events
     public static Action OnGameOver;
     public static Action OnNewBestScore;
     public static Action<int> OnStartStage;
+
+#region ButtonEvents
+    public static Action OnPlayButton;
+    public static Action OnRestartButton;
+#endregion
 }

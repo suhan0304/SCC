@@ -38,7 +38,6 @@ public class UIManager : MonoBehaviour
         Events.OnAllKnivesOnHit += OnAllKnivesOnHit;
         Events.OnHitTarget += UpdateScore;
         Events.OnGameOver += OnGameOver;
-        Events.OnNewBestScore += OnNewBestScore;
     }
 
     private void OnDisable() {
@@ -46,7 +45,6 @@ public class UIManager : MonoBehaviour
         Events.OnAllKnivesOnHit -= OnAllKnivesOnHit;
         Events.OnHitTarget -= UpdateScore;
         Events.OnGameOver -= OnGameOver;
-        Events.OnNewBestScore -= OnNewBestScore;
     }
 
     public void SpawnKnivesIcon(int cntKnives) {
@@ -92,7 +90,6 @@ public class UIManager : MonoBehaviour
 
     public void OnGameOver() {
         CanvasGroup canvasGroup = gameOverUI.GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 0f; 
 
         gameoverStageText.text = GameManager.Instance.stageNum.ToString();
         gameoverScoreText.text = GameManager.Instance.scoreNum.ToString();
@@ -112,8 +109,12 @@ public class UIManager : MonoBehaviour
         stageText.DOFade(0, fadeDuration);
     }
 
-    public void Restart() {
-        SceneManager.LoadScene("MainScene");
+    public void RestartButton() {
+        CanvasGroup canvasGroup = gameOverUI.GetComponent<CanvasGroup>();
+        canvasGroup.DOFade(0f, gameOverFadeDuration); 
+        gameOverUI.SetActive(false);
+
+        Events.OnRestartButton.Invoke();
     }
 
     public void Continue() {

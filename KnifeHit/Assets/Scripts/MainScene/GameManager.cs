@@ -38,15 +38,21 @@ public class GameManager : MonoBehaviour
         Events.OnTouchScreen += OnTouchScreen;
         Events.OnGameOver += OnGameOver;
         Events.OnFinishStage += NextStage;
+        Events.OnRestartButton += OnRestartButton;
     }
 
     private void OnDisable() {
         Events.OnTouchScreen -= OnTouchScreen;
         Events.OnGameOver -= OnGameOver;
         Events.OnFinishStage -= NextStage;
+        Events.OnRestartButton -= OnRestartButton;
     }
 
     public void Start() {
+        StartGame();
+    }
+
+    public void StartGame() {
         bestStageNum = PlayerPrefs.GetInt("BestStage", 1);
         bestScoreNum = PlayerPrefs.GetInt("BestScore", 0);
 
@@ -94,6 +100,10 @@ public class GameManager : MonoBehaviour
         if (scoreNum > bestScoreNum) {
             Events.OnNewBestScore.Invoke();
         }
+    }
+
+    public void OnRestartButton() {
+        StartGame();
     }
 
     [Button("Reload MainScene")]
