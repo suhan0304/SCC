@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,20 +11,25 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    public GameObject knifeIconsContainer;
-    public GameObject KnifeIconPrefab;
-    public GameObject gameOverUI;
-    public GameObject NewBestUI;
-    public List<GameObject> KnifeIcons;
+    [TabGroup("UI","KnifeIcon",SdfIconType.CodeSlash, TextColor="Green")]
+    [TabGroup("UI","KnifeIcon")] public GameObject knifeIconsContainer;
+    [TabGroup("UI","KnifeIcon")] public GameObject KnifeIconPrefab;
+    [TabGroup("UI","KnifeIcon")] public List<GameObject> KnifeIcons;
 
-    private float fadeDuration = 0.35f;
-    private float gameOverFadeDuration = 0.5f;
+    [TabGroup("UI","GameOver",SdfIconType.CodeSlash, TextColor="Yellow")]
+    [TabGroup("UI","GameOver")] public GameObject gameOverUI;
+    [TabGroup("UI","GameOver")] public GameObject NewBestUI;
+    [TabGroup("UI","GameOver"), ReadOnly] private float gameOverFadeDuration = 0.5f;
+    [TabGroup("UI","GameOver")] public TMP_Text gameoverScoreText;
+    [TabGroup("UI","GameOver")] public TMP_Text gameoverStageText;
 
-    public TMP_Text stageText;
-    public TMP_Text scoreText;
+    [TabGroup("UI","Stage",SdfIconType.CodeSlash, TextColor="Red")]
+    [TabGroup("UI","Stage")] public List<GameObject> stageIcons;
 
-    public TMP_Text gameoverScoreText;
-    public TMP_Text gameoverStageText;
+    [TabGroup("Base","In-Game UI",SdfIconType.CodeSlash, TextColor="Blue")]
+    [TabGroup("Base","In-Game UI"), ReadOnly] private float fadeDuration = 0.35f;
+    [TabGroup("Base","In-Game UI")] public TMP_Text stageText;
+    [TabGroup("Base","In-Game UI")] public TMP_Text scoreText;
 
     private void OnEnable() {
         if (Instance == null) {
@@ -97,6 +103,8 @@ public class UIManager : MonoBehaviour
         
         gameOverUI.SetActive(true);
         canvasGroup.DOFade(1f, gameOverFadeDuration); 
+
+
     }
 
     public void OnNewBestScore() {
