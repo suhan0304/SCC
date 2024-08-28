@@ -21,6 +21,9 @@ public class Target : MonoBehaviour
     [TabGroup("Tap","Position",SdfIconType.CodeSlash, TextColor="Blue")]
     [TabGroup("Tap","Position")] public float startPositionY = 0.5f;
 
+    [TabGroup("Tap","Settings",SdfIconType.CodeSlash, TextColor="Cyan")]
+    [TabGroup("Tap","Settings")] public int knivesToDestroy = 5;
+
     [TabGroup("Tap","OnHit Effect",SdfIconType.CodeSlash, TextColor="Red")]
 
     [TabGroup("OnHit Effect","Shake",SdfIconType.CodeSlash, TextColor="Yellow")]
@@ -39,14 +42,8 @@ public class Target : MonoBehaviour
     [TabGroup("Animation","StartAnimation")] public float targetScale = 0.6f;
     [TabGroup("Animation","StartAnimation")] public float animationDuration = 0.35f;
     [TabGroup("Animation","StartAnimation")] public float startScale = 0.001f;
-    
-
-
-    private Coroutine rotateCoroutine;
     private Tween rotateTween;
-
-
-    public readonly int knivesToDestroy = 5;
+    private Coroutine rotateCoroutine;
 
     private void OnEnable() {
         Events.OnAllKnivesOnHit += DestroyTarget;
@@ -126,7 +123,7 @@ public class Target : MonoBehaviour
             .AppendInterval(1f)
             .OnComplete(() => {
                 DOTween.KillAll();
-                Events.OnFinishStage.Invoke();
+                Events.OnFinishStage?.Invoke();
                 Destroy(gameObject);
             });
     }

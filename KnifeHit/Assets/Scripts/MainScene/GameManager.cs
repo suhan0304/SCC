@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
     [ReadOnly] public static GameManager Instance;
 
     [TabGroup("Tab","Prefabs",SdfIconType.CodeSlash, TextColor="Green")]
-
     [TabGroup("Tab","Prefabs")] public GameObject knife;
     [TabGroup("Tab","Prefabs")] public GameObject target;
+    [TabGroup("Tab","Prefabs")] public GameObject boss;
 
     [TabGroup("Tab","Variables",SdfIconType.CodeSlash, TextColor="Red")]
     [TabGroup("Tab","Variables")] public int RemainKnives;
@@ -21,10 +21,10 @@ public class GameManager : MonoBehaviour
     [TabGroup("Tab","Variables")] public int bestStageNum;
     [TabGroup("Tab","Variables")] public int bestScoreNum;
 
+    [TabGroup("Tab","GameObject",SdfIconType.CodeSlash, TextColor="Blue")]
+    [TabGroup("Tab","GameObject")] public GameObject currentKnife;
+    [TabGroup("Tab","GameObject")] public GameObject currentTarget;
 
-
-    [TabGroup("Tab","GameObjects",SdfIconType.CodeSlash, TextColor="Yellow")]
-    [TabGroup("Tab","GameObjects")] public GameObject PlayObects;
 
     private void OnEnable() {
         if (Instance == null) {
@@ -64,7 +64,16 @@ public class GameManager : MonoBehaviour
 
 
     private void StartStage() {
-        SpawnTarget();
+        if (stageNum%5 == 0) {
+            SpawnBoss(stageNum%5);
+        }
+        else {
+            SpawnTarget();
+        }
+
+        UIManager.Instance.Initialize();
+        UIManager.Instance.SpawnKnivesIcon(RemainKnives);
+        
         SpawnKnife();
         Events.OnStartStage?.Invoke(stageNum);
     }
@@ -76,18 +85,19 @@ public class GameManager : MonoBehaviour
 
     [Button("SpawnKnife")]
     public void SpawnKnife() {
-        GameObject currentKnife = Instantiate(knife);
+        currentKnife = Instantiate(knife);
     }
 
     [Button("SpawnTarget")]
     public void SpawnTarget() {
-        GameObject currentTarget = Instantiate(target);
-
-        currentTarget.transform.SetParent(PlayObects.transform);
+        currentTarget = Instantiate(target);
         RemainKnives = currentTarget.GetComponent<Target>().knivesToDestroy;
+    }
 
-        UIManager.Instance.Initialize();
-        UIManager.Instance.SpawnKnivesIcon(RemainKnives);
+    [Button("SpawnBoss")]
+    public void SpawnBoss(int bossNum) {
+        currentTarget = Instantiate(boss);
+        RemainKnives = currentTarget.GetComponent<Target>().knivesToDestroy;
     }
 
     public void OnTouchScreen() {

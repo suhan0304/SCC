@@ -15,8 +15,8 @@ public class Knife : MonoBehaviour
     [TabGroup("Variables")] public float speed = 30f;
     [TabGroup("Variables")] public float knifeOffsetY = 1.25f;
 
-    [TabGroup("Variables")] public float bounceForce = 5f;
-    [TabGroup("Variables")] public float knifeGravityScale = 2f;
+    [TabGroup("Variables")] public float bounceForce = 10f;
+    [TabGroup("Variables")] public float knifeGravityScale = 1f;
 
 
      [TabGroup("Animation")] private Tween animationTween;
@@ -93,6 +93,9 @@ public class Knife : MonoBehaviour
             if ( GameManager.Instance.RemainKnives > 0) {
                 GameManager.Instance.SpawnKnife();
             }
+            else if( GameManager.Instance.RemainKnives == 0) {
+                SFXManager.Instance.playImpact(collision.transform.position);
+            }
         }
         else if(collision.gameObject.CompareTag("Knife") && !hasInteracted) {
             hasInteracted = true;
@@ -126,11 +129,14 @@ public class Knife : MonoBehaviour
         hasInteracted = true;
         rb.bodyType = RigidbodyType2D.Dynamic;
 
-        float randomTorque = Random.Range(200f, 300f);
-        rb.angularVelocity = (Random.Range(0, 2) * 2 - 1) *randomTorque;
-        
+        float randomTorque =(Random.Range(0, 2) * 2 - 1) * Random.Range(200f, 300f);
+        rb.angularVelocity = randomTorque;
+
         float randBounceForce = Random.Range(bounceForce, bounceForce * 1.2f);
-        rb.AddForce(transform.up.normalized * randBounceForce, ForceMode2D.Impulse);
+        float randomAngle = Random.Range(-30f, 30f);
+        Vector3 randomDirection = Quaternion.Euler(0, 0, randomAngle) * transform.up;
+
+        rb.AddForce(randomDirection * randBounceForce, ForceMode2D.Impulse);
 
 
         DOTween.Sequence()

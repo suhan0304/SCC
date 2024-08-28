@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     [TabGroup("Base","In-Game UI"), ReadOnly] private float fadeDuration = 0.35f;
     [TabGroup("Base","In-Game UI")] public TMP_Text stageText;
     [TabGroup("Base","In-Game UI")] public TMP_Text scoreText;
+    [TabGroup("Boss","Boss UI")] public Color bossTextColor;
 
     private void OnEnable() {
         if (Instance == null) {
@@ -94,8 +95,15 @@ public class UIManager : MonoBehaviour
     }
 
     public void OnStartStage(int _stageNum) {
-        stageText.text = "STAGE " + _stageNum;
-        ShowStageTextFadeAnimation();
+        if(_stageNum%5 != 0) {
+            stageText.text = "STAGE " + _stageNum;
+            ShowStageTextFadeAnimation();
+        }
+    }
+
+    public void SetBossNameText() {
+        stageText.color = bossTextColor;
+        stageText.text = "BOSS: " + GameManager.Instance.currentTarget.GetComponent<Boss>().bossName;
     }
 
     public void UpdateScore() {
@@ -108,7 +116,7 @@ public class UIManager : MonoBehaviour
         }
         else if (stageIdx == 4){
             // TODO - Boss Animation
-            stageIdx++;
+            //stageIdx++;
         }
         else {
             stageIcons[stageIdx].transform.DOPunchScale(new Vector3(0.25f, 0.25f, 0), 0.5f, 5, 1f)
