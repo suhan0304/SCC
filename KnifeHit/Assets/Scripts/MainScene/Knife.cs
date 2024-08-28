@@ -15,7 +15,7 @@ public class Knife : MonoBehaviour
     [TabGroup("Variables")] public float speed = 30f;
     [TabGroup("Variables")] public float knifeOffsetY = 1.25f;
 
-    [TabGroup("Variables")] public float bounceForce = 10f;
+    [TabGroup("Variables")] public float bounceForce = 5f;
     [TabGroup("Variables")] public float knifeGravityScale = 2f;
 
 
@@ -126,11 +126,12 @@ public class Knife : MonoBehaviour
         hasInteracted = true;
         rb.bodyType = RigidbodyType2D.Dynamic;
 
-        float randBounceForce = Random.Range(bounceForce, bounceForce * 1.5f);
-        rb.AddForce(Vector3.up * randBounceForce, ForceMode2D.Impulse);
+        float randomTorque = Random.Range(200f, 300f);
+        rb.angularVelocity = (Random.Range(0, 2) * 2 - 1) *randomTorque;
+        
+        float randBounceForce = Random.Range(bounceForce, bounceForce * 1.2f);
+        rb.AddForce(transform.up.normalized * randBounceForce, ForceMode2D.Impulse);
 
-        float randomTorque = Random.Range(-200f, 200f);
-        rb.angularVelocity = randomTorque;
 
         DOTween.Sequence()
             .AppendInterval(delayBeforeFade)

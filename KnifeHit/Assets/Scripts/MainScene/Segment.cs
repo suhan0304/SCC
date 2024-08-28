@@ -10,7 +10,7 @@ public class Segment : MonoBehaviour
     [TabGroup("Destruction Effect","Segements")] public float upwardForceMultiplier = 1f;
     [TabGroup("Destruction Effect","Segements")] public float destroyDuration = 0.5f; 
     [TabGroup("Destruction Effect","Segements")] public float delayBeforeFade = 0.5f; 
-    [TabGroup("Destruction Effect","Segements")] public float torqueMagnitude = 300f;
+    [TabGroup("Destruction Effect","Segements")] public float torqueMagnitude = 200f;
     [TabGroup("Destruction Effect","Segements")] public float segmentGravityScale = 2f;
     
     Tween fadeAnimationTween;
@@ -30,7 +30,7 @@ public class Segment : MonoBehaviour
 
         rb.AddForce(force, ForceMode2D.Impulse);
         
-        float randomTorque = Random.Range(-torqueMagnitude, torqueMagnitude);
+        float randomTorque = (Random.Range(0, 2) * 2 - 1) * Random.Range(torqueMagnitude, torqueMagnitude * 1.5f);
         rb.angularVelocity = randomTorque;
 
         SpriteRenderer sr = transform.GetComponent<SpriteRenderer>();

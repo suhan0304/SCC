@@ -431,9 +431,9 @@ MonoBehaviour:
   maxRotation: 500
   minDuration: 1
   maxDuration: 8
-  maxRotationSpeed: 60
-  minRotateDelay: 0.2
-  maxRotateDelay: 0.5
+  maxRotationSpeed: 100
+  minRotateDelay: 0.1
+  maxRotateDelay: 1
   startPositionY: 0.5
   shakeDuration: 0.2
   shakeStrength: 0.125

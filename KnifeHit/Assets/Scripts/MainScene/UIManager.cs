@@ -106,11 +106,16 @@ public class UIManager : MonoBehaviour
         if(stageIdx > 4) {
             InitializeStageIcons();
         }
-        stageIcons[stageIdx].transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0), 0.5f, 10, 1f)
-            .OnComplete(()=> {
-                stageIconsImage[stageIdx++].color = stageCurrentColor;
-            });
-
+        else if (stageIdx == 4){
+            // TODO - Boss Animation
+            stageIdx++;
+        }
+        else {
+            stageIcons[stageIdx].transform.DOPunchScale(new Vector3(0.25f, 0.25f, 0), 0.5f, 5, 1f)
+                .OnComplete(()=> {
+                    stageIconsImage[stageIdx++].color = stageCurrentColor;
+                });
+        }
         HideStageTextFadeAnimation();
     }
 
