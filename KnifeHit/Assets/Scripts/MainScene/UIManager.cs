@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,6 +26,10 @@ public class UIManager : MonoBehaviour
 
     [TabGroup("UI","Stage",SdfIconType.CodeSlash, TextColor="Red")]
     [TabGroup("UI","Stage")] public List<GameObject> stageIcons;
+    [TabGroup("UI","Stage")] public List<Image> stageIconsImage;
+    [TabGroup("UI","Stage")] public int stageIdx;
+    [TabGroup("UI","Stage")] public Color stageInitColor;
+    [TabGroup("UI","Stage")] public Color stageCurrentColor;
 
     [TabGroup("Base","In-Game UI",SdfIconType.CodeSlash, TextColor="Blue")]
     [TabGroup("Base","In-Game UI"), ReadOnly] private float fadeDuration = 0.35f;
@@ -66,12 +71,18 @@ public class UIManager : MonoBehaviour
         if (RemainKnives < 0) {
             return; 
         }
-        KnifeIcons[(KnifeIcons.Count - 1)- RemainKnives].GetComponent<Image>().color = Color.black;
+        KnifeIcons[KnifeIcons.Count - 1 - RemainKnives].GetComponent<Image>().color = Color.black;
     }
 
     private void Start() {
         gameOverUI.SetActive(false);
         NewBestUI.SetActive(false);
+
+        foreach (GameObject stageIcon in stageIcons) {
+            stageIconsImage.Add(stageIcon.GetComponent<Image>());
+        }
+
+        InitializeStageIcons();
     }
 
     public void Initialize() {
@@ -84,7 +95,7 @@ public class UIManager : MonoBehaviour
 
     public void OnStartStage(int _stageNum) {
         stageText.text = "STAGE " + _stageNum;
-        ShowFadeAnimation();
+        ShowStageTextFadeAnimation();
     }
 
     public void UpdateScore() {
@@ -92,7 +103,23 @@ public class UIManager : MonoBehaviour
     }
 
     public void OnAllKnivesOnHit() {
-        HideFadeAnimation();
+        if(stageIdx > 4) {
+            InitializeStageIcons();
+        }
+        stageIcons[stageIdx].transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0), 0.5f, 10, 1f)
+            .OnComplete(()=> {
+                stageIconsImage[stageIdx++].color = stageCurrentColor;
+            });
+
+        HideStageTextFadeAnimation();
+    }
+
+    private void InitializeStageIcons() {
+        foreach(var stageIconImage in stageIconsImage) {
+            stageIconImage.color = stageInitColor;
+        }
+        stageIdx = 0;
+        stageIconsImage[stageIdx++].color = stageCurrentColor;
     }
 
     public void OnGameOver() {
@@ -103,22 +130,21 @@ public class UIManager : MonoBehaviour
         
         gameOverUI.SetActive(true);
         canvasGroup.DOFade(1f, gameOverFadeDuration); 
-
-
     }
 
     public void OnNewBestScore() {
         NewBestUI.SetActive(true);
     }
 
-    private void ShowFadeAnimation() {
+    private void ShowStageTextFadeAnimation() {
         stageText.DOFade(1, fadeDuration);
     }
-    private void HideFadeAnimation() {
+    private void HideStageTextFadeAnimation() {
         stageText.DOFade(0, fadeDuration);
     }
 
     public void RestartButton() {
+        InitializeStageIcons();
         CanvasGroup canvasGroup = gameOverUI.GetComponent<CanvasGroup>();
         canvasGroup.DOFade(0f, gameOverFadeDuration)
             .OnComplete(() => {

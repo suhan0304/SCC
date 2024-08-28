@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceMagnitude: 10
-  upwardForceMultiplier: 2
+  upwardForceMultiplier: 1
   destroyDuration: 0.5
   delayBeforeFade: 0.5
   torqueMagnitude: 300
@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceMagnitude: 10
-  upwardForceMultiplier: 2
+  upwardForceMultiplier: 1
   destroyDuration: 0.5
   delayBeforeFade: 0.5
   torqueMagnitude: 300
@@ -609,7 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceMagnitude: 10
-  upwardForceMultiplier: 2
+  upwardForceMultiplier: 1
   destroyDuration: 0.5
   delayBeforeFade: 0.5
   torqueMagnitude: 300

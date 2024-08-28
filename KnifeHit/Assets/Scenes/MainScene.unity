@@ -639,13 +639,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knifeIconsContainer: {fileID: 175399999}
   KnifeIconPrefab: {fileID: 8060063415773805420, guid: 13cca387d0e164d47b4276aa6ed6cbd0, type: 3}
+  KnifeIcons: []
   gameOverUI: {fileID: 1844977975}
   NewBestUI: {fileID: 2079269684}
-  KnifeIcons: []
-  stageText: {fileID: 2134833613}
-  scoreText: {fileID: 1132780933}
   gameoverScoreText: {fileID: 1237872598}
   gameoverStageText: {fileID: 222754909}
+  stageIcons:
+  - {fileID: 2085233413}
+  - {fileID: 1603114532}
+  - {fileID: 654896452}
+  - {fileID: 1004139943}
+  - {fileID: 120883722}
+  stageIconsImage: []
+  stageIdx: 0
+  stageInitColor: {r: 1, g: 1, b: 1, a: 1}
+  stageCurrentColor: {r: 1, g: 0.6776472, b: 0.2028302, a: 1}
+  stageText: {fileID: 2134833613}
+  scoreText: {fileID: 1132780933}
 --- !u!4 &616787265
 Transform:
   m_ObjectHideFlags: 0
@@ -8231,8 +8241,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

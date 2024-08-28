@@ -7,7 +7,7 @@ using UnityEngine;
 public class Segment : MonoBehaviour
 {
     [TabGroup("Destruction Effect","Segements")] public float forceMagnitude = 10f; 
-    [TabGroup("Destruction Effect","Segements")] public float upwardForceMultiplier = 2f;
+    [TabGroup("Destruction Effect","Segements")] public float upwardForceMultiplier = 1f;
     [TabGroup("Destruction Effect","Segements")] public float destroyDuration = 0.5f; 
     [TabGroup("Destruction Effect","Segements")] public float delayBeforeFade = 0.5f; 
     [TabGroup("Destruction Effect","Segements")] public float torqueMagnitude = 300f;
@@ -16,17 +16,16 @@ public class Segment : MonoBehaviour
     Tween fadeAnimationTween;
     
     public void ApplyForceToSegments() {
-
-        Vector3 parentPosition = transform.position;
+        Vector3 parentPosition = transform.parent.position;
         Rigidbody2D rb = transform.GetComponent<Rigidbody2D>();
         
-        float RandomUpwardForceMultiplier = Random.Range(upwardForceMultiplier - 2 , upwardForceMultiplier + 2);
+        float RandomUpwardForceMultiplier = Random.Range(upwardForceMultiplier, upwardForceMultiplier + 3);
         Vector3 direction = ((transform.position - parentPosition).normalized + Vector3.up * RandomUpwardForceMultiplier).normalized;
 
-        float RandomforceMagnitude = Random.Range(forceMagnitude - 2 , forceMagnitude + 2);
-        Vector3 force = direction * RandomforceMagnitude;
+        Vector3 force = direction * forceMagnitude;
 
         rb.gravityScale = segmentGravityScale;
+
         rb.bodyType = RigidbodyType2D.Dynamic;
 
         rb.AddForce(force, ForceMode2D.Impulse);
