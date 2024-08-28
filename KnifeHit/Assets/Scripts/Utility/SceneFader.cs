@@ -23,6 +23,7 @@ public class SceneFader : MonoBehaviour
     public Image img;
     public float fadeDuration = 0.25f;
     private void Start() {
+        gameObject.SetActive(true);
         img = GetComponentInChildren<Image>();
         FadeIn();
     }
@@ -39,7 +40,5 @@ public class SceneFader : MonoBehaviour
                 FadeIn();
             }
             );
-
-        
     }
 }
