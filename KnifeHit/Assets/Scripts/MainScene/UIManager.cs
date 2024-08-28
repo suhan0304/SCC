@@ -35,7 +35,8 @@ public class UIManager : MonoBehaviour
     [TabGroup("Base","In-Game UI"), ReadOnly] private float fadeDuration = 0.35f;
     [TabGroup("Base","In-Game UI")] public TMP_Text stageText;
     [TabGroup("Base","In-Game UI")] public TMP_Text scoreText;
-    [TabGroup("Boss","Boss UI")] public Color bossTextColor;
+    [TabGroup("Base","In-Game UI")] public Color stageTextColor;
+    [TabGroup("Base","In-Game UI")] public Color bossTextColor;
 
     private void OnEnable() {
         if (Instance == null) {
@@ -95,15 +96,15 @@ public class UIManager : MonoBehaviour
     }
 
     public void OnStartStage(int _stageNum) {
-        if(_stageNum%5 != 0) {
-            stageText.text = "STAGE " + _stageNum;
-            ShowStageTextFadeAnimation();
+        if(_stageNum%5 == 0) {
+            stageText.color = bossTextColor;
+            stageText.text = "BOSS: " + GameManager.Instance.currentTarget.GetComponent<Boss>().bossName;
         }
-    }
-
-    public void SetBossNameText() {
-        stageText.color = bossTextColor;
-        stageText.text = "BOSS: " + GameManager.Instance.currentTarget.GetComponent<Boss>().bossName;
+        else {
+            stageText.color = stageTextColor;
+            stageText.text = "STAGE " + _stageNum;
+        }
+        ShowStageTextFadeAnimation();
     }
 
     public void UpdateScore() {
