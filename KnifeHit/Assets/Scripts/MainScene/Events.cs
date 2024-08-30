@@ -8,6 +8,7 @@ public static class Events
     public static Action OnAllKnivesOnHit;
     public static Action OnFinishStage;
     public static Action OnBossSpawn;
+    public static Action OnBossDestroy;
     public static Action OnGameOver;
     public static Action OnNewBestScore;
     public static Action<int> OnStartStage;

@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
         Events.OnGameOver += OnGameOver;
         Events.OnNewBestScore += OnNewBestScore;
         Events.OnBossSpawn += OnBossSpawn;
+        Events.OnBossDestroy += OnBossDestroy;
     }
 
     private void OnDisable() {
@@ -64,6 +65,7 @@ public class UIManager : MonoBehaviour
         Events.OnGameOver -= OnGameOver;
         Events.OnNewBestScore -= OnNewBestScore;
         Events.OnBossSpawn -= OnBossSpawn;
+        Events.OnBossDestroy -= OnBossDestroy;
     }
 
     public void SpawnKnivesIcon(int cntKnives) {
@@ -121,8 +123,8 @@ public class UIManager : MonoBehaviour
             InitializeStageIcons();
         }
         else if (stageIdx == 4){
-            // TODO - Boss Animation
-            //stageIdx++;
+            Events.OnBossDestroy.Invoke();
+            stageIdx++;
         }
         else {
             stageIcons[stageIdx].transform.DOPunchScale(new Vector3(0.25f, 0.25f, 0), 0.5f, 5, 1f)
@@ -181,6 +183,12 @@ public class UIManager : MonoBehaviour
                 .OnComplete(()=> {
                     stageIconsContainer.GetComponent<DOTweenAnimation>().DOPlay();
                 });
+    }
+
+    [Button("OnBossDestroy")]
+    public void OnBossDestroy() {
+        stageIconBoss.GetComponent<DOTweenAnimation>().DOPlayBackwardsAllById("stageBoss");
+        stageIconsContainer.GetComponent<DOTweenAnimation>().DOPlayBackwards();
     }
 
     public void HomeButton() {
