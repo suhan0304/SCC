@@ -476,7 +476,7 @@ MonoBehaviour:
   vibrato: 10
   randomness: 90
   flashDuration: 0.05
-  FlashWhiteRenderer: {fileID: 0}
+  FlashWhiteRenderer: {fileID: 8940096590278933880}
   Segments: []
   targetScale: 0.6
   animationDuration: 0.35
