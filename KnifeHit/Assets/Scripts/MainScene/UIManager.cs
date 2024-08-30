@@ -120,10 +120,10 @@ public class UIManager : MonoBehaviour
 
     public void OnAllKnivesOnHit() {
         if(stageIdx > 4) {
+            Events.OnBossDestroy.Invoke();
             InitializeStageIcons();
         }
         else if (stageIdx == 4){
-            Events.OnBossDestroy.Invoke();
             stageIdx++;
         }
         else {
@@ -179,17 +179,17 @@ public class UIManager : MonoBehaviour
 
     [Button("OnBossSpawn")]
     public void OnBossSpawn() {
-        DOTweenAnimation icons = stageIconsContainer.GetComponent<DOTweenAnimation>();
-
+        Debug.Log("[UIMagner.cs] OnBossSpawn");
         stageIconBoss.transform.DOPunchScale(new Vector3(0.25f, 0.25f, 0), 0.5f, 5, 1f)
                 .OnComplete(()=> {
-                    icons?.DORestart();
+                    stageIconsContainer.GetComponent<DOTweenAnimation>().DOPlay();
                 });
     }
 
     [Button("OnBossDestroy")]
     public void OnBossDestroy() {
-        stageIconBoss.GetComponent<DOTweenAnimation>().DOPlayBackwardsAllById("stageBoss");
+        Debug.Log("[UIMagner.cs] OnBossDestroy");
+        stageIconBoss.GetComponent<DOTweenAnimation>().DOPlayBackwards();
         stageIconsContainer.GetComponent<DOTweenAnimation>().DOPlayBackwards();
     }
 

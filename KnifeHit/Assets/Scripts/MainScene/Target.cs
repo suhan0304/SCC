@@ -122,7 +122,7 @@ public class Target : MonoBehaviour
         DOTween.Sequence()
             .AppendInterval(1f)
             .OnComplete(() => {
-                DOTween.KillAll();
+                DOTween.Kill(gameObject);
                 Events.OnFinishStage?.Invoke();
                 Destroy(gameObject);
             });
