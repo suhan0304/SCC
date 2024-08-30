@@ -470,7 +470,7 @@ MonoBehaviour:
   minRotateDelay: 0.1
   maxRotateDelay: 1
   startPositionY: 0.5
-  knivesToDestroy: 10
+  knivesToDestroy: 3
   shakeDuration: 0.2
   shakeStrength: 0.125
   vibrato: 10

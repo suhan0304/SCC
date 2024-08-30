@@ -179,9 +179,11 @@ public class UIManager : MonoBehaviour
 
     [Button("OnBossSpawn")]
     public void OnBossSpawn() {
+        DOTweenAnimation icons = stageIconsContainer.GetComponent<DOTweenAnimation>();
+
         stageIconBoss.transform.DOPunchScale(new Vector3(0.25f, 0.25f, 0), 0.5f, 5, 1f)
                 .OnComplete(()=> {
-                    stageIconsContainer.GetComponent<DOTweenAnimation>().DOPlay();
+                    icons?.DORestart();
                 });
     }
 
