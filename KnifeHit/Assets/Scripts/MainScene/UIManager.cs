@@ -189,8 +189,14 @@ public class UIManager : MonoBehaviour
     [Button("OnBossDestroy")]
     public void OnBossDestroy() {
         Debug.Log("[UIMagner.cs] OnBossDestroy");
-        stageIconBoss.GetComponent<DOTweenAnimation>().DOPlayBackwards();
-        stageIconsContainer.GetComponent<DOTweenAnimation>().DOPlayBackwards();
+        DOTween.Sequence()
+            .AppendCallback(() => {
+                stageIconBoss.GetComponent<DOTweenAnimation>().DOPlayBackwards();
+            })
+            .AppendInterval(0.5f)
+            .AppendCallback(() => {
+                stageIconsContainer.GetComponent<DOTweenAnimation>().DOPlayBackwards();
+            });
     }
 
     public void HomeButton() {
