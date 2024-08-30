@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using TMPro;
 using Unity.VisualScripting;
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour
     [TabGroup("UI","GameOver")] public TMP_Text gameoverStageText;
 
     [TabGroup("UI","Stage",SdfIconType.CodeSlash, TextColor="Red")]
+    [TabGroup("UI","Stage")] public GameObject stageIconsContainer;
     [TabGroup("UI","Stage")] public List<GameObject> stageIcons;
     [TabGroup("UI","Stage")] public List<Image> stageIconsImage;
     [TabGroup("UI","Stage")] public int stageIdx;
