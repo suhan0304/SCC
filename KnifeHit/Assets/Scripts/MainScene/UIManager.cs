@@ -51,6 +51,7 @@ public class UIManager : MonoBehaviour
         Events.OnHitTarget += UpdateScore;
         Events.OnGameOver += OnGameOver;
         Events.OnNewBestScore += OnNewBestScore;
+        Events.OnBossSpawn += BossStageAnimation;
     }
 
     private void OnDisable() {
@@ -59,6 +60,7 @@ public class UIManager : MonoBehaviour
         Events.OnHitTarget -= UpdateScore;
         Events.OnGameOver -= OnGameOver;
         Events.OnNewBestScore -= OnNewBestScore;
+        Events.OnBossSpawn -= BossStageAnimation;
     }
 
     public void SpawnKnivesIcon(int cntKnives) {
@@ -167,6 +169,10 @@ public class UIManager : MonoBehaviour
 
                 Events.OnRestartButton?.Invoke();
             }); 
+
+    }
+
+    public void BossStageAnimation() {
 
     }
 

@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     private void StartStage() {
         if (stageNum%5 == 0) {
             SpawnBoss(stageNum%5);
+            Events.OnBossSpawn.Invoke();
         }
         else {
             SpawnTarget();
