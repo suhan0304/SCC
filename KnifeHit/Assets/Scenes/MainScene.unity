@@ -864,6 +864,7 @@ MonoBehaviour:
   gameoverScoreText: {fileID: 1237872598}
   gameoverStageText: {fileID: 222754909}
   stageIconsContainer: {fileID: 2007991653}
+  stageIconBoss: {fileID: 120883722}
   stageIcons:
   - {fileID: 2085233413}
   - {fileID: 1603114532}

@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
 
     [TabGroup("UI","Stage",SdfIconType.CodeSlash, TextColor="Red")]
     [TabGroup("UI","Stage")] public GameObject stageIconsContainer;
+    [TabGroup("UI","Stage")] public GameObject stageIconBoss;
     [TabGroup("UI","Stage")] public List<GameObject> stageIcons;
     [TabGroup("UI","Stage")] public List<Image> stageIconsImage;
     [TabGroup("UI","Stage")] public int stageIdx;
@@ -176,7 +177,7 @@ public class UIManager : MonoBehaviour
 
     [Button("OnBossSpawn")]
     public void OnBossSpawn() {
-        stageIconsContainer.transform.DOPunchScale(new Vector3(0.25f, 0.25f, 0), 0.5f, 5, 1f)
+        stageIconBoss.transform.DOPunchScale(new Vector3(0.25f, 0.25f, 0), 0.5f, 5, 1f)
                 .OnComplete(()=> {
                     stageIconsContainer.GetComponent<DOTweenAnimation>().DOPlay();
                 });
