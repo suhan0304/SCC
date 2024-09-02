@@ -90,7 +90,6 @@ public class UIManager : MonoBehaviour
         NewBestUI.SetActive(false);
         bossTimeCircle.SetActive(false);
 
-
         foreach (GameObject stageIcon in stageIcons) {
             stageIconsImage.Add(stageIcon.GetComponent<Image>());
         }
@@ -104,7 +103,13 @@ public class UIManager : MonoBehaviour
             Destroy(icon);
         }
         KnifeIcons.Clear();
-        UpdateScore();
+        SpawnKnivesIcon(GameManager.Instance.RemainKnives);
+    }
+
+    public void InitialzieForContinue() {
+        gameOverUI.SetActive(false);
+        NewBestUI.SetActive(false);
+        bossTimeCircle.SetActive(false);
     }
 
     private void TimeCirclePositionSetup() {
@@ -172,7 +177,6 @@ public class UIManager : MonoBehaviour
         gameOverUI.SetActive(true);
         canvasGroup.DOFade(1f, gameOverFadeDuration); 
     }
-
     public void OnNewBestScore() {
         Debug.Log("[UIManager.cs] OnNewBestScore");
         NewBestUI.SetActive(true);
@@ -223,10 +227,5 @@ public class UIManager : MonoBehaviour
 
     public void HomeButton() {
         SceneFader.Instance.FadeTo("TitleScene");
-    }
-
-    public void Continue() {
-        //TODO - Continue Logic
-
     }
 } 

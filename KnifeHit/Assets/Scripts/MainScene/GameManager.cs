@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     [TabGroup("Tab","GameObject")] public GameObject currentKnife;
     [TabGroup("Tab","GameObject")] public GameObject currentTarget;
 
+    private bool canContinue = true;
+
 
     private void OnEnable() {
         if (Instance == null) {
@@ -57,6 +59,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartGame() {
+        canContinue = true;
+        
         bestStageNum = PlayerPrefs.GetInt("BestStage", 1);
         bestScoreNum = PlayerPrefs.GetInt("BestScore", 0);
 
@@ -64,6 +68,15 @@ public class GameManager : MonoBehaviour
         stageNum = 1;
         
         UIManager.Instance.Initialize();
+        StartStage();
+    }
+
+    public void ContinueGame() {
+        UIManager.Instance.Initialize();
+        UIManager.Instance.InitialzieForContinue()
+        if(currentTarget != null) {
+
+        }
         StartStage();
     }
 
@@ -77,7 +90,6 @@ public class GameManager : MonoBehaviour
         }
 
         UIManager.Instance.Initialize();
-        UIManager.Instance.SpawnKnivesIcon(RemainKnives);
         
         SpawnKnife();
         Events.OnStartStage?.Invoke(stageNum);
@@ -121,6 +133,13 @@ public class GameManager : MonoBehaviour
 
     public void OnRestartButton() {
         StartGame();
+    }
+
+    public void OnContinueButton() {
+        if (canContinue) {
+            canContinue = false;
+            ContinueGame();
+        }
     }
 
     [Button("Reload MainScene")]
