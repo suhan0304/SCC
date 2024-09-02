@@ -89,10 +89,14 @@ public class UIManager : MonoBehaviour
         gameOverUI.SetActive(false);
         NewBestUI.SetActive(false);
 
-        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, GameManager.Instance.targetSpawnPosition);
+        Vector2 screenPoint = Camera.main.WorldToScreenPoint(GameManager.Instance.targetSpawnPosition);
+
+        Debug.Log(screenPoint);
 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, screenPoint, canvas.worldCamera, out Vector2 localPoint);
-            
+
+        Debug.Log(localPoint);
+
         bossTimeCircle.GetComponent<RectTransform>().anchoredPosition = localPoint;
 
         foreach (GameObject stageIcon in stageIcons) {
