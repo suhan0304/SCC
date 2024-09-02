@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour
         foreach (GameObject stageIcon in stageIcons) {
             stageIconsImage.Add(stageIcon.GetComponent<Image>());
         }
-        
+
         InitializeStageIcons();
         TimeCirclePositionSetup();
     }
@@ -209,7 +209,7 @@ public class UIManager : MonoBehaviour
         Debug.Log("[UIMagner.cs] OnBossSpawn");
         stageIconBoss.transform.DOPunchScale(new Vector3(0.25f, 0.25f, 0), 0.5f, 5, 1f)
                 .OnComplete(()=> {
-                    stageIconsContainer.GetComponent<DOTweenAnimation>().DOPlay();
+                    stageIconsContainer.GetComponent<DOTweenAnimation>().DORestart();
                 });
     }
 

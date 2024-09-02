@@ -8404,7 +8404,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 120883726}
         m_TargetAssemblyTypeName: DG.Tweening.DOTweenAnimation, Assembly-CSharp-firstpass
-        m_MethodName: DOPlay
+        m_MethodName: DORestart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8416,7 +8416,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 120883727}
         m_TargetAssemblyTypeName: DG.Tweening.DOTweenAnimation, Assembly-CSharp-firstpass
-        m_MethodName: DOPlay
+        m_MethodName: DORestart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
