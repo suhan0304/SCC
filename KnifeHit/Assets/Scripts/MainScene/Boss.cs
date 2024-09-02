@@ -8,18 +8,21 @@ using UnityEngine.UI;
 public class Boss : Target
 {
     [TabGroup("Boss","Settings")] public string bossName;
-    [TabGroup("Boss","Settings")] public float timeLimitSeconds = 10f;
+    [TabGroup("Boss","Settings")] public float timeLimitSeconds = 30f;
+    [TabGroup("Boss","Settings")] public float timeCircleSeconds = 10f;
     [TabGroup("Boss","Settings")] public GameObject timeCircle;
 
-    private Tween timeCircleTween;
+    private Sequence bossSpawnSequence;
 
 
-    private void OnEnable() {
+    protected override void OnEnable() {
+        base.OnEnable();
         Events.OnBossSpawn += OnBossSpawn;
         Events.OnBossDestroy += OnBossDestroy;
     }
 
-    private void OnDisable() {
+    protected override void OnDisable() {
+        base.OnDisable();
         Events.OnBossSpawn -= OnBossSpawn;
         Events.OnBossDestroy -= OnBossDestroy;
         
@@ -31,23 +34,17 @@ public class Boss : Target
     }
 
     private void OnBossSpawn() {
-        StartCoroutine(StartTimeCircle());
+        timeCircle = UIManager.Instance.bossTimeCircle;
+        bossSpawnSequence = DOTween.Sequence()
+            .AppendInterval(timeLimitSeconds - timeCircleSeconds)
+            .Append(timeCircle.GetComponent<Image>().DOFillAmount(0f, timeCircleSeconds).SetEase(Ease.Linear)
+            .OnComplete(()=> {
+                GameManager.Instance.GameOver();
+            }));
     }
 
     private void OnBossDestroy() {
-        timeCircleTween.Kill();
-        StopCoroutine(StartTimeCircle());
+        bossSpawnSequence?.Kill();
         timeCircle.SetActive(false);
-    }
-
-    private IEnumerator StartTimeCircle() {
-        yield return new WaitForSeconds(5f);
-
-        timeCircle.gameObject.SetActive(true);
-        
-        timeCircleTween = timeCircle.GetComponent<Image>().DOFillAmount(0f, timeLimitSeconds).SetEase(Ease.Linear)
-            .OnComplete(()=> {
-                Debug.Log("Time Over!");
-            });
     }
 }

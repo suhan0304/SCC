@@ -42,13 +42,13 @@ public class Target : MonoBehaviour
     private Tween rotateTween;
     private Coroutine rotateCoroutine;
 
-    private void OnEnable() {
+    protected virtual void OnEnable() {
         Events.OnAllKnivesOnHit += DestroyTarget;
         Events.OnHitTarget += OnHitTarget;
         Events.OnGameOver += OnGameOver;
     }
 
-    private void OnDisable() {
+    protected virtual void OnDisable() {
         Events.OnAllKnivesOnHit -= DestroyTarget;
         Events.OnHitTarget -= OnHitTarget;
         Events.OnGameOver -= OnGameOver;
@@ -97,11 +97,13 @@ public class Target : MonoBehaviour
 
     [Button("OnHitTarget")]
     public void OnHitTarget() {
+        Debug.Log($"[Target.cs] OnHitTarget : Remain Knives = {GameManager.Instance.RemainKnives}");
         transform.DOPunchPosition(Vector3.right * shakeStrength, shakeDuration, vibrato, randomness);
         FlashWhiteRenderer.DOFade(1f, flashDuration / 2)
             .OnComplete(() => FlashWhiteRenderer.DOFade(0f, flashDuration /2));
 
         if (GameManager.Instance.RemainKnives == 0) {
+            Debug.Log("[Target.cs] OnHitTarget - OnAllKnivesOnHit Invoke");
             Events.OnAllKnivesOnHit.Invoke();
         }
 
@@ -134,6 +136,7 @@ public class Target : MonoBehaviour
         DOTween.Sequence()
             .AppendInterval(1f)
             .OnComplete(() => {
+            Debug.Log("[Target.cs] OnGameOver : DOTween.Kill");
                 DOTween.Kill(gameObject);
                 Destroy(gameObject);
             });

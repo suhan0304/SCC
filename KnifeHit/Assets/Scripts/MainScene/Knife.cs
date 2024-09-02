@@ -39,6 +39,8 @@ public class Knife : MonoBehaviour
     }
 
     private void Start() {
+        hasInteracted = false;
+
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
@@ -74,10 +76,12 @@ public class Knife : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        Debug.Log("[Knife.cs] OnTriggerEnter2D");
         gameObject.GetComponent<TrailRenderer>().enabled = false;
         Events.OnTouchScreen -= FireKnife;   
 
         if (collision.gameObject.CompareTag("Target") && !hasInteracted) {
+            Debug.Log("[Knife.cs] OnTriggerEnter2D : if-1 Target");
             hasInteracted = true;
 
             rb.velocity = Vector3.zero;
@@ -98,6 +102,7 @@ public class Knife : MonoBehaviour
             }
         }
         else if(collision.gameObject.CompareTag("Knife") && !hasInteracted) {
+            Debug.Log("[Knife.cs] OnTriggerEnter2D : if-2 Knife");
             hasInteracted = true;
             
             rb.bodyType = RigidbodyType2D.Dynamic;

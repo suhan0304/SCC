@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     [TabGroup("UI","GameOver")] public GameObject gameOverUI;
     [TabGroup("UI","GameOver")] public GameObject NewBestUI;
     [TabGroup("UI","GameOver"), ReadOnly] private float gameOverFadeDuration = 0.5f;
+    [TabGroup("UI","GameOver"), ReadOnly] private float bestUIScaleDuration = 0.3f;
     [TabGroup("UI","GameOver")] public TMP_Text gameoverScoreText;
     [TabGroup("UI","GameOver")] public TMP_Text gameoverStageText;
 
@@ -90,6 +91,24 @@ public class UIManager : MonoBehaviour
         NewBestUI.SetActive(false);
         bossTimeCircle.SetActive(false);
 
+
+        foreach (GameObject stageIcon in stageIcons) {
+            stageIconsImage.Add(stageIcon.GetComponent<Image>());
+        }
+        
+        InitializeStageIcons();
+        TimeCirclePositionSetup();
+    }
+
+    public void Initialize() {
+        foreach (GameObject icon in KnifeIcons) {
+            Destroy(icon);
+        }
+        KnifeIcons.Clear();
+        UpdateScore();
+    }
+
+    private void TimeCirclePositionSetup() {
         Vector2 screenPoint = Camera.main.WorldToScreenPoint(GameManager.Instance.targetSpawnPosition);
 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -99,19 +118,6 @@ public class UIManager : MonoBehaviour
             out Vector2 localPoint);
 
         bossTimeCircle.GetComponent<RectTransform>().anchoredPosition = screenPoint + localPoint;
-
-        foreach (GameObject stageIcon in stageIcons) {
-            stageIconsImage.Add(stageIcon.GetComponent<Image>());
-        }
-        InitializeStageIcons();
-    }
-
-    public void Initialize() {
-        foreach (GameObject icon in KnifeIcons) {
-            Destroy(icon);
-        }
-        KnifeIcons.Clear();
-        UpdateScore();
     }
 
     public void OnStartStage(int _stageNum) {
@@ -131,7 +137,9 @@ public class UIManager : MonoBehaviour
     }
 
     public void OnAllKnivesOnHit() {
-        if(stageIdx > 4) {
+        Debug.Log("[UIManager.cs] OnAllKnivesOnHit");
+        if(stageIdx == 5) {
+            Debug.Log("[UIManager.cs] OnAllKnivesOnHit : OnBossDestory Invoke");
             Events.OnBossDestroy.Invoke();
             InitializeStageIcons();
         }
@@ -167,6 +175,13 @@ public class UIManager : MonoBehaviour
 
     public void OnNewBestScore() {
         NewBestUI.SetActive(true);
+
+        RectTransform rectT = NewBestUI.GetComponent<RectTransform>();
+        rectT.localScale = Vector3.zero;
+        DOTween.Sequence()
+            .AppendInterval(gameOverFadeDuration)
+            .Append(rectT.DOScale(1f, bestUIScaleDuration)
+                .SetEase(Ease.OutBack));
     }
 
     private void ShowStageTextFadeAnimation() {
