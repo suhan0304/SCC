@@ -8620,7 +8620,7 @@ MonoBehaviour:
   targetIsSelf: 0
   targetGO: {fileID: 1026729769}
   tweenTargetIsTargetGO: 1
-  delay: 0
+  delay: 1
   duration: 0.4
   easeType: 27
   easeCurve:

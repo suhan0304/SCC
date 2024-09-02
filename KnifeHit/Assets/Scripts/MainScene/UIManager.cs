@@ -163,6 +163,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void OnGameOver() {
+        Debug.Log("[UIManager.cs] OnGameOver");
         CanvasGroup canvasGroup = gameOverUI.GetComponent<CanvasGroup>();
 
         gameoverScoreText.text = GameManager.Instance.scoreNum.ToString();
