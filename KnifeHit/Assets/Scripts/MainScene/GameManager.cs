@@ -73,10 +73,7 @@ public class GameManager : MonoBehaviour
 
     public void ContinueGame() {
         UIManager.Instance.Initialize();
-        UIManager.Instance.InitialzieForContinue()
-        if(currentTarget != null) {
-
-        }
+        UIManager.Instance.InitialzieForContinue();
         StartStage();
     }
 
@@ -136,9 +133,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void OnContinueButton() {
+        Debug.Log("[GameManager.cs] OnContinueButton");
         if (canContinue) {
             canContinue = false;
             ContinueGame();
+        }
+        else {
+            Debug.Log("[GameManager.cs] OnContinueButton - Can't Continue!");
         }
     }
 
