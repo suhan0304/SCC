@@ -108,8 +108,10 @@ public class UIManager : MonoBehaviour
 
     public void InitialzieForContinue() {
         gameOverUI.SetActive(false);
-        NewBestUI.SetActive(false);
+        NewBestUI.SetActive(false);    
         bossTimeCircle.SetActive(false);
+    
+        gameOverUI.GetComponent<CanvasGroup>().alpha = 0.0f;
     }
 
     private void TimeCirclePositionSetup() {

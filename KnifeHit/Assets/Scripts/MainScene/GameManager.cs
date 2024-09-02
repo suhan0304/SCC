@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEditor.SearchService;
 using UnityEngine;
@@ -72,12 +73,19 @@ public class GameManager : MonoBehaviour
     }
 
     public void ContinueGame() {
+
         UIManager.Instance.Initialize();
         UIManager.Instance.InitialzieForContinue();
         StartStage();
     }
 
     private void StartStage() {
+        
+        if(currentKnife != null) {
+            DOTween.Kill(currentKnife);
+            Destroy(currentKnife);
+        }
+
         if (stageNum%5 == 0) {
             SpawnBoss(stageNum%5);
             Events.OnBossSpawn?.Invoke();

@@ -469,7 +469,6 @@ MonoBehaviour:
   maxRotationSpeed: 200
   minRotateDelay: 0.1
   maxRotateDelay: 1
-  startPositionY: 0.5
   knivesToDestroy: 3
   shakeDuration: 0.2
   shakeStrength: 0.125
@@ -486,6 +485,7 @@ MonoBehaviour:
   startScale: 0.001
   bossName: Orange
   timeLimitSeconds: 10
+  timeCircleSeconds: 5
   timeCircle: {fileID: 0}
 --- !u!1 &8435270162272879899
 GameObject:

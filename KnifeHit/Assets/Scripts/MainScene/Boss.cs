@@ -30,13 +30,16 @@ public class Boss : Target
 
     protected override void Start() {
         base.Start();
-        timeCircle.SetActive(false);
     }
 
     private void OnBossSpawn() {
         timeCircle = UIManager.Instance.bossTimeCircle;
         bossSpawnSequence = DOTween.Sequence()
             .AppendInterval(timeLimitSeconds - timeCircleSeconds)
+            .AppendCallback(()=> {
+                timeCircle.GetComponent<Image>().fillAmount = 1f;
+                timeCircle.SetActive(true);
+            })
             .Append(timeCircle.GetComponent<Image>().DOFillAmount(0f, timeCircleSeconds).SetEase(Ease.Linear)
             .OnComplete(()=> {
                 GameManager.Instance.GameOver();
