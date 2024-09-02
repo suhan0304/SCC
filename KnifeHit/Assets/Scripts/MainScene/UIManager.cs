@@ -36,10 +36,12 @@ public class UIManager : MonoBehaviour
 
     [TabGroup("Base","In-Game UI",SdfIconType.CodeSlash, TextColor="Blue")]
     [TabGroup("Base","In-Game UI"), ReadOnly] private float fadeDuration = 0.35f;
+    [TabGroup("Base","In-Game UI")] public Canvas canvas;
     [TabGroup("Base","In-Game UI")] public TMP_Text stageText;
     [TabGroup("Base","In-Game UI")] public TMP_Text scoreText;
     [TabGroup("Base","In-Game UI")] public Color stageTextColor;
     [TabGroup("Base","In-Game UI")] public Color bossTextColor;
+    [TabGroup("Base","In-Game UI")] public GameObject bossTimeCircle;
 
     private void OnEnable() {
         if (Instance == null) {
@@ -87,10 +89,15 @@ public class UIManager : MonoBehaviour
         gameOverUI.SetActive(false);
         NewBestUI.SetActive(false);
 
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, GameManager.Instance.targetSpawnPosition);
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, screenPoint, canvas.worldCamera, out Vector2 localPoint);
+            
+        bossTimeCircle.GetComponent<RectTransform>().anchoredPosition = localPoint;
+
         foreach (GameObject stageIcon in stageIcons) {
             stageIconsImage.Add(stageIcon.GetComponent<Image>());
         }
-
         InitializeStageIcons();
     }
 

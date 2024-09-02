@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [TabGroup("Tab","Variables")] public int scoreNum;
     [TabGroup("Tab","Variables")] public int bestStageNum;
     [TabGroup("Tab","Variables")] public int bestScoreNum;
+    [TabGroup("Tab","Variables")] public Vector3 targetSpawnPosition;
 
     [TabGroup("Tab","GameObject",SdfIconType.CodeSlash, TextColor="Blue")]
     [TabGroup("Tab","GameObject")] public GameObject currentKnife;
@@ -48,6 +49,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void Start() {
+        if (targetSpawnPosition == null) {
+            targetSpawnPosition = new Vector3(0, 1, 0);
+        }
+
         StartGame();
     }
 

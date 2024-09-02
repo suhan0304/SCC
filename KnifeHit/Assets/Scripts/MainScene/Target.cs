@@ -18,9 +18,6 @@ public class Target : MonoBehaviour
     [TabGroup("Tap","Rotate")] public float minRotateDelay = 0.5f;
     [TabGroup("Tap","Rotate")] public float maxRotateDelay = 1f;
 
-    [TabGroup("Tap","Position",SdfIconType.CodeSlash, TextColor="Blue")]
-    [TabGroup("Tap","Position")] public float startPositionY = 0.5f;
-
     [TabGroup("Tap","Settings",SdfIconType.CodeSlash, TextColor="Cyan")]
     [TabGroup("Tap","Settings")] public int knivesToDestroy = 5;
 
@@ -59,6 +56,8 @@ public class Target : MonoBehaviour
 
 
     protected virtual void Start() {
+        gameObject.transform.position = GameManager.Instance.targetSpawnPosition;
+
         rotateCoroutine = StartCoroutine(RotateTargetObject());
 
         StartTargetAnimation();
