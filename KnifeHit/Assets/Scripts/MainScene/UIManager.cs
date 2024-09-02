@@ -22,7 +22,6 @@ public class UIManager : MonoBehaviour
     [TabGroup("UI","GameOver")] public GameObject gameOverUI;
     [TabGroup("UI","GameOver")] public GameObject NewBestUI;
     [TabGroup("UI","GameOver"), ReadOnly] private float gameOverFadeDuration = 0.5f;
-    [TabGroup("UI","GameOver"), ReadOnly] private float bestUIScaleDuration = 0.3f;
     [TabGroup("UI","GameOver")] public TMP_Text gameoverScoreText;
     [TabGroup("UI","GameOver")] public TMP_Text gameoverStageText;
 
@@ -174,14 +173,9 @@ public class UIManager : MonoBehaviour
     }
 
     public void OnNewBestScore() {
+        Debug.Log("[UIManager.cs] OnNewBestScore");
         NewBestUI.SetActive(true);
-
-        RectTransform rectT = NewBestUI.GetComponent<RectTransform>();
-        rectT.localScale = Vector3.zero;
-        DOTween.Sequence()
-            .AppendInterval(gameOverFadeDuration)
-            .Append(rectT.DOScale(1f, bestUIScaleDuration)
-                .SetEase(Ease.OutBack));
+        NewBestUI.GetComponent<DOTweenAnimation>().DORestart();        
     }
 
     private void ShowStageTextFadeAnimation() {
