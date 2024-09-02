@@ -58,7 +58,7 @@ public class Target : MonoBehaviour
     }
 
 
-    private void Start() {
+    protected virtual void Start() {
         rotateCoroutine = StartCoroutine(RotateTargetObject());
 
         StartTargetAnimation();

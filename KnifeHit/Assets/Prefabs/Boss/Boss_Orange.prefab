@@ -588,6 +588,8 @@ MonoBehaviour:
   animationDuration: 0.35
   startScale: 0.001
   bossName: Orange
+  timeLimitSeconds: 10
+  timeCircle: {fileID: 7909486238369279679}
 --- !u!1 &7909486238369279679
 GameObject:
   m_ObjectHideFlags: 0

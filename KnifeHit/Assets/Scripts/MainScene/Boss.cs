@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +10,8 @@ public class Boss : Target
     [TabGroup("Boss","Settings")] public string bossName;
     [TabGroup("Boss","Settings")] public float timeLimitSeconds = 10f;
     [TabGroup("Boss","Settings")] public GameObject timeCircle;
+
+    private Tween timeCircleTween;
 
 
     private void OnEnable() {
@@ -24,7 +25,8 @@ public class Boss : Target
         
     }
 
-    private void Start() {
+    public void Start() {
+        base.Start();
         timeCircle.SetActive(false);
     }
 
@@ -33,7 +35,7 @@ public class Boss : Target
     }
 
     private void OnBossDestroy() {
-        DOTween.Kill(timeCircle);
+        timeCircleTween.Kill();
         StopCoroutine(StartTimeCircle());
         timeCircle.SetActive(false);
     }
@@ -43,7 +45,7 @@ public class Boss : Target
 
         timeCircle.gameObject.SetActive(true);
         
-        timeCircle.GetComponent<Image>().DOFillAmount(0f, timeLimitSeconds).SetEase(Ease.Linear)
+        timeCircleTween = timeCircle.GetComponent<Image>().DOFillAmount(0f, timeLimitSeconds).SetEase(Ease.Linear)
             .OnComplete(()=> {
                 Debug.Log("Time Over!");
             });
