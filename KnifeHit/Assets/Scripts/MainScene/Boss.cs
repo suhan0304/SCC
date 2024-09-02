@@ -25,7 +25,7 @@ public class Boss : Target
         
     }
 
-    public void Start() {
+    protected override void Start() {
         base.Start();
         timeCircle.SetActive(false);
     }
