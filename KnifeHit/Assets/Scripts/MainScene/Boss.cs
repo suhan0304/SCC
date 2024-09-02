@@ -41,7 +41,7 @@ public class Boss : Target
     }
 
     private IEnumerator StartTimeCircle() {
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(5f);
 
         timeCircle.gameObject.SetActive(true);
         
