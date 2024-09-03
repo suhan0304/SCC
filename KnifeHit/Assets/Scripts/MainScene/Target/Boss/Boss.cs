@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Boss : Target
 {
     [TabGroup("Boss","Settings")] public string bossName;
+    [TabGroup("Boss","Settings")] public int bossType = -1;
     [TabGroup("Boss","Settings")] public float timeLimitSeconds = 30f;
     [TabGroup("Boss","Settings")] public float timeCircleSeconds = 10f;
     [TabGroup("Boss","Settings")] public GameObject timeCircle;
@@ -32,6 +33,10 @@ public class Boss : Target
         gameObject.transform.position = GameManager.Instance.targetSpawnPosition;
 
         base.StartTargetAnimation();
+
+        if(bossType == -1) {
+            Debug.LogError($"[Boss.cs] bossType is not assigned.");
+        }
     }
 
     private void OnBossSpawn() {
