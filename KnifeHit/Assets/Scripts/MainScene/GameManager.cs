@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     [TabGroup("Tab","GameObject")] public GameObject currentTarget;
 
     private bool canContinue = true;
+    private int lastBossIndex = -1; 
 
 
     private void OnEnable() {
@@ -117,7 +118,12 @@ public class GameManager : MonoBehaviour
 
     [Button("SpawnBoss")]
     public void SpawnBoss() {
-        int bossNum = Random.Range(0, bossPrefabs.Count - 1);
+        int bossNum;
+        do
+        {
+            bossNum = Random.Range(0, bossPrefabs.Count - 1);
+        } while (bossNum == lastBossIndex);
+        
         Debug.Log($"[GameManager.cs] SpawnBoss : {bossNum} Boss");
         currentTarget = Instantiate(bossPrefabs[bossNum]);
         RemainKnives = currentTarget.GetComponent<Target>().knivesToDestroy;
