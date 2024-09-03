@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor.Internal;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Target : MonoBehaviour
@@ -17,6 +15,9 @@ public class Target : MonoBehaviour
     [TabGroup("Tap","Rotate")] public float maxRotationSpeed = 180f;
     [TabGroup("Tap","Rotate")] public float minRotateDelay = 0.5f;
     [TabGroup("Tap","Rotate")] public float maxRotateDelay = 1f;
+    [TabGroup("Tap","Rotate")] public Tween rotateTween;
+    [TabGroup("Tap","Rotate")] public Sequence bossSequence;
+    [TabGroup("Tap","Rotate")] public Coroutine rotateCoroutine;
 
     [TabGroup("Tap","Settings",SdfIconType.CodeSlash, TextColor="Cyan")]
     [TabGroup("Tap","Settings")] public int knivesToDestroy = 5;
@@ -39,8 +40,6 @@ public class Target : MonoBehaviour
     [TabGroup("Animation","StartAnimation")] public float targetScale = 0.6f;
     [TabGroup("Animation","StartAnimation")] public float animationDuration = 0.35f;
     [TabGroup("Animation","StartAnimation")] public float startScale = 0.001f;
-    public Tween rotateTween;
-    private Coroutine rotateCoroutine;
 
     private void Awake() {
         FlashWhiteRenderer = transform.Find("FlashWhite").GetComponent<SpriteRenderer>();
@@ -120,6 +119,7 @@ public class Target : MonoBehaviour
         StopCoroutine(rotateCoroutine);
 
         rotateTween?.Kill();
+        bossSequence?.Kill();
 
         foreach(GameObject segment in Segments) {
             segment.GetComponent<Segment>().ApplyForceToSegments();
@@ -136,7 +136,9 @@ public class Target : MonoBehaviour
 
     public void OnGameOver() {
         StopCoroutine(rotateCoroutine);
+
         rotateTween?.Kill();
+        bossSequence?.Kill();
 
         DOTween.Sequence()
             .AppendInterval(1f)
