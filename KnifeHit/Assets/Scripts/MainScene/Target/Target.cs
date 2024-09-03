@@ -135,7 +135,8 @@ public class Target : MonoBehaviour
     }
 
     public void OnGameOver() {
-        StopCoroutine(rotateCoroutine);
+        if (rotateCoroutine != null)
+            StopCoroutine(rotateCoroutine);
 
         rotateTween?.Kill();
         bossSequence?.Kill();

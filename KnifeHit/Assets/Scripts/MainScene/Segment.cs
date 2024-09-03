@@ -21,7 +21,7 @@ public class Segment : MonoBehaviour
         float RandomUpwardForceMultiplier = Random.Range(upwardForceMultiplier, upwardForceMultiplier + 3);
 
         Vector3 direction = Random.insideUnitCircle.normalized;
-        direction += (Vector3.up * RandomUpwardForceMultiplier).normalized;
+        direction = (direction + Vector3.up * RandomUpwardForceMultiplier).normalized;
 
         Vector3 force = direction * forceMagnitude;
 

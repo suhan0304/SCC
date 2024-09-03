@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
             targetSpawnPosition = new Vector3(0, 1, 0);
         }
 
-        //StartGame();
+        StartGame();
     }
 
     public void StartGame() {
