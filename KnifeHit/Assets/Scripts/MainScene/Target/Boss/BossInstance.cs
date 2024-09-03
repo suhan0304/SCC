@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public class BossInstance : Boss
 {
+
     protected override void Start() {
         gameObject.transform.position = GameManager.Instance.targetSpawnPosition;
 
@@ -20,15 +21,17 @@ public class BossInstance : Boss
     }
 
     public void RotateBossObject() {
+        float delayTime = 0.5f;
+
         bossSequence?.Kill();
 
         bossSequence = DOTween.Sequence();
 
         switch(bossType) {
             case 0:
-                bossSequence.Append(transform.DORotate(new Vector3(0f, 0f, transform.eulerAngles.z + 60f), 1f, RotateMode.FastBeyond360)
-                    .SetEase(Ease.InOutSine))
-                    .AppendInterval(1f);
+                bossSequence.Append(transform.DORotate(new Vector3(0f, 0f, 60f), 0.5f, RotateMode.FastBeyond360)
+                        .SetEase(Ease.InOutSine))
+                    .AppendInterval(delayTime);
                 break;
             case 1:
                 break;
@@ -42,6 +45,6 @@ public class BossInstance : Boss
                 break;
         }
 
-        bossSequence.SetLoops(-1); 
+        bossSequence.SetLoops(-1, LoopType.Incremental); 
     }
 }

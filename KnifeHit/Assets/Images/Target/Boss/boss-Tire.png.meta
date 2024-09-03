@@ -48,12 +48,12 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 123
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 0
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -79,7 +79,7 @@ TextureImporter:
     overridden: 0
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
@@ -92,7 +92,7 @@ TextureImporter:
     overridden: 0
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: iPhone
     maxTextureSize: 2048
@@ -105,7 +105,7 @@ TextureImporter:
     overridden: 0
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
@@ -118,7 +118,7 @@ TextureImporter:
     overridden: 0
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Windows Store Apps
     maxTextureSize: 2048
@@ -131,7 +131,7 @@ TextureImporter:
     overridden: 0
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
@@ -148,11 +148,68 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline: []
-    physicsShape: []
+    outline:
+    - - {x: 0, y: 200}
+      - {x: -25.066647, y: 198.42294}
+      - {x: -49.73798, y: 193.71663}
+      - {x: -73.624916, y: 185.95529}
+      - {x: -96.35074, y: 175.26134}
+      - {x: -117.55705, y: 161.8034}
+      - {x: -136.90942, y: 145.79373}
+      - {x: -154.10265, y: 127.4848}
+      - {x: -168.86559, y: 107.16535}
+      - {x: -180.96542, y: 85.15584}
+      - {x: -190.2113, y: 61.80337}
+      - {x: -196.45746, y: 37.476223}
+      - {x: -199.60535, y: 12.558053}
+      - {x: -199.60535, y: -12.558166}
+      - {x: -196.45743, y: -37.476334}
+      - {x: -190.21127, y: -61.80348}
+      - {x: -180.96538, y: -85.15592}
+      - {x: -168.86554, y: -107.16542}
+      - {x: -154.10258, y: -127.48487}
+      - {x: -136.90935, y: -145.7938}
+      - {x: -117.55697, y: -161.80347}
+      - {x: -96.35063, y: -175.26138}
+      - {x: -73.62479, y: -185.95535}
+      - {x: -49.737843, y: -193.71667}
+      - {x: -25.066498, y: -198.42296}
+      - {x: 0.00016053571, y: -200}
+      - {x: 25.066816, y: -198.42293}
+      - {x: 49.738155, y: -193.71658}
+      - {x: 73.62509, y: -185.95523}
+      - {x: 96.350914, y: -175.26123}
+      - {x: 117.55723, y: -161.80327}
+      - {x: 136.90958, y: -145.79356}
+      - {x: 154.1028, y: -127.48462}
+      - {x: 168.86572, y: -107.16516}
+      - {x: 180.96552, y: -85.15563}
+      - {x: 190.21138, y: -61.80315}
+      - {x: 196.4575, y: -37.475994}
+      - {x: 199.60536, y: -12.557821}
+      - {x: 199.60532, y: 12.558397}
+      - {x: 196.4574, y: 37.47656}
+      - {x: 190.2112, y: 61.8037}
+      - {x: 180.96527, y: 85.15616}
+      - {x: 168.8654, y: 107.16565}
+      - {x: 154.10243, y: 127.48506}
+      - {x: 136.90916, y: 145.79398}
+      - {x: 117.55675, y: 161.80362}
+      - {x: 96.35041, y: 175.26152}
+      - {x: 73.62455, y: 185.95544}
+      - {x: 49.737595, y: 193.71674}
+      - {x: 25.066244, y: 198.42299}
+    physicsShape:
+    - - {x: -146, y: 200}
+      - {x: -200, y: 110}
+      - {x: -200, y: -192}
+      - {x: -164, y: -200}
+      - {x: 200, y: -200}
+      - {x: 200, y: 160}
+      - {x: 108, y: 200}
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []

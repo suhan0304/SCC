@@ -16,11 +16,12 @@ public class Segment : MonoBehaviour
     Tween fadeAnimationTween;
     
     public void ApplyForceToSegments() {
-        Vector3 parentPosition = transform.parent.position;
         Rigidbody2D rb = transform.GetComponent<Rigidbody2D>();
         
         float RandomUpwardForceMultiplier = Random.Range(upwardForceMultiplier, upwardForceMultiplier + 3);
-        Vector3 direction = ((transform.position - parentPosition).normalized + Vector3.up * RandomUpwardForceMultiplier).normalized;
+
+        Vector3 direction = Random.insideUnitCircle.normalized;
+        direction += (Vector3.up * RandomUpwardForceMultiplier).normalized;
 
         Vector3 force = direction * forceMagnitude;
 
