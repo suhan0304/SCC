@@ -29,7 +29,9 @@ public class Boss : Target
     }
 
     protected override void Start() {
-        base.Start();
+        gameObject.transform.position = GameManager.Instance.targetSpawnPosition;
+
+        base.StartTargetAnimation();
     }
 
     private void OnBossSpawn() {

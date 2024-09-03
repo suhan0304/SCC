@@ -64,7 +64,7 @@ public class Target : MonoBehaviour
     }
 
 
-    private void StartTargetAnimation() {
+    protected void StartTargetAnimation() {
         transform.localScale = Vector3.one * startScale;
         
         DOTween.Sequence()
