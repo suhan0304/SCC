@@ -431,10 +431,10 @@ MonoBehaviour:
   maxRotation: 500
   minDuration: 1
   maxDuration: 8
-  maxRotationSpeed: 100
-  minRotateDelay: 0.05
+  maxRotationSpeed: 180
+  minRotateDelay: 0.5
   maxRotateDelay: 1
-  knivesToDestroy: 5
+  knivesToDestroy: 2
   shakeDuration: 0.2
   shakeStrength: 0.125
   vibrato: 10

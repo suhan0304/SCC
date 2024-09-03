@@ -20,7 +20,7 @@ public class Target : MonoBehaviour
     [TabGroup("Tap","Rotate")] public Coroutine rotateCoroutine;
 
     [TabGroup("Tap","Settings",SdfIconType.CodeSlash, TextColor="Cyan")]
-    [TabGroup("Tap","Settings")] public int knivesToDestroy = 5;
+    [TabGroup("Tap","Settings")] public int knivesToDestroy = 2;
 
     [TabGroup("Tap","OnHit Effect",SdfIconType.CodeSlash, TextColor="Red")]
 
@@ -116,7 +116,8 @@ public class Target : MonoBehaviour
 
     [Button("DestroyTarget")]
     public void DestroyTarget() {
-        StopCoroutine(rotateCoroutine);
+        if(rotateCoroutine != null)
+            StopCoroutine(rotateCoroutine);
 
         rotateTween?.Kill();
         bossSequence?.Kill();
