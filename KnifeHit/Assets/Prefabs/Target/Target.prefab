@@ -432,19 +432,16 @@ MonoBehaviour:
   minDuration: 1
   maxDuration: 8
   maxRotationSpeed: 100
-  minRotateDelay: 0.1
+  minRotateDelay: 0.05
   maxRotateDelay: 1
-  knivesToDestroy: 2
+  knivesToDestroy: 5
   shakeDuration: 0.2
   shakeStrength: 0.125
   vibrato: 10
   randomness: 90
   flashDuration: 0.05
-  FlashWhiteRenderer: {fileID: 8940096590278933880}
-  Segments:
-  - {fileID: 8435270162272879899}
-  - {fileID: 5161170736858518140}
-  - {fileID: 5506509006409840330}
+  FlashWhiteRenderer: {fileID: 0}
+  Segments: []
   targetScale: 0.6
   animationDuration: 0.35
   startScale: 0.001

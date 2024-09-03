@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Boss : Target
 {
+    [TabGroup("Boss","Settings",SdfIconType.CodeSlash, TextColor="lightred")]
     [TabGroup("Boss","Settings")] public string bossName;
     [TabGroup("Boss","Settings")] public int bossType = -1;
     [TabGroup("Boss","Settings")] public float timeLimitSeconds = 30f;
@@ -27,16 +28,6 @@ public class Boss : Target
         Events.OnBossSpawn -= OnBossSpawn;
         Events.OnBossDestroy -= OnBossDestroy;
         
-    }
-
-    protected override void Start() {
-        gameObject.transform.position = GameManager.Instance.targetSpawnPosition;
-
-        StartTargetAnimation();
-
-        if(bossType == -1) {
-            Debug.LogError($"[Boss.cs] bossType is not assigned.");
-        }
     }
 
     private void OnBossSpawn() {

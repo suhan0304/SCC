@@ -39,8 +39,15 @@ public class Target : MonoBehaviour
     [TabGroup("Animation","StartAnimation")] public float targetScale = 0.6f;
     [TabGroup("Animation","StartAnimation")] public float animationDuration = 0.35f;
     [TabGroup("Animation","StartAnimation")] public float startScale = 0.001f;
-    private Tween rotateTween;
+    public Tween rotateTween;
     private Coroutine rotateCoroutine;
+
+    private void Awake() {
+        FlashWhiteRenderer = transform.Find("FlashWhite").GetComponent<SpriteRenderer>();
+        foreach(Transform segment in transform.Find("Segments").transform) {
+            Segments.Add(segment.gameObject);
+        }
+    }
 
     protected virtual void OnEnable() {
         Events.OnAllKnivesOnHit += DestroyTarget;
@@ -53,8 +60,6 @@ public class Target : MonoBehaviour
         Events.OnHitTarget -= OnHitTarget;
         Events.OnGameOver -= OnGameOver;
     }
-
-
     protected virtual void Start() {
         gameObject.transform.position = GameManager.Instance.targetSpawnPosition;
 
@@ -83,7 +88,7 @@ public class Target : MonoBehaviour
         rotateTween = transform.DORotate(new Vector3(0f, 0f, targetRotation), calculatedDurtaion, RotateMode.FastBeyond360)
             .SetEase(Ease.InOutSine);
         
-        yield return new WaitForSeconds(calculatedDurtaion);;
+        yield return new WaitForSeconds(calculatedDurtaion);
     }
 
     IEnumerator RotateTargetObject() {

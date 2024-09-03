@@ -1,13 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class BossRotate : MonoBehaviour
+public class BossInstance : Boss
 {
-    public float bossType = 0;
+    protected override void Start() {
+        gameObject.transform.position = GameManager.Instance.targetSpawnPosition;
+
+        StartTargetAnimation();
+
+        if(bossType == -1) {
+            Debug.LogError($"[Boss.cs] bossType is not assigned.");
+        }
+        RotateBossObject();
+    }
+
     public void RotateBossObject() {
         switch(bossType) {
             case 0:
+                
                 break;
             case 1:
                 break;

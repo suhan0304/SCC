@@ -390,7 +390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 287187008252691327}
   - component: {fileID: 2135970965772391019}
-  - component: {fileID: 1354426578521997814}
+  - component: {fileID: 5162997018543562781}
   m_Layer: 0
   m_Name: Boss_Orange
   m_TagString: Target
@@ -450,7 +450,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
---- !u!114 &1354426578521997814
+--- !u!114 &5162997018543562781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -459,33 +459,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 7048496678587647813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7be9db6bdfa99ed43bea2e8263d282de, type: 3}
+  m_Script: {fileID: 11500000, guid: 17611cb3e569aeb429515b224237c2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minRotation: 90
   maxRotation: 500
   minDuration: 1
-  maxDuration: 4
-  maxRotationSpeed: 200
-  minRotateDelay: 0.1
+  maxDuration: 8
+  maxRotationSpeed: 180
+  minRotateDelay: 0.5
   maxRotateDelay: 1
-  knivesToDestroy: 3
+  knivesToDestroy: 5
   shakeDuration: 0.2
   shakeStrength: 0.125
   vibrato: 10
   randomness: 90
   flashDuration: 0.05
-  FlashWhiteRenderer: {fileID: 8940096590278933880}
-  Segments:
-  - {fileID: 8435270162272879899}
-  - {fileID: 5161170736858518140}
-  - {fileID: 5506509006409840330}
+  FlashWhiteRenderer: {fileID: 0}
+  Segments: []
   targetScale: 0.6
   animationDuration: 0.35
   startScale: 0.001
   bossName: Orange
-  timeLimitSeconds: 10
-  timeCircleSeconds: 5
+  bossType: -1
+  timeLimitSeconds: 30
+  timeCircleSeconds: 10
   timeCircle: {fileID: 0}
 --- !u!1 &8435270162272879899
 GameObject:
