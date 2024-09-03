@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [TabGroup("Tab","Prefabs",SdfIconType.CodeSlash, TextColor="Green")]
     [TabGroup("Tab","Prefabs")] public GameObject knife;
     [TabGroup("Tab","Prefabs")] public GameObject target;
-    [TabGroup("Tab","Prefabs")] public GameObject boss;
+    [TabGroup("Tab","Prefabs")] public List<GameObject> bossPrefabs;
 
     [TabGroup("Tab","Variables",SdfIconType.CodeSlash, TextColor="Red")]
     [TabGroup("Tab","Variables")] public int RemainKnives;
@@ -73,7 +73,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void ContinueGame() {
-
         UIManager.Instance.Initialize();
         UIManager.Instance.InitialzieForContinue();
         StartStage();
@@ -87,7 +86,7 @@ public class GameManager : MonoBehaviour
         }
 
         if (stageNum%5 == 0) {
-            SpawnBoss(stageNum%5);
+            SpawnBoss();
             Events.OnBossSpawn?.Invoke();
         }
         else {
@@ -117,8 +116,10 @@ public class GameManager : MonoBehaviour
     }
 
     [Button("SpawnBoss")]
-    public void SpawnBoss(int bossNum) {
-        currentTarget = Instantiate(boss);
+    public void SpawnBoss() {
+        int bossNum = Random.Range(0, bossPrefabs.Count - 1);
+        Debug.Log($"[GameManager.cs] SpawnBoss : {bossNum} Boss");
+        currentTarget = Instantiate(bossPrefabs[bossNum]);
         RemainKnives = currentTarget.GetComponent<Target>().knivesToDestroy;
     }
 

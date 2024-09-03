@@ -599,8 +599,8 @@ MonoBehaviour:
   targetScale: 0.6
   animationDuration: 0.35
   startScale: 0.001
-  bossName: Orange
-  bossType: 0
+  bossName: Meat
+  bossType: 3
   timeLimitSeconds: 30
   timeCircleSeconds: 10
   timeCircle: {fileID: 0}

@@ -1001,7 +1001,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knife: {fileID: 612295153989972779, guid: a5e0e36bac0ea354e8857864545c7674, type: 3}
   target: {fileID: 7048496678587647813, guid: d52be0aa356c25448a2af47ccfb0a884, type: 3}
-  boss: {fileID: 7048496678587647813, guid: 6959ae1105602ad44bd1e7b7b0b08dab, type: 3}
+  bossPrefabs:
+  - {fileID: 7048496678587647813, guid: 6959ae1105602ad44bd1e7b7b0b08dab, type: 3}
+  - {fileID: 7048496678587647813, guid: b6f5b00a2a8dc564285da0856a38520a, type: 3}
+  - {fileID: 7048496678587647813, guid: d7bf370bca8f89747ad22417d52fa559, type: 3}
+  - {fileID: 7048496678587647813, guid: 91b2e9c0048adfe40ad2fa45ff35a141, type: 3}
+  - {fileID: 7048496678587647813, guid: da3654dea0a1605449798b99fc004dd0, type: 3}
+  - {fileID: 7048496678587647813, guid: 0142eae86fd2c864da7350f8a441e23e, type: 3}
   RemainKnives: 10
   stageNum: 0
   scoreNum: 0

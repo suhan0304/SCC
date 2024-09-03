@@ -36,8 +36,8 @@ public class BossInstance : Boss
                 break;
             case 1:
                 bossSequence
-                    .Append(transform.DORotate(new Vector3(0f, 0f, 70f), 0.5f, RotateMode.FastBeyond360).SetEase(Ease.InOutCubic))
-                    .Append(transform.DORotate(new Vector3(0f, 0f, -140f), 1f, RotateMode.FastBeyond360).SetEase(Ease.InOutCubic).SetLoops(-1, LoopType.Yoyo));
+                    .Append(transform.DORotate(new Vector3(0f, 0f, -140f), 1f, RotateMode.FastBeyond360).SetEase(Ease.InOutCubic).SetLoops(1, LoopType.Yoyo))
+                    .SetLoops(-1, LoopType.Incremental); 
                 break;
             case 2:
                 bossSequence
@@ -59,9 +59,10 @@ public class BossInstance : Boss
                 break;
             case 5:
                 bossSequence
-                    .Append(transform.DORotate(new Vector3(0f, 0f, Random.Range(60f, 100f) * (Random.value > 0.5f ? 1f : -1f)), 0.5f, RotateMode.FastBeyond360)
+                    .Append(transform.DORotate(new Vector3(0f, 0f, Random.Range(80f, 120f) * (Random.value > 0.5f ? 1f : -1f)), 0.5f, RotateMode.FastBeyond360)
                         .SetEase(Ease.Linear)
                         .SetLoops(Random.Range(1,5), LoopType.Yoyo))
+                    .Append(transform.DORotate(new Vector3(0f, 0f, Random.Range(600f, 720f) * (Random.value > 0.5f ? 1f : -1f)), 0.25f, RotateMode.FastBeyond360))
                     .SetLoops(-1, LoopType.Incremental);
                 break;
         }

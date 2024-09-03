@@ -99,6 +99,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void Initialize() {
+        UpdateScore();
         foreach (GameObject icon in KnifeIcons) {
             Destroy(icon);
         }
