@@ -32,7 +32,7 @@ public class Boss : Target
     protected override void Start() {
         gameObject.transform.position = GameManager.Instance.targetSpawnPosition;
 
-        base.StartTargetAnimation();
+        StartTargetAnimation();
 
         if(bossType == -1) {
             Debug.LogError($"[Boss.cs] bossType is not assigned.");
