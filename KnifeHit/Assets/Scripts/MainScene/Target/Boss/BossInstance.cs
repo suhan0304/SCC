@@ -22,11 +22,13 @@ public class BossInstance : Boss
     public void RotateBossObject() {
         bossSequence?.Kill();
 
+        bossSequence = DOTween.Sequence();
+
         switch(bossType) {
             case 0:
-                bossSequence = DOTween.Sequence();
-                bossSequence.Append(transform.DORotate(new Vector3(0f, 0f, 60f), 1f, RotateMode.FastBeyond360).SetEase(Ease.InOutSine));
-                bossSequence.AppendInterval(1f);
+                bossSequence.Append(transform.DORotate(new Vector3(0f, 0f, transform.eulerAngles.z + 60f), 1f, RotateMode.FastBeyond360)
+                    .SetEase(Ease.InOutSine))
+                    .AppendInterval(1f);
                 break;
             case 1:
                 break;
@@ -40,6 +42,6 @@ public class BossInstance : Boss
                 break;
         }
 
-        bossSequence.OnComplete(()=>{RotateBossObject();});
+        bossSequence.SetLoops(-1); 
     }
 }

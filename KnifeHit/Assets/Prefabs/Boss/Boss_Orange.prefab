@@ -481,7 +481,7 @@ MonoBehaviour:
   animationDuration: 0.35
   startScale: 0.001
   bossName: Orange
-  bossType: -1
+  bossType: 0
   timeLimitSeconds: 30
   timeCircleSeconds: 10
   timeCircle: {fileID: 0}
