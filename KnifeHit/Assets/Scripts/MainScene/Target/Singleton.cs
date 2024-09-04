@@ -1,14 +1,24 @@
-class Singleton {
+enum SingletonEnum {
+    INSTANCE;
 
-    private Singleton() {}
-
-    // static 내부 클래스를 이용
-    // Holder로 만들어, 클래스가 메모리에 로드되지 않고 getInstance 메서드가 호출되어야 로드됨
-    private static class SingleInstanceHolder {
-        private static readonly Singleton INSTANCE = new Singleton();
+    private final Client dbClient;
+	
+    SingletonEnum() {
+        dbClient = Database.getClient();
     }
 
-    public static Singleton getInstance() {
-        return SingleInstanceHolder.INSTANCE;
+    public static SingletonEnum getInstance() {
+        return INSTANCE;
+    }
+
+    public Client getClient() {
+        return dbClient;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        SingletonEnum singleton = SingletonEnum.getInstance();
+        singleton.getClient();
     }
 }
