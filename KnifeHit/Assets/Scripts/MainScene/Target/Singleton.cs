@@ -1,12 +1,27 @@
-class Singleton {
-    private static Singleton INSTANCE;
+using System;
 
-    private Singleton() {}
+public class Singleton
+{
+   private static volatile Singleton instance;
+   private static object syncRoot = new Object();
 
-    public static synchronized Singleton getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new Singleton();
-        }
-        return INSTANCE;
-    }
+   private Singleton() {}
+
+   public static Singleton Instance
+   {
+      get 
+      {
+         if (instance == null) 
+         {
+            lock (syncRoot) 
+            {
+               if (instance == null) 
+                  instance = new Singleton();
+            }
+         }
+
+         return instance;
+      }
+   }
 }
+ 
