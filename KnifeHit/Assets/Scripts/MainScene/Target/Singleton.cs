@@ -11,16 +11,12 @@ public class Singleton
    {
       get 
       {
-         if (instance == null) 
-         {
-            lock (syncRoot) 
-            {
-               if (instance == null) 
-                  instance = new Singleton();
-            }
-         }
-
-         return instance;
+        lock (syncRoot) 
+        {
+            if (instance == null) 
+                instance = new Singleton();
+        }
+        return instance;
       }
    }
 }
