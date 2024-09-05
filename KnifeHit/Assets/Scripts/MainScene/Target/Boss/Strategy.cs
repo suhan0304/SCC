@@ -47,4 +47,16 @@ class ConcreteStrateyA implements IStrategy {
 // 전략 알고리즘 B
 class ConcreteStrateyB implements IStrategy {
     public void doSomething() {}
+}class Context {
+    IStrategy Strategy; // 전략 인터페이스를 합성(composition)
+	
+    // 전략 교체 메소드
+    void setStrategy(IStrategy Strategy) {
+        this.Strategy = Strategy;
+    }
+	
+    // 전략 실행 메소드
+    void doSomething() {
+        this.Strategy.doSomething();
+    }
 }
