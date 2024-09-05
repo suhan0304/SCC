@@ -7,3 +7,9 @@ public class RailLoadStrategy implements MovableStrategy{
         System.out.println("선로를 통해 이동");
     }
 }
+
+public class LoadStrategy implements MovableStrategy{
+    public void move() {
+        System.out.println("도로를 통해 이동");
+    }
+}
