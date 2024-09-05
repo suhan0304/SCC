@@ -27,3 +27,7 @@ public class Moving {
         this.movableStrategy = movableStrategy;
     }
 }
+
+public class Bus extends Moving{
+
+}
