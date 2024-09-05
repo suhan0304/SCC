@@ -34,4 +34,17 @@ public class Bus extends Moving{
 
 public class Train extends Moving{
 
+}// 전략(추상화된 알고리즘)
+interface IStrategy {
+    void doSomething();
+}
+
+// 전략 알고리즘 A
+class ConcreteStrateyA implements IStrategy {
+    public void doSomething() {}
+}
+
+// 전략 알고리즘 B
+class ConcreteStrateyB implements IStrategy {
+    public void doSomething() {}
 }
