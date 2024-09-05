@@ -31,3 +31,7 @@ public class Moving {
 public class Bus extends Moving{
 
 }
+
+public class Train extends Moving{
+
+}
