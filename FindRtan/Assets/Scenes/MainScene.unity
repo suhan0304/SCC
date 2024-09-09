@@ -475,15 +475,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81cc91f0fdab0b44a8bd366d7e67b73a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cards: {fileID: 2032450408}
-  card: {fileID: 1670088114099793172, guid: c9c56dac3f826904298c0d2c55b06d03, type: 3}
   timeText: {fileID: 1624165324}
-  firstCard: {fileID: 0}
-  secondCard: {fileID: 0}
   cardCount: 0
   endText: {fileID: 261328955}
-  audioClip: {fileID: 8300000, guid: c41ed0d8e30abd642a92ed927dfda2be, type: 3}
-  audioSource: {fileID: 0}
 --- !u!4 &874060682
 Transform:
   m_ObjectHideFlags: 0
@@ -595,6 +589,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1170054537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1170054538}
+  m_Layer: 0
+  m_Name: CardManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1170054538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170054537}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1396470686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,3 +1061,4 @@ SceneRoots:
   - {fileID: 874060682}
   - {fileID: 1728480206}
   - {fileID: 135438759}
+  - {fileID: 1170054538}

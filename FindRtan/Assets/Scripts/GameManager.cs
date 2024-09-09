@@ -7,52 +7,13 @@ using System.Linq;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
-    public Transform cards;
-    public GameObject card;
-
     public Text timeText;
     float time = 0.00f;
 
-    public Card firstCard;
-    public Card secondCard;
 
     public int cardCount = 0;
 
     public GameObject endText;
-
-    public AudioClip audioClip;
-    public AudioSource audioSource;
-
-    void Awake() {
-        if(Instance == null)  {
-            Instance = this;
-        }
-        else {
-            Destroy(gameObject);
-        }
-    }
-
-    void Start() {
-        Time.timeScale = 1.0f;
-        audioSource = GetComponent<AudioSource>();
-
-        int[] arr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7};
-        arr = arr.OrderBy(x => Random.Range(0f, 7f)).ToArray();
-
-        for (int i = 0; i < 16; i++) {
-            GameObject go = Instantiate(card, this.transform);
-            go.transform.SetParent(cards);
-
-            float x = (i%4) * 1.4f - 2.1f;
-            float y = (i/4) * 1.4f - 3.0f;
-
-            go.transform.position = new Vector2(x, y);
-            go.GetComponent<Card>().Setting(arr[i]);
-
-            cardCount = arr.Length;
-        }
-    }
 
     void Update() {
         time += Time.deltaTime;
@@ -61,37 +22,16 @@ public class GameManager : MonoBehaviour
             EndGame();
         }
     }
-
-    public void isMatched() {
-        if(firstCard.idx == secondCard.idx) {
-            audioSource.PlayOneShot(audioClip);
-
-            firstCard.DestroyCard();
-            secondCard.DestroyCard();
-            cardCount -= 2;
-
-            if (cardCount == 0) {
-                EndGame();
-            }
+        void Awake() {
+        if(Instance == null)  {
+            Instance = this;
         }
         else {
-            firstCard.CloseCard();
-            secondCard.CloseCard();
+            Destroy(gameObject);
         }
-        CardReset();
     }
 
-    void CardReset() {
-
-        Invoke("CardResetInvoke", 0.5f);
-
-    }
-    void CardResetInvoke() {
-        firstCard = null;
-        secondCard = null;
-    }
-
-    void EndGame() {
+    public void EndGame() {
         endText.SetActive(true);
         Time.timeScale = 0.0f;
     }

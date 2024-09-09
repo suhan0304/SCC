@@ -28,17 +28,17 @@ public class Card : MonoBehaviour
     public void OpenCard() {
         audioSource.PlayOneShot(clip);
 
-        if (GameManager.Instance.secondCard == null) {
+        if (CardManager.Instance.secondCard == null) {
             Anim.SetBool("isOpen", true);
             front.SetActive(true);
             back.SetActive(false);
 
-            if(GameManager.Instance.firstCard == null) {
-                GameManager.Instance.firstCard = this;
+            if(CardManager.Instance.firstCard == null) {
+                CardManager.Instance.firstCard = this;
             }
             else {
-                GameManager.Instance.secondCard = this;
-                GameManager.Instance.isMatched();
+                CardManager.Instance.secondCard = this;
+                CardManager.Instance.isMatched();
             }
         }
     }
